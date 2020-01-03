@@ -1,0 +1,26 @@
+.audit-result{
+  margin: 40rpx 30rpx 0;
+  padding-bottom: 19rpx;
+  border-bottom: 1rpx solid #dedede;
+}
+.audit-result view image{
+  width: 238rpx;
+  height: 178rpx;
+  border: 1rpx solid #ededed;
+}
+.audit-result text{
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 22rpx;
+  display: block;
+}
+.audit-result .under-review{
+  font-size: 28rpx;
+  color: #437fdf;
+  line-height: 156rpx;
+}
+.audit-result .audit-status{
+  width: 157rpx;
+  height: 124rpx;
+  margin-top: 28rpx;
+}

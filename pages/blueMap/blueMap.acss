@@ -1,0 +1,27 @@
+.protocol-specification{
+  padding: 30rpx;
+}
+.protocol-specification view{
+  margin-top: 60rpx;
+}
+.protocol-specification view text{
+  margin-top: 30rpx;
+}
+.protocol-specification text{
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 40rpx;
+  text-indent: 2em;
+  text-align: justify;
+}
+.protocol-specification .protocol-header{
+  text-align: center;
+  font-size: 32rpx;
+  color: #333;
+  text-indent: 0;
+}
+.protocol-specification .two-title{
+  font-size: 30rpx;
+  text-indent: 0;
+}

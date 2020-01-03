@@ -1,0 +1,18 @@
+<view class="common-scroll-container">
+  <view class="not-login" a:if="{{auditList.length == 0}}">
+    <image mode="scaleToFill" class="comment-pal" src="/images/not-login.png"/>
+    <text>暂无审核记录</text>
+  </view>
+  <scroll-view class="scroll-container" a:else scroll-y="{{true}}" 
+    lower-threshold="300" onScrollToLower="scrollMytrip">
+    <view class="audit-result clearfix" a:for="{{auditList}}">
+      <view class="fl">
+        <image mode="aspectFill" src="{{item[1]}}"/>
+        <text>发布日期：{{item[2]}}</text>
+      </view>
+      <image a:if="{{item[3] == 1}}" class="audit-status fr" mode="scaleToFill" src="/images/icon-audit-success.png"/>
+      <image a:elif="{{item[3] == 2}}" class="audit-status fr" mode="scaleToFill" src="/images/icon-audit-fail.png"/>
+      <text a:else class="fr under-review">正在审核</text>  
+    </view>
+  </scroll-view>
+</view>

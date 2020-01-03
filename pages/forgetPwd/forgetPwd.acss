@@ -1,0 +1,30 @@
+.atd-verify-wrapper {
+  width: 100%;
+  padding: 45rpx 0 100rpx;
+}
+.atd-verify-wrapper .atd-tel-wrapper {
+  background-color: #fff;
+}
+
+.atd-verify-wrapper .am-input-item {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+}
+.forget-pwd{
+  padding: 0;
+}
+.forget-pwd .atd-verify-wrapper {
+  padding: 0;
+}
+.forget-pwd .am-input-item {
+  padding-left: 0;
+  background: none;
+}
+.am-input-line{
+  padding-right: 0;
+}
+.forget-pwd .bind-btn{
+  margin-top: 100rpx;
+}

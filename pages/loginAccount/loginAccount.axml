@@ -1,0 +1,31 @@
+<view class="auth-containner">
+  <view class="login-container">
+    <image mode="scaleToFill" src="/images/logo.png"/>
+    <text class="prompt">发现污染·找回蔚蓝</text>
+    <text>欢迎加入蔚蓝地图</text>
+  </view>
+  <view class="atd-mobile-code">
+    <view class="atd-verify-wrapper ">
+      <view class="atd-tel-wrapper">
+        <label for="account" class="atd-input-con">
+          <el-input name="account" type="text" placeholder="请输入手机号/邮箱" 
+            value="{{account}}" onInput="onAccountInput"/>
+        </label>
+      </view>
+      <view class="atd-tel-wrapper">
+        <label for="mobile" class="atd-input-con">
+          <el-input name="pwd" type="text" password="{{true}}" placeholder="请输入密码" 
+            value="{{pwd}}" onInput="onPwdInput"/>
+        </label>
+      </view>
+    </view>
+    <button class="long-btn bind-btn" 
+      style="background : {{(account && pwd) ? '': '#abc2f8'}};" 
+      disabled="{{(account && pwd) ? false : true}}" 
+      scope='userInfo'
+      open-type="getAuthorize"
+      onGetAuthorize="onGetAuthorize" 
+      onError="onAuthError">登 录</button>
+      <text class="forget-pwd" onTap="forgetPwd">忘记密码？</text>
+  </view>
+</view>

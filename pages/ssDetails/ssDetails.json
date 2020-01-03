@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "ss-details": "/components/ssDetails/ssDetails"
+  }
+}

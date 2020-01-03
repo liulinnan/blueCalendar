@@ -1,0 +1,14 @@
+<view class="my-feedback">
+  <text>请写下你的建议吧...</text>
+  <form onSubmit="bindFormSubmit">
+    <view class="feedback-content">
+      <textarea name="textarea"
+      value="{{textareaVal}}"
+      onInput="onTextareaInput"
+      maxlength="200"
+      auto-height  />
+    </view>
+    <button style="background : {{textareaVal ? '': '#abc2f8'}};" 
+    disabled="{{textareaVal ? false : true}}" class="long-btn" form-type="submit" type="primary">提交</button>
+  </form>
+</view>

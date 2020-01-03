@@ -1,0 +1,8 @@
+{
+  "pullRefresh": true,
+  "usingComponents": {
+    "search-bar": "mini-antui/es/search-bar/index",
+    "popup": "mini-antui/es/popup/index",
+    "am-icon": "mini-antui/es/am-icon/index"
+  }
+}

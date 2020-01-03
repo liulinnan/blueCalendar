@@ -1,0 +1,45 @@
+.follow-list-container{
+  padding: 40rpx 35rpx 40rpx 40rpx;
+}
+.follow-list{
+  width: 210rpx;
+  height: 264rpx;
+  border: 10rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 3rpx 5rpx 3rpx #f2f2f2;
+  margin: 0 auto;
+  text-align: center;
+  margin-right: 22rpx;
+  margin-bottom: 22rpx;
+}
+.follow-list image{
+  width: 124rpx;
+  height: 124rpx;
+  border-radius: 50%;
+  margin-top: 22rpx;
+  margin-bottom: 18rpx;
+}
+.follow-list text{
+  font-size: 27rpx;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.follow-list button{
+  line-height: 36rpx;
+  font-size: 21rpx;
+  border-radius: 50rpx;
+  width: 88rpx;
+  margin: 0 auto;
+}
+.concerned{
+  color: #999;
+  background: #ededed;
+}
+.unconcerned{
+  color: #fff;
+  background: #437dde;
+}
+.follow-list:nth-child(3n){
+  margin-right: 0;
+}

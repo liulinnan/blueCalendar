@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/my",
+    "pages/login/login",
+    "pages/loginAccount/loginAccount",
+    "pages/loginBind/loginBind",
+    "pages/followList/followList",
+    "pages/ssDetails/ssDetails",
+    "pages/myActivityShot/myActivityShot",
+    "pages/myAuditResult/myAuditResult",
+    "pages/myDynamic/myDynamic",
+    "pages/myPublicWelfare/myPublicWelfare",
+    "pages/myFeedback/myFeedback",
+    "pages/ssRelease/ssRelease",
+    "pages/ssUpload/ssUpload",
+    "pages/demo/demo",
+    "pages/forgetPwd/forgetPwd",
+    "pages/blueMap/blueMap"
+  ],
+  "window": {
+    "defaultTitle": "蔚蓝日历"
+  },
+  "tabBar": {
+    "textColor": "#666666",
+    "selectedColor": "#437dde",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "晒晒",
+        "icon": "/images/icon-bask-normal.png",
+        "activeIcon": "/images/icon-bask-select.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "name": "我的",
+        "icon": "/images/icon-my-normal.png",
+        "activeIcon": "/images/icon-my-select.png"
+      }
+    ]
+  }
+}

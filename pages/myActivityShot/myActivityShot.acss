@@ -1,0 +1,48 @@
+.activity-shot{
+  padding: 30rpx 30rpx 0;
+}
+.activity-shot text{
+  font-size: 30rpx;
+  color: #343434;
+  line-height: 40rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+.upload-img{
+  margin: 50rpx 0;
+  width: 100%;
+  height: 396rpx;
+}
+.upload-img view{
+  height: 100%;
+  border: 2rpx dashed #ededed;
+  text-align: center;
+}
+.upload-img view image{
+  width: 100rpx;
+  height: 82rpx;
+  margin: 126rpx auto 0;
+}
+.upload-img view text{
+  color: #999;
+  margin-top: 33rpx;
+  margin-bottom: 0;
+}
+.upload-img .yl-img{
+  width: 100%;
+  height: 100%;
+}
+.upload-img-example text{
+  margin-bottom: 20rpx;
+}
+.upload-img-example image{
+  display: inline-block;
+  width: 238rpx;
+  height: 178rpx;
+  margin-right: 13rpx;
+  border: 1rpx solid #ededed;
+}
+.upload-btn{
+  margin: 95rpx 0 0;
+  color: #fff!important;
+}

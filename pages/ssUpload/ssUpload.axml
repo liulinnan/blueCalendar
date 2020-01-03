@@ -1,0 +1,31 @@
+<view class="ss-upload">
+  <image class="ss-img" mode="widthFix" src="{{bigImg}}"/>
+
+  <!-- 用户选择的图片 -->
+  <view class="ss-select">
+    <view class="select-pos">
+      <view class="picture-select" a:for="{{selectList}}">
+        <image mode="aspectFill" src="{{item}}" 
+          data-item="{{item}}" data-current="{{index}}" onTap="switchImg" />
+        <view class="close" onTap="deleteImg" data-index="{{index}}">
+          <am-icon class="fr" size="14" color="#fff" type="cross" />
+        </view>
+        <view class="border" a:if="{{currentData === index}}"></view>
+      </view>
+      <view class="ss-upload" a:if="{{selectList.length < 6}}">
+        <am-icon size="22" color="#ccc" type="plus" />
+      </view>
+    </view>
+  </view>
+  <!-- 水印 -->
+  <view class="ss-watermark" style="bottom: {{watermarkState === 1 ? '182rpx' : '0rpx'}}">
+    <view class="icon-watermark clearfix"><image mode="scaleToFill" src="/images/icon-watermark.png" onTap="openWatermark" /></view>
+    <!-- 水印列表 -->
+    <view class="watermark-list">
+      <view a:for="{{watermarkList}}" data-index="{{index}}" onTap="selectWatermark">
+        <image mode="scaleToFill" src="{{item}}"/>
+        <text a:if="{{watermarkIndex === index}}" class="border"></text>
+      </view>
+    </view>
+  </view>
+</view>

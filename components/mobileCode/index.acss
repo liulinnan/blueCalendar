@@ -1,0 +1,107 @@
+.atd-verify-wrapper {
+  width: 100%;
+  padding: 45rpx 0 200rpx;
+}
+
+.atd-verify-wrapper .atd-title-wrapper {
+  padding-top: 32rpx;
+  padding-bottom: 16rpx;
+  padding-left: 32rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.atd-verify-wrapper .atd-tel-wrapper {
+  background-color: #fff;
+  /* padding-left: 32rpx; */
+}
+
+.atd-verify-wrapper .atd-tel-wrapper .atd-input-con .atd-input-box {
+  padding-left: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.atd-tel-wrapper .atd-input-con {
+  border-bottom: 1rpx solid #ccc;
+}
+
+.atd-verify-wrapper .atd-tel-wrapper .atd-input-con .atd-title-field {
+  color: rgb(153, 153, 153);
+}
+
+.atd-verify-wrapper .am-input-item {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.atd-verify-wrapper .send-code-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.atd-verify-wrapper .send-code-wrapper .atd-input-con {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: none;
+}
+
+.atd-verify-wrapper .send-code-wrapper .atd-input-box {
+  padding-left: 8rpx;
+}
+
+.atd-verify-wrapper .send-code-wrapper .msg {
+  line-height: 44rpx;
+  padding: 0 16rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  background: #a2beee;
+  border-radius: 5rpx;
+  margin-top: 26rpx;
+  /* border-left: 1rpx solid #ddd; */
+}
+
+.atd-verify-wrapper .send-code-wrapper .msg.active {
+  color: #fff;
+  background: #437dde;
+}
+
+.atd-verify-wrapper .atd-input-con .atd-title-field {
+  align-self: center;
+  color: rgb(153, 153, 153);
+}
+
+.atd-input-con {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  font-size: 28rpx;
+  line-height: 89rpx;
+  margin-top: 34rpx;
+}
+
+.atd-verify-wrapper .popover {
+  width: 300rpx;
+}
+
+.atd-input-box {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.atd-verify-wrapper  .am-input-item {
+  background: none !important;
+  padding: 0;
+}
+
+.atd-verify-wrapper  .am-input-line {
+  position: static !important
+}
+
+.atd-verify-wrapper input {
+  padding: 0px !important
+}

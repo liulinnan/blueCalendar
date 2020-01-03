@@ -1,0 +1,97 @@
+page{
+  background: #f6f7f9;
+}
+.picture-list{
+  width: calc(100% - 60rpx);
+  padding: 20rpx 30rpx 34rpx;
+}
+.picture-list .fl{
+  margin-right: 16rpx;
+  margin-bottom: 10rpx;
+}
+.picture-list .fl:nth-child(4n){
+  margin-right: 0;
+}
+/* 标签 */
+.ss-label{
+  padding: 43rpx 25rpx 0 30rpx;
+}
+.ss-label text{
+  font-size: 26rpx;
+  color: #333;
+}
+.ss-label view{
+  margin-top: 50rpx;
+}
+.ss-label button{
+  width: 117rpx;
+  height: 46rpx;
+  border: 2rpx solid #dedede;
+  font-size: 22rpx;
+  color: #666;
+  border-radius: 50rpx;
+  line-height: 47rpx;
+  background: #f4f4f6;
+  /* border-style: solid;
+  border-bottom-width: 2rpx; */
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  display: inline-block;
+}
+.ss-label .ss-tag-select{
+  margin: 0;
+}
+.ss-tag-select text{
+  display: block;
+  line-height: 46rpx;
+  margin-bottom: 0;
+}
+.ss-text{
+  width: calc(100% - 60rpx);
+  padding: 0 30rpx;
+}
+.ss-text text{
+  font-size: 26rpx;
+  color: #989898;
+  font-weight: bold;
+  padding-top: 47rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #dedede;
+  display: block;
+}
+.ss-text textarea{
+  padding: 23rpx 0;
+  font-size: 26rpx;
+  color: #999;
+  line-height: 40rpx;
+  min-height: 176rpx;
+}
+.ss-pos-share{
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: center; */
+  font-size: 25rpx;
+  color: #333;
+  padding: 32rpx 30rpx;
+}
+/* .ss-pos{
+  padding-bottom: 40rpx;
+} */
+.ss-pos image{
+  width: 24rpx;
+  height: 29rpx;
+  margin-right: 20rpx;
+}
+.ss-pos text{
+  line-height: 29rpx;
+}
+.ss-share{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ss-platform-share image{
+  width: 62rpx;
+  height: 62rpx;
+  margin-left: 30rpx;
+}

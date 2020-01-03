@@ -1,0 +1,10 @@
+<view class="follow-list-container clearfix">
+  <view class="follow-list fl" a:for="{{followList}}" data-ssUserId="{{item[0]}}" onTap="jumpDetails">
+    <image mode="scaleToFill" src="{{item[2]}}"/>
+    <text class="text-overflow">{{item[1]}}</text>
+    <button class="{{item[6] === 1 ? 'concerned' : 'unconcerned'}}" 
+      catchTap="followState" data-otheruserid="{{item[0]}}" data-state="{{item[6]}}" data-index="{{index}}">
+      {{item[6] === 1 ? '已关注' : '关注'}}
+    </button>
+  </view>
+</view>

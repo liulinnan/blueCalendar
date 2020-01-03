@@ -1,0 +1,23 @@
+.my-feedback{
+  padding: 48rpx 30rpx 0;
+}
+.my-feedback text{
+  font-size: 28rpx;
+  color: #999;
+}
+.feedback-content{
+  margin-top: 30rpx;
+}
+.feedback-content textarea{
+  padding: 11rpx 21rpx;
+  background: #f6f7f9;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 48rpx;
+  min-height: 380rpx;
+}
+.long-btn{
+  width: calc(100% - 60rpx);
+  position: absolute;
+  bottom: 80rpx;
+}

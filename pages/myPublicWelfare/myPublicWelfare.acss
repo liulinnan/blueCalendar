@@ -1,0 +1,93 @@
+page{
+  height: 100%;
+  background-image: url('/images/public-welfare-bg.png');
+  background-size:100% 100%;
+}
+.public-welfare{
+  margin: 0 40rpx;
+  padding-top: 44rpx;
+}
+
+.public-welfare .public-welfare-hour{
+  width: 100%;
+  border-radius: 20rpx;
+  background: #fff;
+  padding-bottom: 47rpx;
+  box-shadow: 0 3rpx 10rpx 3rpx #bfe1ea;
+}
+.public-welfare-hour text{
+  display: block;
+  font-size: 34rpx;
+  color: #666;
+  text-align: center;
+}
+.public-welfare-hour .hour-title{
+  display: block;
+  width: 457rpx;
+  height: 108rpx;
+  position: relative;
+  top: -44rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.public-welfare-hour .hour-border-container{
+  border: 2rpx solid #cff2f6;
+  border-radius: 50%;
+  margin: 50rpx auto 40rpx;
+  width: 446rpx;
+  height: 446rpx;
+}
+.hour-border-container .hour-border{
+  width: calc(100% - 56rpx);
+  height: calc(100% - 56rpx);
+  border: 28rpx solid #eafefc;
+  border-radius: 50%;
+  box-shadow:inset 0 0 3rpx 1px #dcfbf5;
+  position: relative;
+}
+.hour-border-container .hour-linear-gradient,.hour-border-container .hour-text{
+  width: 353rpx;
+  height: 353rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: linear-gradient(to right,#7de4f5, #72f0a7, #f8e600);
+  transform:translate(-50%,-50%);
+}
+.hour-border-container  .hour-text{
+  width: 302rpx;
+  height: 302rpx;
+  background: #fff;
+  color: #666;
+  font-size: 34rpx;
+}
+.hour-border-container  .hour-text text:first-of-type{
+  font-size: 110rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  margin-top: 55rpx;
+}
+
+.public-welfare-hour button{
+  width: 292rpx;
+  height: 84rpx;
+  font-size: 28rpx;
+  line-height: 84rpx;
+  text-align: center;
+  background-image: linear-gradient(to right, #6b95ff , #3b68e5);
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 50rpx;
+  box-shadow: 0 2rpx 0 2rpx #e1e7e5;
+}
+
+.public-welfare .blue-map{
+  width: 100%;
+  height: 246rpx;
+  margin-top: 37rpx;
+  box-shadow: 0 3rpx 10rpx 3rpx #bfe1ea;
+  border-radius: 30rpx;
+}

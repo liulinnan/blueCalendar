@@ -1,0 +1,42 @@
+/* .my-details-container .scroll-container{} */
+.my-dynamic{
+  padding: 25rpx 0 29rpx;
+  margin-left: 30rpx;
+  border-bottom: 1rpx solid #c8c7cc;
+}
+.my-dynamic .user-head{
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  margin-left: -6rpx;
+}
+.my-dynamic .dynamic-content{
+  margin-left: 16rpx;
+}
+.dynamic-content text{
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 15rpx;
+  display: block;
+}
+.dynamic-content .thumbs-up{
+  margin-top: 15rpx;
+  width: 480rpx;
+}
+.dynamic-content .thumbs-up image{
+  margin-right: 6rpx;
+}
+.dynamic-content .reply-btn{
+  font-size: 20rpx;
+  color: #385790;
+  margin-left: 42rpx;
+  cursor: pointer;
+}
+.my-dynamic .dynamic-detail{
+  width: 110rpx;
+  height: 110rpx;
+  margin-right: 26rpx;
+}
+.my-dynamic:last-of-type{
+  padding-bottom: 130rpx;
+}

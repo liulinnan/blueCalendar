@@ -1,0 +1,23 @@
+<view class="atd-mobile-code forget-pwd">
+  <mobile-code
+    onSendCode="onSendCode"
+    onCodeInput="onCodeInput"
+    disabled="{{disabled}}"
+    mobile="{{mobile}}"
+  />
+  <view class="atd-tel-wrapper">
+    <label for="pwd" class="atd-input-con">
+      <el-input name="pwd" password="{{true}}" placeholder="请输入新密码" 
+        value="{{pwd1}}" onInput="onPwd1Input"/>
+    </label>
+  </view>
+  <view class="atd-tel-wrapper">
+    <label for="pwd2" class="atd-input-con">
+      <el-input name="pwd2" password="{{true}}" placeholder="再次输入密码" 
+        value="{{pwd2}}" onInput="onPwd2Input"/>
+    </label>
+  </view>
+  <button class="long-btn bind-btn" 
+    style="background : {{(code && mobile && pwd1 && pwd2) ? '': '#abc2f8'}};" 
+    disabled="{{(code && mobile && pwd1 && pwd2) ? false : true}}" onTap="bindTap" >完 成</button>
+</view>

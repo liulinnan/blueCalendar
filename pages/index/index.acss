@@ -1,0 +1,156 @@
+page{
+  background: #f7f7f7;
+}
+.ss-index{
+  padding-top: 12rpx;
+  background: #fff;
+}
+.am-search{
+  padding: 0;
+  margin: 0 30rpx 0 40rpx;
+  height: 52rpx;
+  border: 2rpx solid #ededed;
+  border-radius: 50rpx;
+  /* position: fixed;
+  top: 0;
+  width: calc(100% - 70rpx);
+  background: #fff; */
+}
+.am-search-input{
+  line-height: 52rpx;
+  height: 52rpx;
+  background: #fafafa;
+}
+.am-search-synthetic{
+  height: 52rpx;
+  line-height: 52rpx;
+}
+.am-search-synthetic-placeholder{
+  font-size: 24rpx;
+  color: #a1a1a1;
+}
+.am-search-value{
+  font-size: 24rpx;
+  height: 52rpx;
+}
+.am-search-cancel{
+  display: none;
+}
+.ss-classify{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.tab-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx;
+  /* 如果 swipeable="{{true}}"，需要增加 height */
+  /* height: 350px; */
+}
+.am-tabs-bar-content{
+  height: 74rpx;
+}
+.am-tabs-scroll-left, .am-tabs-scroll-right{
+  width: 20rpx;
+}
+.am-tabs-content-wrap{
+  margin: 0;
+}
+.tabbar-cls{
+  color: #333;
+  height: auto;
+  font-size: 24rpx;
+  height: 74rpx;
+  width: 14%!important;
+  /* width: 100rpx!important; */
+}
+.active-cls{
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  border: none;
+}
+.tab-h{
+  height: 74rpx;
+  width: 100%; 
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 74rpx;
+  font-size: 24rpx; 
+  white-space: nowrap;
+}
+.tab-item{
+  width: 14%!important;
+  display: inline-block;
+  text-align: center;
+}
+.tab-item.active{
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+}
+.scoll-h{height: 100%;}
+
+/*  瀑布流样式  */
+.ss-list-cantainer{
+  padding: 8rpx 8rpx 0;
+  margin-top: 8rpx;
+  background: #f7f7f7;
+  /* column-count: 2;
+  column-gap: 7rpx;
+   break-inside: avoid; */
+}
+.ss-list{
+  margin-bottom: 10rpx;
+  /* margin-right: 7rpx; */
+  background: #fff;
+  width: 363rpx;
+  /* display: inline-block; */
+}
+/* .ss-list:nth-child(2n){
+  margin-right: 0;
+} */
+.ss-list .ss-img{
+  width: 100%;
+  border-radius: 5rpx 5rpx 0 0;
+}
+.ss-list text{
+  font-size: 21rpx;
+  color: #333;
+  line-height: 26rpx;
+  display: block;
+  margin: 0 19rpx;
+  text-align: justify;
+}
+.ss-list .ss-user-data{
+  display: flex;
+  align-items: center;
+  /* margin: 0 22rpx 15rpx; */
+  justify-content: space-between;
+  padding: 14rpx 22rpx 21rpx;
+}
+.ss-list .ss-user-data view{
+  display: flex;
+  align-items: center;
+}
+.ss-list .ss-user-data image{
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+}
+.ss-list .ss-user-data text{
+  font-size: 18rpx;
+  color: #323232;
+}
+.upload-ss{
+  width: 142rpx;
+  height: 142rpx;
+  position: fixed;
+  bottom: 20rpx;
+  right: 26rpx;
+}
+/* .ss-details .comment-all{
+  bottom: 20rpx;
+} */

@@ -1,0 +1,25 @@
+<view class="my-container">
+  <view class="common-mb user-data clearfix">
+    <image class="fl" mode="scaleToFill" src="{{userData.Url ? userData.Url : '/images/user-default.png'}}"/>
+    <text class="fl">{{userData.UserName}}</text>
+  </view>
+
+  <view class="common-mb view-data">
+    <view onTap="seeYL">查看日历进度<text></text></view>
+    <view onTap="activityShot">提交活动截图<text></text></view>
+    <view onTap="auditResult">查看审核结果<text></text></view>
+  </view>
+
+  <view class="common-mb view-data">
+    <view onTap="myDynamic">我的动态<text></text></view>
+    <view onTap="myFeedback">用户反馈<text></text></view>
+  </view>
+
+  <!-- <view class="common-mb view-data">
+    <view onTap="publicWelfare">查看公益时<text></text></view>
+  </view> -->
+
+  <view class="common-mb view-data">
+    <view onTap="signOut">退出</view>
+  </view>
+</view>

@@ -1,0 +1,52 @@
+page{
+  background: #f6f7f9;
+}
+.my-container{
+  height: 100%;
+}
+.common-mb{
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.my-container .user-data{
+  padding-top: 52rpx;
+  padding-bottom: 52rpx;
+}
+.user-data image{
+  width: 118rpx;
+  height: 118rpx;
+  border-radius: 50%;
+  margin-left: 15rpx;
+}
+.user-data text{
+  font-size: 36rpx;
+  color: #333;
+  line-height: 118rpx;
+  margin-left: 50rpx;
+}
+.view-data view{
+  color: #333;
+  font-size: 28rpx;
+  line-height: 109rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #dedede;
+  cursor: pointer;
+}
+.view-data text{
+  line-height: 109rpx;
+  /*font-size: 28rpx; */
+  display: block;
+  width: 15rpx;
+  height: 15rpx;
+  border-top: 3rpx solid #9a9a9a;
+  border-right: 3rpx solid #9a9a9a;
+  transform: rotate(45deg);
+  margin-top: 45rpx;
+  margin-right: 2rpx;
+}
+.view-data view:last-of-type{
+  border: none;
+}

@@ -1,0 +1,18 @@
+<view class="public-welfare">
+  <view class="public-welfare-hour">
+    <image class="hour-title" mode="scaleToFill" src="/images/public-welfare-title.png"/>
+    <text>已完成晒出蔚蓝日历活动，获得</text>
+    <view class="hour-border-container">
+      <view class="hour-border">
+        <view class="hour-linear-gradient">
+            <view class="hour-text">
+              <text>2</text>
+              <text>公益时</text>
+            </view>
+        </view>
+      </view>
+    </view>
+    <button size="default">查看3小时公益</button>
+  </view>
+  <image class="blue-map" mode="scaleToFill" src="/images/blue-map-banner.png"/>
+</view>

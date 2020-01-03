@@ -1,0 +1,54 @@
+
+.authorize-login{
+  margin-top: 83rpx;
+  text-align: center;
+}
+.authorize-login text{
+  font-size: 27rpx;
+  color: #637895;
+  cursor: pointer;
+  margin-top: 42rpx;
+  margin-bottom: 50rpx;
+  display: block;
+}
+.authorize-login image{
+  width: 412rpx;
+  height: 457rpx;
+}
+.map-protocol{
+  margin-top: 55rpx;
+  display: flex;
+  justify-content: center;
+  /* width: 430rpx; */
+}
+.map-protocol .box-btn{
+  width: 26rpx;
+  height: 26rpx;
+  border: 1rpx solid #437dde;
+  border-radius: 50rpx;
+  margin-right: 17rpx;
+  background: #437dde;
+}
+.map-protocol .normal-btn{
+  background: #fff;
+}
+.box-btn .select-btn{
+  width: 12rpx;
+  height: 20rpx;
+  color: none;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2rpx 2rpx 0;
+  transform: rotate(45deg);
+  background: none;
+  margin-left: 7rpx;
+  margin-top: 1rpx;
+}
+.map-protocol text{
+  margin: 0;
+  display: flex;
+  line-height: 28rpx;
+}
+.map-protocol .blue-map{
+  color: #437edc;
+}

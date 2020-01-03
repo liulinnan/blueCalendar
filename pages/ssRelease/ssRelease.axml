@@ -1,0 +1,49 @@
+<view class="ss-release">
+  <view class="picture-list clearfix mt">
+    <view class="picture-select fl" a:for="{{pictureList}}">
+      <image mode="scaleToFill" src="{{item}}"/>
+      <view class="close" onTap="deleteImg" data-index="{{index}}">
+        <am-icon class="fr" size="7" color="#fff" type="cross" />
+      </view>
+    </view>
+    <view class="ss-upload fl" a:if="{{pictureList.length < 6}}" onTap="addImg">
+      <am-icon size="22" color="#ccc" type="plus" />
+    </view>
+  </view>
+
+  <view class="ss-label mt">
+    <view class="ss-tag-select clearfix">
+      <text class="fl">选个合适的标签吧：</text>
+      <button class="fl" a:for="{{labelSelect}}" onTap="deleteTag" data-index="{{index}}">{{item[1]}} X</button>
+    </view>
+    <view>
+      <button a:for="{{labelList}}" size="default" onTap="selectTag" 
+        data-index="{{index}}" data-label="{{item[0]}}" data-name="{{item[1]}}">{{item[1]}}</button>
+    </view>
+  </view>
+
+  <view class="ss-text mt">
+    <text>写下标题收获更多赞哦</text>
+    <textarea onBlur="bindTextAreaBlur" value="{{describe}}" auto-height maxlength="-1" placeholder="写下此时此刻的想法..." />
+  </view>
+
+  <view class="ss-pos-share mt">
+    <view class="ss-pos clearfix" onTap="chooseLocation">
+      <image class="fl" mode="scaleToFill" src="/images/icon-pos.png"/>
+      <text class="fl">{{location.address ? location.address  : '请选择位置'}}</text>
+      <!-- <am-icon class="fr" size="13" color="#666" type="arrow-right" /> -->
+    </view>
+    <!-- <view class="ss-share">
+      同步到
+      <view class="ss-platform-share">
+        <image mode="scaleToFill" src="/images/icon-wb.png"/>
+        <image mode="scaleToFill" src="/images/icon-wx.png"/>
+        <image mode="scaleToFill" src="/images/icon-pyq.png"/>
+        <image mode="scaleToFill" src="/images/icon-qq.png"/>
+        <image mode="scaleToFill" src="/images/icon-dd.png"/>
+        <image mode="scaleToFill" src="/images/icon-zfb.png"/>
+      </view>
+    </view> -->
+  </view>
+  <button class="long-btn" size="default" style="width: calc(100% - 60rpx)" onTap="subSS">发布</button>
+</view>

@@ -1,0 +1,10 @@
+.atd-verify-wrapper .am-input-line{
+  position: relative!important;
+}
+.forget-pwd{
+  font-size: 25rpx;
+  color: #427cdd;
+  text-align: center;
+  display: block;
+  margin-top: 30rpx;
+}

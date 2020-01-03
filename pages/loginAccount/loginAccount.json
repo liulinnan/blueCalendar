@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "el-input": "mini-antui/es/input-item/index"
+  }
+}

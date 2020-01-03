@@ -1,0 +1,23 @@
+<view class="activity-shot">
+  <text>领取公益时，把满30天的月历分享到微博、朋友圈或钉钉，加上环保宣言，上传活动截图。审核通过后，5-7个工作日给出公益时。</text>
+  <text>参与环保，感恩有你！</text>
+
+  <view class="upload-img" onTap="uploadYl">
+    <view a:if="{{uploadStatus === 0}}">
+      <image mode="aspectFit" src="/images/icon-activity-shot.png"/>
+      <text>请上传活动图片</text>
+    </view>
+    <image a:else class="yl-img" mode="aspectFill" src="{{uploadUrl}}"/>
+  </view>
+
+  <view class="upload-img-example">
+    <text>上传图片示例</text>
+    <view>
+      <image mode="scaleToFill" src="/images/yl-upload-ex1.png"/>
+      <image mode="scaleToFill" src="/images/yl-upload-ex2.png"/>
+    </view>
+  </view>
+  <button class="linear-gradient-btn upload-btn" 
+    style="background : {{uploadUrl ? '': '#abc2f8'}};" 
+    disabled="{{uploadUrl ? false : true}}" onTap="uploadFile">提 交</button>
+</view>

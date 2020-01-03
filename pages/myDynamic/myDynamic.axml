@@ -1,0 +1,39 @@
+<view class="not-login" a:if="{{dynamicList.length == 0}}">
+    <image mode="scaleToFill" class="comment-pal" src="/images/not-login.png"/>
+    <text>暂无动态记录</text>
+  </view>
+<view class="common-scroll-container" a:else>
+  <scroll-view class="scroll-container" scroll-y="{{true}}" 
+    lower-threshold="300" onScrollToLower="scrollMytrip">
+    <view class="my-dynamic clearfix" a:for="{{dynamicList}}" onTap="commentUserData" data-wallid="{{item[7]}}" data-parentid="{{item[0]}}" data-parentuserid="{{item[1]}}" data-rootid="{{item[10]}}" data-name="{{item[2]}}">
+      <image class="user-head fl" mode="scaleToFill" src="{{item[3]}}"/>
+      <view class="dynamic-content fl">
+        <text>{{item[2]}} 评论了</text>
+        <view class="thumbs-up flex">
+          <image a:if="{{(item[4].indexOf('♥️') >= 0) }}" class="icon-thumbs-up" mode="scaleToFill" src="/images/icon-thumbs-up.png"/>
+          <!-- {{item.state === 0 ? '为你点赞' : item.content}} -->
+          {{(item[4].indexOf('♥️') >= 0) ? (item[4].split("♥️")[1]) : item[4]}}
+        </view>
+        <view class="flex">
+          <text>{{item[5]}}</text>
+          <text class="reply-btn">回复</text>
+        </view>
+      </view>
+      <image class="dynamic-detail fr" catchTap="jumpDetails" data-ssId="{{item[7]}}" mode="aspectFill" src="{{item[8]}}"/>
+    </view>
+  </scroll-view>
+  <view class="comment-all">
+    <input
+      type="text"
+      enableNative="{{false}}"
+      focus="{{focusKeyboard}}"
+      value="{{detailsComment}}"
+      class="comment-cls"
+      placeholder-class="pd-cls"
+      placeholder="{{userName}}"
+      confirm-type="none"
+      onInput="getCommentVal"
+    />
+    <button size="default" onTap="commentListSub">发送</button>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mobile-code": "/components/mobileCode/index",
+     "el-input": "mini-antui/es/input-item/index"
+  }
+}
