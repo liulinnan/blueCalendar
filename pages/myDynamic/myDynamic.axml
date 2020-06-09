@@ -1,12 +1,8 @@
-<view class="not-login" a:if="{{dynamicList.length == 0}}">
-    <image mode="scaleToFill" class="comment-pal" src="/images/not-login.png"/>
-    <text>暂无动态记录</text>
-  </view>
-<view class="common-scroll-container" a:else>
+<view class="common-scroll-container" a:if="{{dynamicList.length > 0}}">
   <scroll-view class="scroll-container" scroll-y="{{true}}" 
     lower-threshold="300" onScrollToLower="scrollMytrip">
     <view class="my-dynamic clearfix" a:for="{{dynamicList}}" onTap="commentUserData" data-wallid="{{item[7]}}" data-parentid="{{item[0]}}" data-parentuserid="{{item[1]}}" data-rootid="{{item[10]}}" data-name="{{item[2]}}">
-      <image class="user-head fl" mode="scaleToFill" src="{{item[3]}}"/>
+      <image class="user-head fl" mode="scaleToFill" src="{{item[3]?item[3]: '/images/ss-default-head.png'}}"/>
       <view class="dynamic-content fl">
         <text>{{item[2]}} 评论了</text>
         <view class="thumbs-up flex">
@@ -22,11 +18,11 @@
       <image class="dynamic-detail fr" catchTap="jumpDetails" data-ssId="{{item[7]}}" mode="aspectFill" src="{{item[8]}}"/>
     </view>
   </scroll-view>
-  <view class="comment-all">
+  <view class="comment-all" a:if="{{focusKeyboard}}">
     <input
       type="text"
       enableNative="{{false}}"
-      focus="{{focusKeyboard}}"
+      focus="{{true}}"
       value="{{detailsComment}}"
       class="comment-cls"
       placeholder-class="pd-cls"
@@ -36,4 +32,8 @@
     />
     <button size="default" onTap="commentListSub">发送</button>
   </view>
+</view>
+<view class="not-login" a:else>
+  <image mode="scaleToFill" class="comment-pal" src="/images/not-login.png"/>
+  <text>暂无动态记录</text>
 </view>

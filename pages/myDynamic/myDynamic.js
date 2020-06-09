@@ -8,6 +8,7 @@ Page({
     userName: '',
     detailsComment: '',
     commentDetails: {},
+    focusKeyboard: false
   },
   onLoad() {
     this.getMyDynamic(this.data.pageindex);
@@ -30,9 +31,9 @@ Page({
       dynamicList: selfObj.data.dynamicList
     });
   },
-  commentUserData(e) {
+  commentUserData(e) {//获取点击的某个要回复用户的信息
     let data = e.target.dataset;
-    console.log(data);
+    //console.log(data);
     var ids = {
       wallid: data.wallid,
       parentid: data.parentid,
@@ -41,6 +42,7 @@ Page({
       name: data.name
     }
     this.setData({
+      focusKeyboard: true,
       commentDetails: ids,
       userName: '回复：'+ data.name
     });
@@ -50,35 +52,23 @@ Page({
       detailsComment: e.detail.value
     })
   },
-  commentUserData(e) { //获取点击的某个要回复用户的信息
-    let data = e.target.dataset;
-    console.log()
-    var ids = {
-      wallid: data.wallid,
-      parentid: data.parentid,
-      parentuserid: data.parentuserid,
-      rootid: data.rootid,
-      name: data.name
-    }
-    this.setData({
-      commentDetails: ids,
-      userName: '回复：'+ data.name
-    });
-  },
   commentListSub() { //评论单个提交
     if(app.globalData.userid){
       if(this.data.detailsComment){
         let params = {
-          userid: app.globalData.userid, //login id
-          dt: app.getTimestamp(), //time
-          wallid: this.data.commentDetails.wallid, //ss id
-          parentid: this.data.commentDetails.parentid, //评论id
-          parentuserid: this.data.commentDetails.parentuserid, //被留言id
-          Content: this.data.detailsComment, //内容
-          rootid: this.data.commentDetails.rootid, // 首次评论 0 
+          content: this.data.detailsComment,
         }
-        console.log(params);
-        publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successCommentDetaile);
+        publicFun.requestPostApi(publicFun.api.getriskContent, params, this, this.successRiskContentAlone);
+        // let params = {
+        //   userid: app.globalData.userid, //login id
+        //   dt: publicFun.getTimestamp(), //time
+        //   wallid: this.data.commentDetails.wallid, //ss id
+        //   parentid: this.data.commentDetails.parentid, //评论id
+        //   parentuserid: this.data.commentDetails.parentuserid, //被留言id
+        //   Content: this.data.detailsComment, //内容
+        //   rootid: this.data.commentDetails.rootid, // 首次评论 0 
+        // }
+        // publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successCommentDetaile);
       }else{
         publicFun.showToast("请输入评论内容")
       }
@@ -86,13 +76,39 @@ Page({
       publicFun.jumpLogin();
     }
   },
+  successRiskContentAlone(res, selfObj) {
+    if(res.S == 1) {
+      if(res.D.action == 'PASSED') {
+        let params = {
+          userid: app.globalData.userid, //login id
+          dt: publicFun.getTimestamp(), //time
+          wallid: selfObj.data.commentDetails.wallid, //ss id
+          parentid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, //评论id
+          parentuserid: selfObj.data.commentDetails.parentuserid, //被留言id
+          Content: selfObj.data.detailsComment, //内容
+          rootid: selfObj.data.commentDetails.rootid ? selfObj.data.commentDetails.rootid : 0, // 首次评论 0 
+        }
+        publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successCommentDetaile);
+      }else{
+        setTimeout(function () {
+          publicFun.showToast("您输入的内容涉及敏感词汇，请重新输入。", 2000);
+          selfObj.setData({
+            detailsComment: ''
+          });
+        }, 300)
+      }
+    }
+  },
   successCommentDetaile(res, selfObj) {
     if(res.S == 1){
-      publicFun.showToast("提交成功", 2000);
+      setTimeout(function () {
+        publicFun.showToast("提交成功", 2000);
+      }, 300);
       selfObj.setData({
         detailsComment: '',
         commentDetails: {},
         userName: '',
+        focusKeyboard: false
       });
     }
   },

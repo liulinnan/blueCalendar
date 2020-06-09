@@ -1,0 +1,48 @@
+<view a:if={{calendarList.length > 0}}>
+  <scroll-view style="height: {{systemInfo.windowHeight}}px" scroll-y="true"               scroll-into-view="{{toView}}" scroll-with-animation="true" 
+class="{{rid == 0 ? 'calendar-container' : ''}}">
+    <view class="calendar-list" a:for="{{calendarList}}" id="{{'list'+item[0]}}">
+      <view class="calendar-date">
+        <text>{{item[18].split(" ")[0].split("/")[2]}}
+        </text>{{item[18].split(" ")[0].split("/")[1]}}月
+      </view>
+      <image mode="aspectFill" class="calendar-image" src="{{item[5]}}"/>
+      <view class="calendar-content">
+          <text class="ss-content">{{item[19]}}</text>
+          <view class="calendar-number">
+            <view class="see">
+              <image src="/images/icon-calendar-see.png"/>
+              {{item[6]}}
+            </view>
+            <view class="comment">
+              <image src="/images/icon-calendar-comment.png"/>
+              {{item[9]}}
+            </view>
+            <view class="like">
+              <image src="/images/icon-calendar-like.png"/>
+              {{item[7]}}
+            </view>
+          </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="monthly-calendar-container" a:if="{{rid == 0}}">
+    <view class="monthly-calendar">
+      <view class="progress-bar">
+        <slider value="{{ssDay.length}}" disabled="true" 
+          onChange="slider4change" min="0" max="31"
+          backgroundColor="#e8e8e8" activeColor="#6691fa" trackSize="12" handleSize="18" handleColor="#fff" />
+        <text>您已发晒晒<text class="number">{{ssDay.length}}</text>天，晒满21天可以进行月历制作！</text>
+      </view>
+      <view class="monthly-calendar-btn {{ssDay.length >= 21 ?  'active' : 'normal'}}" onTap="jumpMyCalendar">
+        生成月历
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="not-login" a:else>
+  <image mode="scaleToFill" class="comment-pal" src="/images/not-login.png"/>
+  <text>暂无相关晒晒列表</text>
+</view>

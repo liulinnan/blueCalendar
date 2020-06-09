@@ -9,6 +9,10 @@
     onCancel="handleCancel"
     onSubmit="handleSubmit"
     showCancelButton="{{false}}" /> -->
+  <view class="index-banner">
+    <image onTap="jumpInfor" src="/images/index-banner.png"/>
+    <web-view a:if="{{webView}}" src="{{webView}}" id="web-view-1" onMessage="onMessage"></web-view>
+  </view>
   <view class="ss-classify">
     <scroll-view scroll-x="{{true}}" class="tab-h" scroll-left="{{scrollLeft}}">
       <view a:for="{{tabs}}"  class="tab-item {{currentTab == index?'active':''}}"
@@ -22,7 +26,7 @@
             <view class="tab-follow">
               <view a:for="{{followList}}"
                 data-index="{{index}}" data-ssUserId="{{item[0]}}" onTap="followAll">
-                <image mode="scaleToFill" src="{{item[2]}}"/>
+                <image mode="scaleToFill" src="{{item[2]?item[2]:'/images/ss-default-head.png'}}"/>
                 <text class="text-overflow">{{item[1]}}</text>
               </view>
               <view a:if="{{followLength > 3}}" data-id="all" onTap="followAll">
@@ -142,9 +146,10 @@
                 <image mode="scaleToFill" src="{{item[3] ? item[3]: '/images/ss-list-default.png'}}"/>
                 <text>{{item[2]}}</text>
               </view>
-              <image data-ssId="{{item[0]}}"  data-index="{{index}}" data-state="{{item[12]}}" 
-                catchTap="getLikeState" class="ss-list-icon" mode="scaleToFill" 
+              <view class="ss-list-icon" data-ssId="{{item[0]}}"  data-index="{{index}}" data-state="{{item[12]}}"  catchTap="getLikeState">
+                <image mode="scaleToFill" 
                 src="{{item[12] == 1 ? '/images/icon-like.png' : '/images/icon-unlike.png'}}"/>
+              </view>
             </view>
           </view>
         </view>
@@ -158,15 +163,17 @@
                 <image mode="scaleToFill" src="{{item[3] ? item[3] : '/images/ss-list-default.png'}}"/>
                 <text>{{item[2]}}</text>
               </view>
-              <image data-ssId="{{item[0]}}"  data-index="{{index}}" data-state="{{item[12]}}" 
-                catchTap="getLikeState" class="ss-list-icon" mode="scaleToFill" 
+              <view class="ss-list-icon" data-ssId="{{item[0]}}"  data-index="{{index}}" data-state="{{item[12]}}"  catchTap="getLikeState">
+                <image mode="scaleToFill" 
                 src="{{item[12] == 1 ? '/images/icon-like.png' : '/images/icon-unlike.png'}}"/>
+              </view>
             </view>
           </view>
         </view>
       </view>
     </scroll-view>
   </view>
+  <!-- 相机 -->
   <image onTap="chooseSSImg" class="upload-ss" mode="scaleToFill" src="/images/icon-camera.png"/>
   <!-- 评论弹窗 -->
   <scroll-view class="ss-details alert-container" a:if="{{alertState}}"  scroll-y="{{true}}" 
@@ -182,7 +189,7 @@
       <view class="comment-container comment-list-container">
         <view class="user-comment" a:for="{{commentList}}" data-parentid="{{item[0]}}"
           data-parentuserid="{{item[2]}}" data-rootid="{{item[0]}}" data-name="{{item[3]}}" onTap="commentUserData">
-          <image class="user-head" mode="scaleToFill" src="{{item[4]}}"/>
+          <image class="user-head" mode="scaleToFill" src="{{item[4]?item[4]:'/images/ss-default-head.png'}}"/>
           <view class="user-data">
             <text>{{item[3]}}</text>
             <view class="like">
@@ -209,7 +216,7 @@
       </view>
     </view>
   </scroll-view>
-  <view class="comment-all" a:if="{{showInput}}">
+  <view class="comment-all comment-all-index" a:if="{{showInput}}">
     <input
       type="text"
       enableNative="{{false}}"

@@ -8,15 +8,17 @@ Page({
     currentTab: 1, //预设当前项的值
     scrollLeft:0, //tab标题的滚动条位置
     tabs: [ //sstab //关注300 推荐400 实景1 人物3 水质8 花草7 美食6 污染2 萌宠4
-      ["300", "关注", "0"],
-      ["400", "推荐", "0"],
-      ["1", "实景", "0"],
-      ["3", "人物", "0"],
-      ["8", "水质", "0"],
-      ["7", "花草", "0"],
-      ["6", "美食", "0"],
-      ["2", "污染", "0"],
-      ["4", "萌宠", "0"]
+      // ["300", "关注", "0"],
+      // ["400", "推荐", "0"],
+      // ["1", "实景", "0"],
+      // ["7", "自然", "0"],
+      // //["3", "人物", "0"],
+      // ["8", "水", "0"],
+      // // ["6", "美食", "0"],
+      // ["2", "污染", "0"],
+      // ["4", "萌宠", "0"],
+      // ["9", "观鸟", "0"],
+      // ["100", "日历", "0"]
     ], 
     activeTab: 1, //选中tab
     ssKey: '', //数据缓存
@@ -42,9 +44,18 @@ Page({
     showInput: false, //控制输入栏
     followList: [], //关注列表
     followLength: 0,//关注数量
+    webView: '',
   },
   onLoad() {
-    //my.navigateTo({url:'/pages/loginBind/loginBind'});
+    //my.navigateTo({url:'/pages/login/login'});
+    //my.navigateTo({url:'/pages/demo/demo'});
+    // my.navigateTo({
+    //   url: '../myCalendarDetails/myCalendarDetails'
+    //   //url: '../myCalendarList/myCalendarList'
+    // });
+    this.setData({
+      webView: ''
+    })
     var that = this; 
     my.getSystemInfo( { // 高度自适应
       success ( res ) { 
@@ -58,11 +69,17 @@ Page({
       } 
     });
     if(app.globalData.secondCount){
-      //this.getSSTab();
+      if(app.globalData.tabs.length > 0){
+        that.setData({
+          tabs: app.globalData.tabs
+        })
+      }else{
+        this.getSSTab();
+      }
       this.getSSList(this.data.ssType, this.data.pageindex);
     }else{
       app.getSecondCount().then(res => {
-        //this.getSSTab();
+        this.getSSTab();
         this.getSSList(this.data.ssType, this.data.pageindex);
       });
     }
@@ -90,6 +107,28 @@ Page({
       this.getSSList(this.data.ssType, 1);
     }
   },
+
+  getSSTab() { //获取ss tab
+    let params = {
+      userid: app.globalData.userid ? app.globalData.userid : 0,
+    }
+    publicFun.requestGetApi(publicFun.api.ssTab, params, this, this.successTab);
+  },
+  successTab(res, selfObj) { //获取成功返回的tab list
+    if(res.S == 1){
+      for(let i=0;i<res.L.length;i++){
+        if(res.L[i][0] == 1000 || res.L[i][0] == 3 || res.L[i][0] == 6 || res.L[i][0] == 300){
+          res.L.splice(i,1);
+        }
+      }
+      res.L.unshift(["300", "关注", "0"]);
+      selfObj.setData({
+        tabs: res.L
+      });
+      app.globalData.tabs = res.L;
+    }
+  },
+
   // 点击标题切换当前页时改变样式
   swichNav(e) {
     app.globalData.tabPage = 0;
@@ -186,42 +225,15 @@ Page({
       followLength: res.L.length,
     });
   },
-
-  getSSTab() { //获取ss tab
-    let params = {
-      userid: app.globalData.userid ? app.globalData.userid : 0,
-    }
-    //publicFun.requestGetApi(publicFun.api.ssTab, params, this, this.successTab);
-  },
-  successTab(res, selfObj) { //获取成功返回的tab list
-    var resList = [];
-    resList.push({
-      value: res.L[res.L.length-1][0],
-      title: res.L[res.L.length-1][1]
-    });
-    for(var i=1;i<res.L.length-1;i++){
-      resList.push({
-        value: res.L[i][0],
-        title: res.L[i][1]
-      });
-    }
-    console.log(res);
-    selfObj.setData({
-      activeTab: app.globalData.userid ? Number(res.X) : 1,
-      tabs: resList
-    })
-    //selfObj.getSSList(selfObj.data.ssType, selfObj.data.pageindex);
-  },
-
+  
   getSSList(type, pageindex) { //获取晒晒列表
-    //console.log(type, pageindex);
     //my.showLoading();
     let params = {
       sorttype: 2,
-      pagesize: 10,
+      pagesize: 20,
       pageindex: pageindex,
-      lat: 0,
-      lng: 0,
+      lat: app.globalData.location.lat ? app.globalData.location.lat : 0,
+      lng: app.globalData.location.lng ? app.globalData.location.lng : 0,
       userid: 0,
       duserid: app.globalData.userid ? app.globalData.userid : 0,
       type: type,
@@ -237,6 +249,7 @@ Page({
     publicFun.requestPostApi(publicFun.api.ssList, params, this, this.successList);
   },
   successList(res, selfObj) { //晒晒成功后返回参数
+    //console.log(res);
     res.L.forEach((ssItem) => {
       selfObj.data.ssList.push(ssItem);
     });
@@ -290,7 +303,7 @@ Page({
       let data = e.target.dataset;
       let params  = {
         userid: app.globalData.userid,
-        dt: app.getTimestamp(),
+        dt: publicFun.getTimestamp(),
         wallid: data.ssId
       }
       if(data.state == 1){
@@ -334,23 +347,53 @@ Page({
     })
     if(app.globalData.userid){
       let params = {
-        userid: app.globalData.userid, //login id
-        dt: app.getTimestamp(), //time
-        wallid: data.ssId, //ss id
-        parentid: 0, //评论id
-        parentuserid: data.ssUserId, //被留言id
-        Content: this.data.listComment, //内容
-        rootid: 0, // 首次评论 0 
+        content: this.data.listComment,
       }
-      my.showLoading();
-      publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successComment, data.index);
+      publicFun.requestPostApi(publicFun.api.getriskContent, params, this, this.successRiskContent, data);
+      // let params = {
+      //   userid: app.globalData.userid, //login id
+      //   dt: publicFun.getTimestamp(), //time
+      //   wallid: data.ssId, //ss id
+      //   parentid: 0, //评论id
+      //   parentuserid: data.ssUserId, //被留言id
+      //   Content: this.data.listComment, //内容
+      //   rootid: 0, // 首次评论 0 
+      // }
+      // my.showLoading();
+      // publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successComment, data.index);
     }else{
       publicFun.jumpLogin();
     }
   },
+  successRiskContent(res, selfObj, sourceObj, dataParams) {
+      if(res.S == 1) {
+        if(res.D.action == 'PASSED') {
+          my.showLoading();
+          let params = {
+            userid: app.globalData.userid, //login id
+            dt: publicFun.getTimestamp(), //time
+            wallid: dataParams.ssId, //ss id
+            parentid: 0, //评论id
+            parentuserid: dataParams.ssUserId, //被留言id
+            Content: selfObj.data.listComment, //内容
+            rootid: 0, // 首次评论 0 
+          }
+          publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successComment, dataParams.index);
+        }else{
+          setTimeout(function () {
+            publicFun.showToast("您输入的内容涉及敏感词汇，请重新输入。", 2000);
+            selfObj.setData({
+              listComment: ''
+            });
+          }, 300)
+        }
+      }
+    },
   successComment(res, selfObj, sourceObj, dataParams) {
     if(res.S == 1){
-      publicFun.showToast("提交成功", 2000);
+      setTimeout(function () {
+        publicFun.showToast("提交成功", 2000);
+      },300);
       selfObj.data.ssList[dataParams][9] = Number(selfObj.data.ssList[dataParams][9])+1;
       selfObj.setData({
         ssList: selfObj.data.ssList,
@@ -425,16 +468,20 @@ Page({
     if(app.globalData.userid){
       if(this.data.detailsComment){
         let params = {
-          userid: app.globalData.userid, //login id
-          dt: app.getTimestamp(), //time
-          wallid: this.data.ssId, //ss id
-          parentid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, //评论id
-          parentuserid: this.data.commentDetails.parentuserid ? this.data.commentDetails.parentuserid : this.data.parentuserid, //被留言id
-          Content: this.data.detailsComment, //内容
-          rootid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, // 首次评论 0 
+          content: this.data.detailsComment,
         }
-        my.showLoading();
-        publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successCommentDetaile);
+        publicFun.requestPostApi(publicFun.api.getriskContent, params, this, this.successRiskContentAlone);
+        // let params = {
+        //   userid: app.globalData.userid, //login id
+        //   dt: publicFun.getTimestamp(), //time
+        //   wallid: this.data.ssId, //ss id
+        //   parentid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, //评论id
+        //   parentuserid: this.data.commentDetails.parentuserid ? this.data.commentDetails.parentuserid : this.data.parentuserid, //被留言id
+        //   Content: this.data.detailsComment, //内容
+        //   rootid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, // 首次评论 0 
+        // }
+        // my.showLoading();
+        // publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successCommentDetaile);
       }else{
         publicFun.showToast("请输入评论内容")
       }
@@ -442,9 +489,36 @@ Page({
       publicFun.jumpLogin();
     }
   },
+  successRiskContentAlone(res, selfObj) {
+    if(res.S == 1) {
+      if(res.D.action == 'PASSED') {
+        let params = {
+          userid: app.globalData.userid, //login id
+          dt: publicFun.getTimestamp(), //time
+          wallid: selfObj.data.ssId, //ss id
+          parentid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, //评论id
+          parentuserid: selfObj.data.commentDetails.parentuserid ? selfObj.data.commentDetails.parentuserid : selfObj.data.parentuserid, //被留言id
+          Content: selfObj.data.detailsComment, //内容
+          rootid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, // 首次评论 0 
+        }
+        my.showLoading();
+        publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successCommentDetaile);
+      }else{
+        setTimeout(function () {
+          publicFun.showToast("您输入的内容涉及敏感词汇，请重新输入。", 2000);
+          selfObj.setData({
+            detailsComment: ''
+          });
+        }, 300)
+      }
+    }
+  },
   successCommentDetaile(res, selfObj) {
     if(res.S == 1){
-      publicFun.showToast("提交成功", 2000);
+      setTimeout(function () {
+          publicFun.showToast("提交成功", 2000);
+      }, 300)
+      
       //selfObj.data.ssList[dataParams][9] = Number(selfObj.data.ssList[dataParams][9])+1;
       selfObj.setData({
         commentList: [],
@@ -498,6 +572,12 @@ Page({
     }
   },
 
+  jumpInfor() {
+    //http://www.ipe.org.cn/apphelp/newsdetail/index.html?newid=2575087
+    this.setData({
+      webView: 'https://www.ipe.org.cn/apphelp/newsdetail/index.html?newid=2575087&page=1'
+    });
+  },
   jumpSSDetails(e) {
     if(this.data.ssType === 400){
       my.navigateTo({
@@ -515,11 +595,11 @@ Page({
   jumpFollowList() {
 
   },
-  chooseSSImg() { //上传ss
+  chooseSSImg() {//上传ss
     let that = this;
-    if(app.globalData.userid){ 
+    if(app.globalData.userid){
       my.chooseImage({
-        //chooseImage: 1,
+        chooseImage: 1,
         sourceType: ['camera','album'],
         count: 6,
         success: (res) => {
@@ -531,7 +611,78 @@ Page({
             url: '/pages/ssRelease/ssRelease?pathArr='+path+'&key='+that.data.ssKey//发布页面
           });
         },
+        fail:()=>{
+          my.getSetting({
+            success: (res) => {
+              //console.log(res.authSetting+111);
+              if(!res.authSetting.album || !res.authSetting.camera){
+                publicFun.showToast("没有相机或者相册访问权限，请授权", 2000);
+                my.openSetting({
+                  success: (res) => {
+                    console.log(res.authSetting);
+                  }
+                });
+              }
+            },
+          }) 
+        }
       })
+    }else{
+      publicFun.jumpLogin();
+    }
+  },
+  chooseSSImg1() { //上传ss
+    let that = this;
+    if(app.globalData.userid){ 
+      if(!app.globalData.location.lat || !app.globalData.location.lng){
+        //console.log('打开定位');
+        app.getLocation();
+        my.chooseImage({
+          chooseImage: 1,
+          sourceType: ['camera','album'],
+          count: 6,
+          success: (res) => {
+            //console.log(JSON.stringify(res));
+            const path = res.apFilePaths;
+            console.log(res); 
+            my.navigateTo({
+              //url: '/pages/ssUpload/ssUpload?path='+path //水印页面
+              url: '/pages/ssRelease/ssRelease?pathArr='+path+'&key='+that.data.ssKey//发布页面
+            });
+          },
+          fail:()=>{
+            publicFun.showToast("没有相机和相册访问权限，请授权", 3000);
+            my.openSetting({
+              success: (res) => {
+                console.log(res);
+              }
+            });
+          }
+        })
+      }else{
+        my.chooseImage({
+          chooseImage: 1,
+          sourceType: ['camera','album'],
+          count: 6,
+          success: (res) => {
+            //console.log(JSON.stringify(res));
+            const path = res.apFilePaths;
+            //console.log(res); 
+            my.navigateTo({
+              //url: '/pages/ssUpload/ssUpload?path='+path //水印页面
+              url: '/pages/ssRelease/ssRelease?pathArr='+path+'&key='+that.data.ssKey//发布页面
+            });
+          },
+          fail:()=>{
+            publicFun.showToast("没有相机和相册访问权限，请授权", 3000);
+            my.openSetting({
+              success: (res) => {
+                console.log(res);
+              }
+            });
+          }
+        });
+      }
     }else{
       publicFun.jumpLogin();
     }

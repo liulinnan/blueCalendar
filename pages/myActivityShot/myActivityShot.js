@@ -38,7 +38,7 @@ Page({
       filePath: this.data.uploadUrl,
       formData: {
         uid: app.globalData.userid,
-        datetime: app.getTimestamp()
+        datetime: publicFun.getTimestamp()
       },
       success: res => {
         let data = JSON.parse(res.data);

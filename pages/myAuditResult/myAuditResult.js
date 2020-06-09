@@ -2,13 +2,16 @@ const app = getApp();
 const publicFun = require('/utils/public.js');
 Page({
   data: {
-    pageindex: 0,
+    //pageindex: 1,
     auditList: []//0正在审核 1成功 2失败  
   },
   onLoad() {
-    this.getSSAudit(this.data.pageindex);
+    this.getSSAudit();
   },
-  getSSAudit(pageindex){
+  getSSAudit(){
+    this.setData({
+      auditList: [] 
+    })
     var params  = {
       userid: app.globalData.userid,
     }
@@ -24,15 +27,15 @@ Page({
       auditList: selfObj.data.auditList
     });
   },
-  scrollMytrip() {
-    try {
-        //const { pageindex } = this.data;
-        const newPage = this.data.pageindex + 1;
-        this.successSSAudit(newPage);
-        this.setData({pageindex: newPage});
-      } catch (e) {
-        my.hideLoading();
-        console.log('scrollMytrip执行异常:', e);
-      }
-  },
+  // scrollMytrip() {
+  //   try {
+  //       //const { pageindex } = this.data;
+  //       const newPage = this.data.pageindex + 1;
+  //       this.getSSAudit(newPage);
+  //       this.setData({pageindex: newPage});
+  //     } catch (e) {
+  //       my.hideLoading();
+  //       console.log('scrollMytrip执行异常:', e);
+  //     }
+  // },
 });

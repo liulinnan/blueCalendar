@@ -36,7 +36,7 @@ button{
   width: calc(100% - 110rpx);
   margin: 0 auto;
   font-size: 28rpx;
-  color: #fff;
+  color: #fff!important;
   line-height: 80rpx;
   border: none;
   background-image: linear-gradient(to right, #3e6edd , #6b96fe);
@@ -116,7 +116,12 @@ button{
   width: 26rpx!important;
   height: 24rpx!important;
 }
-.ss-list-icon{
+.ss-list-icon {
+  width: 48rpx;
+  height: 48rpx;
+  justify-content: flex-end;
+}
+.ss-list-icon image{
   width: 34rpx!important;
   height: 28rpx!important;
   border-radius: 0!important;
@@ -206,7 +211,7 @@ button{
 }
 .ss-details  .ss-user-data .user-name view text{
   display: inline-block;
-  width: 400rpx;
+  width: 380rpx;
   margin-left: 20rpx;
 }
 /* ss详情btn */
@@ -419,7 +424,7 @@ button{
 .comment-all {
   padding: 21rpx 30rpx 17rpx;
   border-top: 2rpx solid #e8e8e8;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   width: calc(100% - 60rpx);
   background: #fff;

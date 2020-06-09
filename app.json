@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/my/my",
     "pages/login/login",
+    "pages/loginQuick/loginQuick",
     "pages/loginAccount/loginAccount",
     "pages/loginBind/loginBind",
     "pages/followList/followList",
@@ -16,7 +17,12 @@
     "pages/ssUpload/ssUpload",
     "pages/demo/demo",
     "pages/forgetPwd/forgetPwd",
-    "pages/blueMap/blueMap"
+    "pages/blueMap/blueMap",
+    "pages/myCalendar/myCalendar",
+    "pages/myCalendarDetails/myCalendarDetails",
+    "pages/myCalendarList/myCalendarList",
+    "pages/myCalendarShare/myCalendarShare",
+    "pages/commonJump/commonJump"
   ],
   "window": {
     "defaultTitle": "蔚蓝日历"

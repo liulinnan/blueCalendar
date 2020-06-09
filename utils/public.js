@@ -1,13 +1,23 @@
 import { requestGetApi, requestPostApi, api} from '/utils/request'
-// my.getStorage({
-//   key: 'userid',
-//   success: function(res) {
-//     res.key = res.data
-//   },
-// });
-//const userid = '' //userid
 
-// 转换为当前时间
+//获取当前时间戳转换为时间 
+function getTimestamp() {  
+  var timestamp = Date.parse(new Date());  
+  timestamp = timestamp / 1000;  
+  return getTime(timestamp);
+}
+
+//获取当前年月日
+function getThisDate() {
+  var now = new Date(); //当前日期 
+	var nowYear = now.getFullYear(); //当前年 
+	var nowMonth = now.getMonth(); //当前月 
+	let start = timeStampChangeDate(new Date(nowYear, nowMonth, 1));
+	let end = timeStampChangeDate(new Date(nowYear, nowMonth+1, 0));
+  return {start: start, end: end}
+}
+
+// 时间戳转换为2020-02-20 xx:xx:xx格式
 function getTime(timestamp) {
   //获取当前时间  
   var n = timestamp * 1000;  
@@ -26,10 +36,47 @@ function getTime(timestamp) {
   var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds(); 
 
   var time = Y+'-'+M+'-'+D+' '+h+':'+m+':'+s;
-  //console.log(time); 
-  //return timestamp;
   return time;
 }
+//获取当前时间转为年月日点分格式
+function getNowFormatDate() {
+  var date = new Date();
+  var seperator1 = "-";
+  var seperator2 = ":";
+  var month = date.getMonth() + 1<10? "0"+(date.getMonth() + 1):date.getMonth() + 1;
+  var strDate = date.getDate()<10? "0" + date.getDate():date.getDate();
+  var currentdate = date.getFullYear() + '年'  + month  + '月'  + strDate
+      + '日' + date.getHours()  + '点' + date.getMinutes()
+      + '分'; //+ date.getSeconds();
+  return currentdate;
+}
+
+//日期转为时间戳
+function timeStampChangeDate(date) {
+  let timeStamp = new Date(date).getTime();
+  var date = new Date(timeStamp);  
+  //年  
+  var Y = date.getFullYear();  
+  //月  
+  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);  
+  //日  
+  var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();  
+  var time = Y+'-'+M+'-'+D;
+  return time;
+}
+
+//秒转时
+function formatSeconds(value) {
+
+    var theTime = parseInt(value);// 秒
+    var hour= 0;// 小时
+
+    if(theTime > 60) {
+      hour = (theTime/3600).toFixed(0);
+      return hour;
+  }
+}
+
 // 获取位置
 function formatLocation(longitude, latitude) {
   longitude = Number(longitude).toFixed(2)
@@ -70,10 +117,16 @@ module.exports = {
   requestGetApi,
   requestPostApi,
   api,
+  getTimestamp,
+  getThisDate,
   getTime,
+  getNowFormatDate,
+  timeStampChangeDate,
+  formatSeconds,
+  
   formatLocation,
   arrayUnique,
-  //userid,
   jumpLogin,
-  showToast
+  showToast,
+  
 }

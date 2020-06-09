@@ -1,0 +1,111 @@
+page{
+    background: #f7f7f7;
+}
+.calendar-container{
+    margin-bottom: 136rpx;
+}
+.calendar-list{
+    padding: 40rpx 30rpx 40rpx 20rpx;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1rpx solid #dedede;
+    margin-bottom: 20rpx;
+}
+.calendar-list .calendar-date{
+    font-size: 25rpx;
+    color: #262626;
+    margin-right: 30rpx;
+}
+.calendar-list .calendar-date text{
+    font-size: 35rpx;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 15rpx;
+}
+.calendar-list .calendar-image{
+    width: 220rpx;
+    height: 220rpx;
+}
+.calendar-list  .calendar-content{
+    width: 376rpx;
+    font-size: 26rpx;
+    color: #323232;
+    margin-top: 6rpx;
+    margin-left: 21rpx; 
+    flex-flow: column;
+    display:flex;
+}
+.calendar-content .ss-content{
+    display: block;
+    line-height: 35rpx;
+    flex: 1;            
+    text-align: justify;
+}
+.calendar-content  .calendar-number{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.calendar-number image{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 8rpx;
+}
+.calendar-number .see image{
+    width: 36rpx;
+    height: 30rpx;
+    margin-left: 10rpx;
+}
+.calendar-number .see,
+.calendar-number .comment, 
+.calendar-number .like{
+    font-size: 25rpx;
+    color: #c5c5c5;
+    display: flex;
+    align-items: center;
+    margin-right: 46rpx;
+}
+/* 生成月历 */
+.monthly-calendar-container{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1rpx solid #ededed;
+}
+.monthly-calendar{
+    padding: 26rpx 30rpx 20rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.monthly-calendar .progress-bar{
+    width: 580rpx;
+}
+.monthly-calendar .progress-bar slider{
+    margin-bottom: 19rpx;
+}
+.monthly-calendar .progress-bar text{
+    font-size: 24rpx;
+    color: #666666;
+    margin-left: 22rpx;
+}
+.monthly-calendar .progress-bar .number{
+    color: #427ede;
+    margin-left: 0;
+}
+.monthly-calendar-container .monthly-calendar-btn{
+    width: 50rpx;
+    height: 50rpx; 
+    color: #fff;
+    font-size: 24rpx;
+    border-radius: 50%;
+    padding: 19rpx 19rpx;
+}
+.normal{
+    background: #cccccc;    
+}
+.active{
+    background-image: linear-gradient(to right, #3e6edd , #6b96fe);
+}

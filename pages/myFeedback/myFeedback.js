@@ -11,20 +11,36 @@ Page({
       textareaVal: e.detail.value
     })
   },
-  bindFormSubmit(e) {
-    var params = {
-      UserId: app.globalData.userid,
-      Message: this.data.textareaVal
+  bindFormSubmit() {
+    if(this.data.textareaVal) {
+      var params = {
+        UserId: app.globalData.userid,
+        Message: this.data.textareaVal
+      }
+      my.showLoading();
+      publicFun.requestPostApi(publicFun.api.userFeedBack, params, this, this.successUserFeedBack);
+    }else{
+      my.showToast({
+        content: '请填写建议', // 文字内容
+      });
     }
-    publicFun.requestPostApi(publicFun.api.userFeedBack, params, this, this.successUserFeedBack);
   },
   successUserFeedBack(res, selfObj) {
     console.log(res);
     if(res.S == 1){
-      publicFun.showToast(res.M);
+      my.showToast({
+        type: 'none',
+        content: res.M,
+        duration: 2000,
+        success: () => {
+          my.switchTab({
+            url: '/pages/my/my'
+          }); 
+        },
+      });
       selfObj.setData({
         textareaVal: ''
-      })
+      });
     }else{
       publicFun.showToast(res.M);
     }

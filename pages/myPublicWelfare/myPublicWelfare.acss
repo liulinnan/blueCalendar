@@ -4,16 +4,20 @@ page{
   background-size:100% 100%;
 }
 .public-welfare{
-  margin: 0 40rpx;
-  padding-top: 44rpx;
+  padding-top: 97rpx;
 }
 
+.public-welfare-container{
+  margin: 0 98rpx;
+}
 .public-welfare .public-welfare-hour{
   width: 100%;
   border-radius: 20rpx;
   background: #fff;
-  padding-bottom: 47rpx;
-  box-shadow: 0 3rpx 10rpx 3rpx #bfe1ea;
+  /* padding-top: 53rpx; */
+  padding-bottom: 60rpx;
+  /* box-shadow: 0 3rpx 10rpx 3rpx #bfe1ea; */
+  box-shadow: 0 0 10rpx #cde7f4;
 }
 .public-welfare-hour text{
   display: block;
@@ -26,7 +30,7 @@ page{
   width: 457rpx;
   height: 108rpx;
   position: relative;
-  top: -44rpx;
+  top: -62rpx;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -34,7 +38,7 @@ page{
 .public-welfare-hour .hour-border-container{
   border: 2rpx solid #cff2f6;
   border-radius: 50%;
-  margin: 50rpx auto 40rpx;
+  margin: -20rpx auto 0;
   width: 446rpx;
   height: 446rpx;
 }
@@ -43,7 +47,7 @@ page{
   height: calc(100% - 56rpx);
   border: 28rpx solid #eafefc;
   border-radius: 50%;
-  box-shadow:inset 0 0 3rpx 1px #dcfbf5;
+  box-shadow:inset 0 0 3rpx 1rpx #dcfbf5;
   position: relative;
 }
 .hour-border-container .hour-linear-gradient,.hour-border-container .hour-text{
@@ -71,17 +75,19 @@ page{
   margin-top: 55rpx;
 }
 
-.public-welfare-hour button{
-  width: 292rpx;
-  height: 84rpx;
-  font-size: 28rpx;
-  line-height: 84rpx;
+.public-welfare button{
+  width: 100%;
+  /* height: 94rpx; */
+  font-size: 30rpx;
+  line-height: 94rpx;
   text-align: center;
-  background-image: linear-gradient(to right, #6b95ff , #3b68e5);
+  /* background-image: linear-gradient(to right, #73ebd3, #75e8e6, #adec65); */
+  background: #ffab00;
   color: #fff;
   margin: 0 auto;
-  border-radius: 50rpx;
-  box-shadow: 0 2rpx 0 2rpx #e1e7e5;
+  border-radius: 20rpx;
+  margin-top: 26rpx;
+  box-shadow: inset 0 -5rpx 0 0 #ff9000;
 }
 
 .public-welfare .blue-map{
@@ -90,4 +96,32 @@ page{
   margin-top: 37rpx;
   box-shadow: 0 3rpx 10rpx 3rpx #bfe1ea;
   border-radius: 30rpx;
+}
+.three-hours-container{
+  margin: 0 68rpx;
+}
+.three-hours-container .three-hours-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.three-hours-container text{
+  font-size: 27rpx;
+  color: #ffffff;
+  line-height: 42rpx;
+  text-align: justify;
+  display: block;
+}
+.three-hours-container .three-hours-title{
+  margin-top: 23rpx;
+}
+.three-hours-container .three-hours-title image{
+  width: 91rpx;
+  height: 8rpx;
+}
+.three-hours-container .three-hours-title text{
+  color: #fff;
+  font-size: 30rpx;
+  margin: 0 32rpx;
+  line-height: 78rpx;
 }

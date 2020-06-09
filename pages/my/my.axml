@@ -1,7 +1,17 @@
 <view class="my-container">
-  <view class="common-mb user-data clearfix">
-    <image class="fl" mode="scaleToFill" src="{{userData.Url ? userData.Url : '/images/user-default.png'}}"/>
-    <text class="fl">{{userData.UserName}}</text>
+  <view class="common-mb user-data-container clearfix">
+    <view class="user-data">
+      <image mode="scaleToFill" src="{{userData.Url ? userData.Url : '/images/my-default-head.png'}}"/>
+      <view class="user-name">
+        <text>{{userData.UserName}}</text>
+        <view>公益时<text class="green">{{threeHours}}</text></view>
+      </view>
+    </view>
+    <view class="three-hours">
+      <!-- <image src="/images/icon-dd.png"/> -->
+      <!-- 公益三小时 -->
+      <image onTap="jumpThreeHours" src="/images/three-hours.png"/>
+    </view>
   </view>
 
   <view class="common-mb view-data">
@@ -12,12 +22,13 @@
 
   <view class="common-mb view-data">
     <view onTap="myDynamic">我的动态<text></text></view>
+    <view onTap="myCalendarList">我的月历<text></text></view>
     <view onTap="myFeedback">用户反馈<text></text></view>
   </view>
 
-  <!-- <view class="common-mb view-data">
+  <view class="common-mb view-data">
     <view onTap="publicWelfare">查看公益时<text></text></view>
-  </view> -->
+  </view>
 
   <view class="common-mb view-data">
     <view onTap="signOut">退出</view>

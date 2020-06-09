@@ -33,7 +33,7 @@ Component({
       mobileDisabled: disabled,
       canSend: flag
     });
-    console.log('载入mobileCode组件:' + this.data.version);
+    //console.log('载入mobileCode组件:' + this.data.version);
   },
   didUpdate(prevProps) {
     const {

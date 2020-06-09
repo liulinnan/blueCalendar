@@ -3,13 +3,18 @@
   margin-top: 83rpx;
   text-align: center;
 }
-.authorize-login text{
+.authorize-login text,
+.authorize-login .phone-login{
   font-size: 27rpx;
   color: #637895;
   cursor: pointer;
-  margin-top: 42rpx;
-  margin-bottom: 50rpx;
   display: block;
+}
+.authorize-login .phone-login{
+  width: 300rpx;
+  line-height: 40rpx;
+  border: none;
+  margin: 32rpx auto 50rpx;
 }
 .authorize-login image{
   width: 412rpx;

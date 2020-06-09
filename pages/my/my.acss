@@ -10,22 +10,64 @@ page{
   padding-left: 30rpx;
   padding-right: 30rpx;
 }
-.my-container .user-data{
+.my-container .user-data-container{
   padding-top: 52rpx;
   padding-bottom: 52rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding-right: 0;
+}
+.my-container .user-data{
+  display: flex;
+  align-items: center;
 }
 .user-data image{
   width: 118rpx;
   height: 118rpx;
   border-radius: 50%;
   margin-left: 15rpx;
+  margin-right: 50rpx;
 }
-.user-data text{
-  font-size: 36rpx;
+.user-data .user-name text{
   color: #333;
-  line-height: 118rpx;
-  margin-left: 50rpx;
+  font-size: 36rpx;
 }
+.user-data .user-name view{
+  font-size: 26rpx;
+  margin-top: 18rpx;
+}
+.user-data .user-name .green{
+  color: #11b35d;
+  font-size: 26rpx;
+  margin-left: 14rpx;
+  font-weight: bold;
+}
+.user-data-container .three-hours{
+  width: 196rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 0;
+  /* border-radius: 50px 0 0 50px;
+  background: #e0f7ed;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 13rpx 25rpx 13rpx 12rpx;
+  color: #0f994e;
+  font-size: 24rpx; */
+}
+.user-data-container .three-hours image{
+  /* width: 34rpx;
+  height: 34rpx;
+  margin-right: 8rpx;
+  margin-left: 0; */
+  width: 196rpx;
+  height: 60rpx;
+  border-radius: 0;
+}
+
 .view-data view{
   color: #333;
   font-size: 28rpx;

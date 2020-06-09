@@ -23,7 +23,11 @@
       onGetAuthorize="onGetAuthorize" 
       onError="onAuthError"
       style="background: {{ protocolStatus === 1 ? '#5884f1' : '#b5c7f5'}};color: #fff">支付宝用户一键授权</button>
-    <text class="phone-login" onTap="mobileLogin">蔚蓝地图账号登录</text>
+    <button class="phone-login" 
+      scope='userInfo'
+      open-type="getAuthorize"
+      onGetAuthorize="onGetAuthorizeMobile" 
+      onError="onAuthError">蔚蓝地图账号登录</button>
 
     <image mode="scaleToFill" src="/images/login-Illustration.png"/>
     <view class="map-protocol" onTap="authTap">

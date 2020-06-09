@@ -1,0 +1,3 @@
+<view class="share-img">
+  <image mode="widthFix" src="{{fmurl}}" onLongTap="saveImage" />
+</view>

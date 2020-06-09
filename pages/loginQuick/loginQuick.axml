@@ -1,0 +1,18 @@
+<view class="auth-containner">
+  <view class="login-container">
+    <image mode="scaleToFill" src="/images/logo.png"/>
+    <text class="prompt">发现污染·找回蔚蓝</text>
+    <text>欢迎加入蔚蓝地图</text>
+  </view>
+  <view class="atd-mobile-code">
+    <mobile-code
+      onSendCode="onSendCode"
+      onCodeInput="onCodeInput"
+      disabled="{{disabled}}"
+      mobile="{{mobile}}"
+    />
+    <button class="long-btn bind-btn"
+    style="background : {{disabled === true ? '#abc2f8': ''}};" 
+    disabled="{{(code && mobile) ? false : true}}" onTap="bindTap">登 录</button>
+  </view>
+</view>

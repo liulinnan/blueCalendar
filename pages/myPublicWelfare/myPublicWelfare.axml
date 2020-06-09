@@ -1,18 +1,29 @@
 <view class="public-welfare">
-  <view class="public-welfare-hour">
-    <image class="hour-title" mode="scaleToFill" src="/images/public-welfare-title.png"/>
-    <text>已完成晒出蔚蓝日历活动，获得</text>
-    <view class="hour-border-container">
-      <view class="hour-border">
-        <view class="hour-linear-gradient">
-            <view class="hour-text">
-              <text>2</text>
-              <text>公益时</text>
-            </view>
+  <view class="public-welfare-container">
+    <view class="public-welfare-hour">
+      <image class="hour-title" mode="scaleToFill" src="/images/public-welfare-title.png"/>
+      <!-- <text>已完成晒出蔚蓝日历活动，获得</text> -->
+      <view class="hour-border-container">
+        <view class="hour-border">
+          <view class="hour-linear-gradient">
+              <view class="hour-text">
+                <text>{{threeHours}}</text>
+                <text>公益时</text>
+              </view>
+          </view>
         </view>
       </view>
     </view>
-    <button size="default">查看3小时公益</button>
+    <button onTap="jumpThreeHours" size="default">查看3小时公益</button>
+    <!-- <image class="blue-map" mode="scaleToFill" src="/images/blue-map-banner.png"/> -->
   </view>
-  <image class="blue-map" mode="scaleToFill" src="/images/blue-map-banner.png"/>
+  
+  <view class="three-hours-container">
+    <view class="three-hours-title">
+      <image src="/images/icon-left.png"/>
+      <text class="">3小时公益平台</text>
+      <image src="/images/icon-right.png"/>
+    </view>
+    <text>公众通过参与志愿服务、公益捐赠、互联网公益、无偿献血、环保公益等行为均可增加个人的公益时。打开支付宝或者淘宝搜索“3小时公益”，即可查询个人的公益时。</text>
+  </view>
 </view>

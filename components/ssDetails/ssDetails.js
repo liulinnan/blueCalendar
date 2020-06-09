@@ -109,23 +109,42 @@ Component({
       })
       if(app.globalData.userid){
         let params = {
-          userid: app.globalData.userid, //login id
-          dt: app.getTimestamp(), //time
-          wallid: data.ssId, //ss id
-          parentid: 0, //评论id
-          parentuserid: data.ssUserId, //被留言id
-          Content: this.data.listComment, //内容
-          rootid: 0, // 首次评论 0 
+          content: this.data.listComment,
         }
-        my.showLoading();
-        publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successComment, data.index);
+        publicFun.requestPostApi(publicFun.api.getriskContent, params, this, this.successRiskContent, data);
       }else{
         publicFun.jumpLogin();
       }
     },
+    successRiskContent(res, selfObj, sourceObj, dataParams) {
+      if(res.S == 1) {
+        if(res.D.action == 'PASSED') {
+          my.showLoading();
+          let params = {
+            userid: app.globalData.userid, //login id
+            dt: publicFun.getTimestamp(), //time
+            wallid: dataParams.ssId, //ss id
+            parentid: 0, //评论id
+            parentuserid: dataParams.ssUserId, //被留言id
+            Content: selfObj.data.listComment, //内容
+            rootid: 0, // 首次评论 0 
+          }
+          publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successComment, dataParams.index);
+        }else{
+          setTimeout(function () {
+            publicFun.showToast("您输入的内容涉及敏感词汇，请重新输入。", 2000);
+            selfObj.setData({
+              listComment: ''
+            });
+          }, 300)
+        }
+      }
+    },
     successComment(res, selfObj, sourceObj, dataParams) {
       if(res.S == 1){
-        publicFun.showToast("提交成功", 2000);
+        setTimeout(function () {
+          publicFun.showToast("提交成功", 2000);
+        }, 300);
         selfObj.data.ssList[dataParams][9] = Number(selfObj.data.ssList[dataParams][9])+1;
         selfObj.setData({
           ssList: selfObj.data.ssList,
@@ -133,6 +152,7 @@ Component({
         });
       }
     },
+  
     openComment(e) { //打开全部评论列表
       console.log(e.target.dataset)
       if(app.globalData.userid){
@@ -197,26 +217,12 @@ Component({
       });
     },
     commentListSub() { //评论单个提交
-      console.log(this.data.detailsComment)
       if(app.globalData.userid){
         if(this.data.detailsComment){
           let params = {
-            userid: app.globalData.userid, //login id
-            dt: app.getTimestamp(), //time
-            wallid: this.data.ssId, //ss id
-            parentid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, //评论id
-            parentuserid: this.data.commentDetails.parentuserid ? this.data.commentDetails.parentuserid : this.data.parentuserid, //被留言id
-            Content: this.data.detailsComment, //内容
-            rootid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, // 首次评论 0 
+            content: this.data.detailsComment,
           }
-          this.setData({
-            commentList: [],
-            detailsComment: '',
-            commentDetails: {},
-            userName: '喜欢就评论一下吧',
-          });
-          my.showLoading();
-          publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successCommentDetaile);
+          publicFun.requestPostApi(publicFun.api.getriskContent, params, this, this.successRiskContentAlone);
         }else{
           publicFun.showToast("请输入评论内容")
         }
@@ -224,9 +230,41 @@ Component({
         publicFun.jumpLogin();
       }
     },
+    successRiskContentAlone(res, selfObj) {
+      if(res.S == 1) {
+        if(res.D.action == 'PASSED') {
+          let params = {
+            userid: app.globalData.userid, //login id
+            dt: publicFun.getTimestamp(), //time
+            wallid: selfObj.data.ssId, //ss id
+            parentid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, //评论id
+            parentuserid: selfObj.data.commentDetails.parentuserid ? selfObj.data.commentDetails.parentuserid : selfObj.data.parentuserid, //被留言id
+            Content: selfObj.data.detailsComment, //内容
+            rootid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, // 首次评论 0 
+          }
+          selfObj.setData({
+            commentList: [],
+            detailsComment: '',
+            commentDetails: {},
+            userName: '喜欢就评论一下吧',
+          });
+          my.showLoading();
+          publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successCommentDetaile);
+        }else{
+          setTimeout(function () {
+            publicFun.showToast("您输入的内容涉及敏感词汇，请重新输入。", 2000);
+            selfObj.setData({
+              detailsComment: ''
+            });
+          }, 300)
+        }
+      }
+    },
     successCommentDetaile(res, selfObj) {
       if(res.S == 1){
-        publicFun.showToast("提交成功", 2000);
+        setTimeout(function () {
+          publicFun.showToast("提交成功", 2000);
+        }, 300);
         //selfObj.data.ssList[dataParams][9] = Number(selfObj.data.ssList[dataParams][9])+1;
         selfObj.setData({
           commentList: [],
@@ -261,7 +299,7 @@ Component({
         let data = e.target.dataset;
         let params  = {
           userid: app.globalData.userid,
-          dt: app.getTimestamp(),
+          dt: publicFun.getTimestamp(),
           wallid: data.ssId
         }
         //console.log(params)
@@ -357,6 +395,17 @@ Component({
         my.hideLoading();
         console.log('scrollMytrip执行异常:', e);
       }
+    },
+    previewImage(e) { //查看大图
+      let data = e.currentTarget.dataset;
+      let arr = [];
+      for(let i=0;i<data.list.length;i++){
+        arr.push(data.imgUrl+data.list[i]);
+      }
+      my.previewImage({
+        current: data.index,
+        urls: arr
+      });
     }
-  },
+  }
 });

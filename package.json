@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "mini-antui": "^0.4.34"
+    "mini-ali-ui": "^1.0.2",
+    "mini-antui": "^0.4.35"
+  },
+  "devDependencies": {
+    "umtrack-alipay": "^2.1.0"
   }
 }

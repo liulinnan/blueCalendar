@@ -48,6 +48,7 @@ Page({
    */
   bindTap() {
     var params  = {
+      UserId: this.data.userid,
       Phone: this.data.mobile,
       Code: this.data.code,
       //Type: app.globalData.mobileInfo
@@ -56,8 +57,51 @@ Page({
     publicFun.requestPostApi(publicFun.api.bindMobile, params, this, this.successBind);
   },
   successBind(res, selfObj) {
-    if(res.S == 1){
+    if(res.S == 1){ //绑定
       publicFun.showToast('绑定成功');
+      app.globalData.userid = selfObj.data.userid;
+      my.setStorage({
+        key: 'userid',
+        data: selfObj.data.userid
+      }); 
+      my.switchTab({
+        url: '/pages/index/index'
+      });
+    }else if(res.S == 2){ //合并
+      selfObj.mergeAccount(res.fId);
+    } else {
+      publicFun.showToast(res.M);
+    }
+  },
+  mergeAccount(FUserId) {
+    publicFun.showToast('正在合并数据');
+    let params = {
+      UserId: FUserId,
+      FUserId: this.data.userid,
+      Phone: this.data.mobile,
+      Code: this.data.code,
+    }
+    console.log(params);
+    publicFun.requestPostApi(publicFun.api.mergeAccount, params, this, this.successMerge);
+
+  },
+  successMerge(res, selfObj) {
+    if(res.S == 1)  {
+      //publicFun.showToast(res.M);
+      my.showLoading();
+      let params  = {
+        Phone: selfObj.data.mobile,
+        Code: selfObj.data.code,
+        Type: app.globalData.mobileInfo
+      }
+      publicFun.requestPostApi(publicFun.api.quickLogin, params, selfObj, selfObj.quickLogin);
+    }else{
+      publicFun.showToast(res.M);
+    }
+  },
+  quickLogin(res, selfObj) {
+    if(res.S == 1){
+      publicFun.showToast('合并成功');
       app.globalData.userid = res.R;
       my.setStorage({
         key: 'userid',
@@ -70,7 +114,7 @@ Page({
       publicFun.showToast(res.M);
     }
   },
-  jumpIndex() {
+  jumpIndex() { //跳过
     app.globalData.userid = this.data.userid;
     my.setStorage({
       key: 'userid',

@@ -14,6 +14,6 @@
     <button class="long-btn bind-btn"
     style="background : {{disabled === true ? '#abc2f8': ''}};" 
     disabled="{{(code && mobile) ? false : true}}" onTap="bindTap">绑 定</button>
-     <text class="forget-pwd" onTap="jumpIndex">跳  过</text>
+     <!-- <text class="forget-pwd" onTap="jumpIndex">跳  过</text> -->
   </view>
 </view>

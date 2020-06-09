@@ -5,6 +5,15 @@ page{
   padding-top: 12rpx;
   background: #fff;
 }
+.index-banner{
+  width: 734rpx;
+  height: 292rpx;
+  margin: 0 auto;
+}
+.index-banner image{
+  width: 100%;
+  height: 100%;
+}
 .am-search{
   padding: 0;
   margin: 0 30rpx 0 40rpx;
@@ -78,7 +87,7 @@ page{
   box-sizing: border-box;
   overflow: hidden;
   line-height: 74rpx;
-  font-size: 24rpx; 
+  font-size: 26rpx; 
   white-space: nowrap;
 }
 .tab-item{
@@ -143,6 +152,9 @@ page{
 .ss-list .ss-user-data text{
   font-size: 18rpx;
   color: #323232;
+  text-align: left;
+  width:180rpx;
+  word-break:break-all;
 }
 .upload-ss{
   width: 142rpx;

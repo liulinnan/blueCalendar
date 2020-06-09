@@ -18,9 +18,15 @@
           circular="{{circular}}"
           onChange="intervalChange"
         >
-          <block a:for="{{item[20]}}" a:for-item="imgList">
+          <block a:for="{{item[20]}}" a:for-item="imgList" a:for-index="idx">
             <swiper-item key="swiper-item-{{imgList.index}}">
-              <image src="{{item[26]+imgList}}" mode="aspectFit" style="display: block"/>
+              <image src="{{item[26]+imgList}}" 
+                data-index="{{idx}}" 
+                data-imgUrl="{{item[26]}}" 
+                data-list="{{item[20]}}" 
+                onTap="previewImage" 
+                mode="aspectFit" 
+                style="display: block"/>
             </swiper-item>
           </block>  
         </swiper>

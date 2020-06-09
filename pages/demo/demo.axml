@@ -1,19 +1,4 @@
-
-
-<!-- 自定义标题栏 -->
-<!-- <view style="height:{{statusBarHeight+44}}px;display:flex;justify-content:center;background:white;">
-  <image src='/images/logo.png' style='position:absolute;height:60rpx;width:60rpx;left:28rpx;top:{{statusBarHeight+6}}px;' onTap="goback"></image>
-  <view style='position:absolute;top:{{statusBarHeight+8}}px;font-size:36rpx;font-weight:bold;z-index:999;'>0.0我是自定义标题栏</view>
-</view> -->
-<!-- 按钮 -->
-<image src="/images/logo.png" style="position:absolute;bottom:0rpx;right:0rpx;height:150rpx;width:350rpx;" onTap="showInput"></image>
-<!-- 输入框及发送按钮 -->
-<view class="input-section" a:if="{{showInput}}">
-  <input type="text" class='input_input' 
-    value="{{inputMessage}}" focus="true" placeholder="请输入内容" onInput='bindInputMsg' onBlur=""="onHideInput" confirm-type="send" onConfirm="sendTextMsg" />
-  <view style="height:110rpx;width:170rpx;display:flex; align-items: center;justify-content: center;">
-    <view class="send_btn">
-      <text class="send_btn_text">发送</text>
-    </view>
-  </view>
-</view>
+<canvas class='canvas' id="awesomeCanvas"></canvas>
+<button onTap="ChooseImage">Button</button>
+<image mode="scaleToFill" src="{{imgUrl}}"/>
+<image mode="scaleToFill" src="https://www.ipe.org.cn/public/static/images/watermark2.png"/>
