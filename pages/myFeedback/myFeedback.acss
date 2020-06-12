@@ -18,6 +18,12 @@
 }
 .long-btn{
   width: calc(100% - 60rpx);
-  position: absolute;
-  bottom: 80rpx;
+  margin-top: 102rpx;
+  margin-bottom: 52rpx;
+}
+.my-feedback .see-feedback-list{
+  display: block;
+  text-align: center;
+  font-size: 26rpx;
+  color: rgb(93, 137, 244);
 }

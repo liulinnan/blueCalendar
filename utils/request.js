@@ -40,6 +40,7 @@ const api = {
   myDynamic: apiUrl + '/ShareWall_MyMessage', //我的动态
   GetZhiFubaoCode: apiUrl + '/GetZhiFubaoCode', //支付宝uid
   userFeedBack: apiUrl + '/UserFeedBack', //用户反馈
+  userFeedBackList: apiUrl + '/UserFeedBack_Reply', //用户反馈回复列表
   
   monthlyCalendar: apiUrl + '/UserRiLiDetail_V4_1', //获取月份月历
   DanRiLiList: apiUrl + '/RiLi_DanRiLi_V4_0', //获取月份月历下发布过的月历封面列表

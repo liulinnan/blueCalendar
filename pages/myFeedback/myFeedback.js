@@ -45,4 +45,9 @@ Page({
       publicFun.showToast(res.M);
     }
   },
+  jumpFeedbackList() {
+    my.navigateTo({
+      url: '../myFeedbackList/myFeedbackList'
+    });
+  }
 });

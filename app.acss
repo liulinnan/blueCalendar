@@ -339,7 +339,7 @@ button{
   display: block;
 }
 .ss-details .swiper-container .indicator-dots{
-  position: absolute;
+  position: fixed;
   right: 40rpx;
   bottom: 40rpx;
   background: rgba(255,255,255, .3);

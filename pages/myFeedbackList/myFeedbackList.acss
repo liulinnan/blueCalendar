@@ -1,0 +1,54 @@
+
+pages{
+    background: #fff;
+}
+.my-feedback-list{
+    padding: 0 30rpx 30rpx;
+}
+.kf-head{
+    display: flex;
+    align-items: center;
+    padding: 46rpx 0 23rpx 2rpx;
+}
+.kf-head image{
+    width: 56rpx;
+    height: 56rpx;
+    margin-right: 20rpx;
+}
+.kf-head text{
+    font-size: 34rpx;
+    color: rgb(51,51,51);
+}
+.user-feedback{
+    display: block;
+    font-size: 30rpx;
+    color: rgb(51,51,51);
+    line-height: 44rpx;
+}
+.kf-reply{
+    padding: 30rpx;
+    background: rgb(246,247,248);
+    margin-top: 33rpx;
+}
+.kf-reply .reply-time{
+    margin-bottom: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kf-reply .reply-time text:first-of-type,
+.kf-reply .kf-reply-content{
+    font-size: 28rpx;
+    color: rgb(51,51,51);
+    font-weight: bold;
+    display: block;
+}
+.kf-reply .reply-time text:last-of-type{
+    display: block;
+    font-size: 26rpx;
+    color: rgb(102,102,102)
+}
+.kf-reply .kf-reply-content{
+    line-height: 44rpx;
+    font-weight: normal;
+}

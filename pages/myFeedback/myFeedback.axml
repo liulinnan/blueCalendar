@@ -10,5 +10,6 @@
     </view>
     <button style="background : {{textareaVal ? '': '#abc2f8'}};" 
     disabled="{{textareaVal ? false : true}}" class="long-btn" form-type="submit" type="primary">提交</button>
+    <text class="see-feedback-list" onTap="jumpFeedbackList">查看所有反馈记录</text>
   </form>
 </view>

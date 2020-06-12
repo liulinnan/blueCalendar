@@ -9,7 +9,7 @@ Component({
     autoplay: false,
     interval: 5000,
     circular: true,
-    imgIndex: 1,
+    //imgIndex: 1,
     commentContent: '', //评论内容
     commentList: [], //评论列表
     alertState: false, //评论弹窗 false 关闭 true 打开
@@ -49,12 +49,12 @@ Component({
     this.getSSDetailes(this.data.pageindex);
   },
   methods: {
-    intervalChange(e) { //轮播图
-      //console.log(e.detail.current);
-      this.setData({
-        imgIndex: e.detail.current+1
-      })
-    },
+    // intervalChange(e) { //轮播图
+    //   //console.log(e.detail.current);
+    //   this.setData({
+    //     imgIndex: e.detail.current+1
+    //   })
+    // },
 
     followState(){ //关注状态
       if(app.globalData.userid){
@@ -404,6 +404,7 @@ Component({
       }
       my.previewImage({
         current: data.index,
+        enablesavephoto: true,
         urls: arr
       });
     }

@@ -30,6 +30,9 @@ Page({
     followLength: 0,//关注数量
     ssDetailsList: [1,2,3], //关注晒晒列表
     optionsData: {},//详情
+    autoplay: false,
+    interval: 5000,
+    circular: true,
     ssId: '',
     parentuserid: '', //被评论id
     commentId: '', //评论当前ssid
@@ -47,7 +50,7 @@ Page({
     webView: '',
   },
   onLoad() {
-    //my.navigateTo({url:'/pages/login/login'});
+    //my.navigateTo({url:'/pages/myFeedbackList/myFeedbackList'});
     //my.navigateTo({url:'/pages/demo/demo'});
     // my.navigateTo({
     //   url: '../myCalendarDetails/myCalendarDetails'
@@ -595,6 +598,12 @@ Page({
   jumpFollowList() {
 
   },
+  // intervalChange(e) { //轮播图
+  //   console.log(e.detail.current);
+  //   this.setData({
+  //     imgIndex: e.detail.current+1
+  //   })
+  // },
   chooseSSImg() {//上传ss
     let that = this;
     if(app.globalData.userid){
@@ -604,12 +613,18 @@ Page({
         count: 6,
         success: (res) => {
           //console.log(JSON.stringify(res));
-          const path = res.apFilePaths;
-          console.log(res); 
-          my.navigateTo({
-            //url: '/pages/ssUpload/ssUpload?path='+path //水印页面
-            url: '/pages/ssRelease/ssRelease?pathArr='+path+'&key='+that.data.ssKey//发布页面
-          });
+          //const path = res.apFilePaths;
+          my.compressImage({
+            apFilePaths: res.apFilePaths,
+            compressLevel: 1,
+            success: data => {
+              console.log(data.apFilePaths);
+              my.navigateTo({
+                //url: '/pages/ssUpload/ssUpload?path='+path //水印页面
+                url: '/pages/ssRelease/ssRelease?pathArr='+data.apFilePaths+'&key='+that.data.ssKey//发布页面
+              });
+            }
+        })
         },
         fail:()=>{
           my.getSetting({

@@ -1,0 +1,29 @@
+<view class="common-scroll-container" a:if="{{feedbackList.length > 0}}">
+  <scroll-view  
+    class="scroll-container"
+    scroll-y="{{true}}" 
+    lower-threshold="300" 
+    onScrollToLower="scrollMytrip">
+    <view class="my-feedback-list">
+      <block a:for="{{feedbackList}}">
+        <view class="kf-head">
+          <image src="/images/icon-kf.png"/>
+          <text>{{item[2].split(" ")[0]}}</text>
+        </view>
+        <text class="user-feedback">{{item[1]}}</text>
+        <view class="kf-reply" a:if="{{item[3].length > 0}}">
+          <view class="reply-time">
+            <text>客服回复：</text>
+            <text>{{item[3][2]}}</text>
+          </view>
+          <text class="kf-reply-content">{{item[3][1]}}</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="not-login" a:else>
+  <image mode="scaleToFill" class="comment-pal" src="/images/not-login.png"/>
+  <text>暂无反馈记录</text>
+</view>

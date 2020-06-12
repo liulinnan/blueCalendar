@@ -75,7 +75,7 @@ Page({
           toView: 'list'+selfObj.data.rid,
           ssDay: result
         });
-        console.log(selfObj.data.ssDay)
+        //console.log(selfObj.data.ssDay)
       }
   },
   jumpMyCalendar() {
@@ -86,5 +86,10 @@ Page({
     }else{
       publicFun.showToast('请至少晒满21天图片后再来制作并发布日历', 2000);
     }
-  }
+  },
+  jumpDetails(e) { //跳转ss详情
+    my.navigateTo({ 
+      url: '../ssDetails/ssDetails?ssId='+ e.target.dataset.ssId+'&type=1'
+    });
+  },
 });

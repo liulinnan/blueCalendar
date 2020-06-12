@@ -287,6 +287,7 @@ Page({
             canvasW: res.width,
             canvasH: res.height
           });
+          console.log(res);
           let ctx = my.createCanvasContext('firstCanvas'+i);
           //将图片src放到cancas内，宽高为图片大小(原图片);
           ctx.drawImage(item[i], 0, 0, res.width, res.height);

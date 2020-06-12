@@ -50,15 +50,14 @@
                   autoplay="{{autoplay}}"
                   interval="{{interval}}"
                   circular="{{circular}}"
-                  onChange="intervalChange"
                 >
                   <block a:for="{{item[20]}}" a:for-item="imgList">
                     <swiper-item key="swiper-item-{{imgList.index}}">
                       <image src="{{item[26]+imgList}}" mode="aspectFit" style="display: block"/>
+                      <view class="indicator-dots"><text>{{index+1}}</text>/{{item[20].length}}</view>
                     </swiper-item>
                   </block>  
                 </swiper>
-                <view class="indicator-dots"><text>{{imgIndex}}</text>/{{item[20].length}}</view>
               </view>
               <view class="ss-content">
                 <text class="ss-content-intor">{{item[19]}}</text>
