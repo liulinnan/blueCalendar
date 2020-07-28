@@ -113,6 +113,89 @@ function showToast(content, duration) {
   });
 }
 
+// 判断图片大小是否满足需求
+function imageSizeIsLessLimitSize(imagePath, limitSize, lessCallBack, moreCallBack) {
+  my.getFileInfo({
+      apFilePath: imagePath,
+      success(res) {
+          console.log("压缩前图片大小:", res.size / 1024, 'kb');
+          if (res.size > 1024 * limitSize) {
+              moreCallBack();
+          } else {
+              lessCallBack();
+          }
+      }
+  })
+};
+
+/**
+ * 获取画布图片 
+ */
+// 利用cavas进行压缩  每次压缩都需要ctx.draw()  my.canvasToTempFilePath()连用
+function getCanvasImage(canvasId, imagePath, imageW, imageH, getImgsuccess) {
+    const ctx = my.createCanvasContext(canvasId);
+    ctx.drawImage(imagePath, 0, 0, imageW, imageH);
+    ctx.draw(false, setTimeout(function() { // 一定要加定时器，因为ctx.draw()应用到canvas是有个时间的
+        ctx.toTempFilePath({
+            //canvasId: canvasId,
+            x: 0,
+            y: 0,
+            width: imageW,
+            height: imageH,
+            quality: 1,
+            success: function(res) {
+              console.log(res);
+              getImgsuccess(res.tempFilePath);
+              my.getFileInfo({
+                apFilePath: res.apFilePath,
+                success:function(res){
+                  console.log(res);
+                  console.log('压缩后：'+res.size/1024+'kb')
+                }
+              })
+            },
+        });
+    }, 200));
+};
+
+// 主调用方法
+/**
+ * 获取小于限制大小的Image, limitSize默认为100KB，递归调用。
+ */
+function getLessLimitSizeImage(canvasId, imagePath, limitSize = 200, drawWidth, callBack) {
+  imageSizeIsLessLimitSize(imagePath, limitSize,
+      (lessRes) => {
+        console.log(imagePath);
+        callBack(imagePath);
+      },
+      (moreRes) => {
+          my.getImageInfo({
+              src: imagePath,
+              success: function(imageInfo) {
+                  console.log(imageInfo)
+                  var maxSide = Math.max(imageInfo.width, imageInfo.height);
+                  console.log(maxSide);
+                  //画板的宽高默认是windowWidth
+                  var windowW = drawWidth;
+                  var scale = 1;
+                  if (maxSide > windowW) {
+                      scale = windowW / maxSide;
+                      console.log(scale);
+                  }
+                  var imageW = Math.trunc(imageInfo.width * scale);
+                  var imageH = Math.trunc(imageInfo.height * scale);
+                  console.log('调用压缩', imageW, imageH);
+                  getCanvasImage(canvasId, imagePath, imageW, imageH,
+                      (pressImgPath) => {
+                          getLessLimitSizeImage(canvasId, pressImgPath, limitSize, drawWidth * 0.95, callBack);
+                      }
+                  );
+              }
+          })
+      }
+  )
+};
+
 module.exports = {
   requestGetApi,
   requestPostApi,
@@ -129,4 +212,5 @@ module.exports = {
   jumpLogin,
   showToast,
   
+  getLessLimitSizeImage
 }

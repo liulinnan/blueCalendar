@@ -48,14 +48,17 @@ Page({
     followList: [], //关注列表
     followLength: 0,//关注数量
     webView: '',
+    //tabbar
+    tabbar: {},
   },
   onLoad() {
-    //my.navigateTo({url:'/pages/myFeedbackList/myFeedbackList'});
-    //my.navigateTo({url:'/pages/demo/demo'});
+    //my.navigateTo({url:'/pages/login/login'});
+    //my.navigateTo({url:'/pages/refuseClassify/refuseClassify'});
     // my.navigateTo({
-    //   url: '../myCalendarDetails/myCalendarDetails'
+    //   url: '../loginAuthorization/loginAuthorization'
     //   //url: '../myCalendarList/myCalendarList'
     // });
+    app.editTabbar();
     this.setData({
       webView: ''
     })
@@ -597,6 +600,18 @@ Page({
   },
   jumpFollowList() {
 
+  },
+  previewImage(e) { //查看大图
+    let data = e.currentTarget.dataset;
+    let arr = [];
+    for(let i=0;i<data.list.length;i++){
+      arr.push(data.imgUrl+data.list[i].replace(/\/ico/g, ''));
+    }
+    my.previewImage({
+      current: data.index,
+      enablesavephoto: true,
+      urls: arr
+    });
   },
   // intervalChange(e) { //轮播图
   //   console.log(e.detail.current);

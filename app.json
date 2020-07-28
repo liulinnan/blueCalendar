@@ -23,7 +23,9 @@
     "pages/myCalendarList/myCalendarList",
     "pages/myCalendarShare/myCalendarShare",
     "pages/commonJump/commonJump",
-    "pages/myFeedbackList/myFeedbackList"
+    "pages/myFeedbackList/myFeedbackList",
+    "pages/refuseClassify/refuseClassify",
+    "pages/loginAuthorization/loginAuthorization"
   ],
   "window": {
     "defaultTitle": "蔚蓝日历"

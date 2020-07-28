@@ -2,10 +2,11 @@ const apiUrl = 'https://nginx.ipe.org.cn/app/app_v3.asmx';
 const imgUrl = 'https://wwwoa.ipe.org.cn';
 const api = {
   //apiUrl: 'https://nginx.ipe.org.cn/app/app_v3.asmx',
-  imgUrlUpload: imgUrl + '/App/APP_V3_Solve.ashx', //上传图片
-  commonImg: imgUrl + '/App/CommonUpload.ashx', //月历上传封面
+  imgUrlUpload: imgUrl + '/App/APP_V3_Solve.ashx', //上传图片 //动态密钥
+  commonImg: imgUrl + '/App/CommonUpload.ashx', //月历上传封面 //固定密钥
   activityImg: imgUrl + '/SiteManage/BlueMapCalendar/UploadImg.aspx', //上传活动截图
   miyao: apiUrl + '/GetSecondCount',
+  imgMiyao: '24646572424578787574454', //上传图片密钥
 
   getAuthCode: apiUrl + '/GetZhiFubaoCode', //获取支付宝user_id
   LoginAccount: apiUrl + '/User_Login_V', //第三方登录
@@ -49,6 +50,8 @@ const api = {
 
   getThreeHours: apiUrl + '/GetZhiFubaoCharitytime', //获取公益时
   getriskContent: apiUrl + '/GetZhiFubaoRiskContent', //文本风险识别
+
+  submitGarbage: apiUrl + '/Garbage_Submit_V1', //提交垃圾分类信息
 }
 /**
  * @desc    API请求接口类封装

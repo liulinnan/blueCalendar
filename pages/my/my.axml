@@ -34,3 +34,4 @@
     <view onTap="signOut">退出</view>
   </view>
 </view>
+<tabbar-component optionsData="{{tabbar}}"></tabbar-component>

@@ -1,4 +1,6 @@
-<canvas class='canvas' id="awesomeCanvas"></canvas>
+<canvas class='canvas' id="canvas" 
+    style="width: {{cWidth}}rpx; height: {{cHeight}}rpx;"></canvas>
 <button onTap="ChooseImage">Button</button>
-<image mode="scaleToFill" src="{{imgUrl}}"/>
-<image mode="scaleToFill" src="https://www.ipe.org.cn/public/static/images/watermark2.png"/>
+<button onTap="ChooseImage1">Button</button>
+<image mode="aspectFit" src="{{compressImgs}}"/>
+<!-- <image mode="scaleToFill" src="https://www.ipe.org.cn/public/static/images/watermark2.png"/> -->

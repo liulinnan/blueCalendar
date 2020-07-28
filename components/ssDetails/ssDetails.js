@@ -400,7 +400,7 @@ Component({
       let data = e.currentTarget.dataset;
       let arr = [];
       for(let i=0;i<data.list.length;i++){
-        arr.push(data.imgUrl+data.list[i]);
+        arr.push(data.imgUrl+data.list[i].replace(/\/ico/g, ''));
       }
       my.previewImage({
         current: data.index,

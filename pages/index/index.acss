@@ -2,8 +2,9 @@ page{
   background: #f7f7f7;
 }
 .ss-index{
-  padding-top: 12rpx;
+  /* padding-top: 12rpx; */
   background: #fff;
+  /* margin-bottom: 100rpx; */
 }
 .index-banner{
   width: 734rpx;
@@ -160,7 +161,8 @@ page{
   width: 142rpx;
   height: 142rpx;
   position: fixed;
-  bottom: 20rpx;
+  bottom: 120rpx;
+  /* bottom: 20px; */
   right: 26rpx;
 }
 /* .ss-details .comment-all{

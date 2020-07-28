@@ -6,7 +6,7 @@ Page({
   },
   onLoad(options) {
     this.setData({
-      fmurl: options.fmurl
+      fmurl: publicFun.imgUrl+options.fmurl
     })
   },
   saveImage() {

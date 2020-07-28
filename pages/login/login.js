@@ -51,15 +51,28 @@ Page({
                 let userInfo = JSON.parse(ress.response).response; 
                 app.globalData.userInfo = userInfo;
                 if(app.globalData.userInfo || userInfo){
-                  that.LoginTap();
+                  if(app.globalData.secondCount){
+                    that.LoginTap();
+                  }else{
+                    app.getSecondCount().then(res => {
+                      that.LoginTap();
+                    });
+                  }
+                }else{
+                  publicFun.showToast('获取用户信息失败，请重新授权');
                 }
               },
               fail: (resss) => {
                 console.log(resss);
+                publicFun.showToast('获取用户信息失败，请重新授权');
               },
             });
           }
         },
+        fail: (err) => {
+          console.log(err);
+          publicFun.showToast('获取授权码失败，请重新授权');
+        }
       });
     }else{
       publicFun.showToast("请勾选蔚蓝地图协议")
@@ -70,12 +83,11 @@ Page({
       authorization_code: "authorization_code",
       zhifubaoCode: this.data.authCode,
       refreshtoken: "",
-      miyao: app.getMiyao()
+      //miyao: app.getMiyao()
     }
     publicFun.requestPostApi(publicFun.api.getAuthCode, data, this, this.successAuthCode);
   },
   successAuthCode(res, selfObj) {
-    //console.log(res); 
     if(res.S == 1 && selfObj.data.loginType == 0){
       app.globalData.zfbUid = res.UserInfo.user_id;
       var params  = {
@@ -89,7 +101,7 @@ Page({
         sex: app.globalData.userInfo.gender === "m" ? 1 : 2,
         WeiXinUnionId: 0
       }
-      my.showLoading();
+      //my.showLoading();
       let data1 = {};
       publicFun.requestPostApi(publicFun.api.LoginAccount, params, selfObj, selfObj.successLogin, data1, selfObj.failLogin);
     } else if(res.S == 1 && selfObj.data.loginType == 1){
@@ -102,6 +114,8 @@ Page({
           //url: '/pages/loginAccount/loginAccount'
           url: '/pages/loginQuick/loginQuick?zfbUid='+res.UserInfo.user_id
         });
+    }else{
+      publicFun.showToast(res.M);
     }
   },
   successLogin(res, selfObj) {

@@ -11,18 +11,45 @@ App({
     userid: '', //用户id 889489
     authCode: '', //authCode码
     zfbUid: '', //获取公益三小时数据 2088022915906671
+    systemInfo: {}, //手机信息
     mobileInfo: '', //手机类型
     secondCount: '',
     location: {},
     aqi: {},
     tabPage: 0, //页面跳转
     tabs: [],
-    uma
+    uma,
+    tabBar: {
+      "backgroundColor": "#ffffff",
+      "color": "#666666",
+      "selectedColor": "#437dde",
+      "list": [
+        {
+          "pagePath": "/pages/index/index",
+          "iconPath": "/components/tabbarComponent/icon/icon-bask-normal.png",
+          "selectedIconPath": "/components/tabbarComponent/icon/icon-bask-select.png",
+          "text": "晒晒"
+        },
+        {
+          "pagePath": "/pages/refuseClassify/refuseClassify",
+          "iconPath": "/components/tabbarComponent/icon/icon_release_red.png",
+          "isSpecial": true,
+          "text": " "
+        },
+        {
+          "pagePath": "/pages/my/my",
+          "iconPath": "/components/tabbarComponent/icon/icon-my-normal.png",
+          "selectedIconPath": "/components/tabbarComponent/icon/icon-my-select.png",
+          "text": "我的"
+        }
+      ]
+    }
   },
   onLaunch() {
     this.getUserId();
     this.getLocation();
     this.getMobileInfo();   
+    this.hidetabbar();
   },
   onShow(options) {
     // options.query == {number:1}
@@ -56,6 +83,20 @@ App({
         });
       }
     })
+  },
+  editTabbar: function () {
+    let tabbar = this.globalData.tabBar;
+    let currentPages = getCurrentPages();
+    let _this = currentPages[currentPages.length - 1];
+    let pagePath = _this.route;
+    (pagePath.indexOf('/') != 0) && (pagePath = '/' + pagePath);
+    for (let i in tabbar.list) {
+      tabbar.list[i].selected = false;
+      (tabbar.list[i].pagePath == pagePath) && (tabbar.list[i].selected = true);
+    }
+    _this.setData({
+      tabbar: tabbar
+    });
   },
   getMiyao() {
     var data = publicFun.getTimestamp()+this.globalData.secondCount;
@@ -105,31 +146,28 @@ App({
       },
     });
   },
-  getLocation() { //获取定位信息
+  getLocation(confirmText) { //获取定位信息
     var that = this;
     //my.showLoading();
     my.getLocation({
       cacheTimeout: 1,
-      type: 2,
+      type: 3,
       success(res) {
         //my.hideLoading();
+        //console.log(res);
         var location = publicFun.formatLocation(res.longitude, res.latitude);
         that.globalData.location.lng = location.longitude[0]+'.'+location.longitude[1]; //经度
         that.globalData.location.lat = location.latitude[0]+'.'+location.latitude[1]; //纬度
-        that.globalData.location.city = res.city;
-
-        //that.globalData.location.lng = res.longitude; 
-        //that.globalData.location.lat = res.latitude; 
+        
         that.globalData.location.province = res.province; //省
-        //that.globalData.location.city = res.city; //市
+        that.globalData.location.city = res.city; //市
         that.globalData.location.district = res.district; //区
         that.globalData.location.address = res.province+res.city+res.district+res.streetNumber.street //地址
-        //console.log(that.globalData.location);
+        that.globalData.location.name = res.pois[0].name;
       },
       fail() {
-        //my.hideLoading();
         my.confirm({
-          content: '您需要开启定位服务，来获取您所在位置的天气和空气信息。',
+          content: confirmText ? confirmText : '您需要开启定位服务，来获取您所在位置的天气和空气信息。',
           confirmButtonText: '开启定位',
           cancelButtonText: '以后再说',
           success: (result) => {
@@ -138,7 +176,7 @@ App({
                 success: (res) => {
                   my.getLocation({
                     cacheTimeout: 1,
-                    type: 2,
+                    type: 3,
                     success(res) {
                       
                       var location = publicFun.formatLocation(res.longitude, res.latitude);
@@ -149,7 +187,7 @@ App({
                       that.globalData.location.city = res.city; //市
                       that.globalData.location.district = res.district; //区
                       that.globalData.location.address = res.province+res.city+res.district+res.streetNumber.street //地址
-                      
+                      that.globalData.location.name = res.pois[0].name;
                     }
                   })
                 }
@@ -180,7 +218,19 @@ App({
     let that = this;
     my.getSystemInfo({
       success: (res) => {
+        //console.log(res);
+        that.globalData.systemInfo = res;
         that.globalData.mobileInfo = res.platform === "Android" ? 1 : 2;
+      }
+    });
+  },
+  //自己对wx.hideTabBar的一个封装
+  hidetabbar() {
+    my.hideTabBar({
+      fail: function() {
+        setTimeout(function() { // 做了个延时重试一次，作为保底。
+          my.hideTabBar()
+        }, 500)
       }
     });
   },

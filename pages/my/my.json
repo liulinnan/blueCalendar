@@ -1,3 +1,6 @@
 {
-    "pullRefresh": false
+  "pullRefresh": false,
+  "usingComponents": {
+    "tabbar-component": "/components/tabbarComponent/tabbarComponent"
+  }
 }

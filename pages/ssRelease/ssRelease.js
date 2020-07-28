@@ -90,10 +90,13 @@ Page({
         that.data.location.lng = res.longitude; //经度
         that.data.location.lat = res.latitude; //纬度
         that.data.location.address = res.address; //地址
-        //that.data.location.name = res.name; //名字
+        app.globalData.location.name = res.name; //名字
         that.setData({
           location: app.globalData.location
         });
+      },
+      fail:(error)=>{
+        publicFun.showToast('选择位置失败，请重新选择');
       },
     });
   },

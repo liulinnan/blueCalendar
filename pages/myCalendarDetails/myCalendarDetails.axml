@@ -4,8 +4,8 @@ class="{{rid == 0 ? 'calendar-container' : ''}}">
     <view class="calendar-list" a:for="{{calendarList}}" id="{{'list'+item[0]}}" 
     data-ssId="{{item[0]}}" onTap="jumpDetails">
       <view class="calendar-date">
-        <text>{{item[18].split(" ")[0].split("/")[2]}}
-        </text>{{item[18].split(" ")[0].split("/")[1]}}月
+        <text>{{item[4].split(" ")[0].split("/")[2]}}
+        </text>{{item[4].split(" ")[0].split("/")[1]}}月
       </view>
       <image mode="aspectFill" class="calendar-image" src="{{item[5]}}"/>
       <view class="calendar-content">

@@ -3,9 +3,12 @@ const publicFun = require('/utils/public.js');
 Page({
   data: {
     userData: {},
-    threeHours: 0
+    threeHours: 0,
+    //tabbar
+    tabbar: {},
   },
   onLoad() {
+    app.editTabbar();
     if(app.globalData.userid){
       this.getUserData();
       this.getThreeHours();

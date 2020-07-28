@@ -1,0 +1,31 @@
+<view 
+  class="tabbar_box {{isIphoneX ? 'iphoneX-height': ''}}" 
+  >
+  <image class="tabber_bg" src="/components/tabbarComponent/icon/tabber-bg.png"></image>
+  <view class="tabber_content">
+    <block a:for="{{tabbar.list}}" a:key="{{item.pagePath}}">
+      <navigator 
+        a:if="{{item.isSpecial}}" 
+        class="tabbar_nav tabbar_nav_pos" 
+        hover-class="none" 
+        url="{{item.pagePath}}" 
+        style="color:{{tabbar.selectedColor}}" 
+        open-type="navigate">
+        <view class="special-wrapper">
+          <image class="tabbar_icon" src="{{item.iconPath}}"></image>
+        </view>
+        <image class="special-text-wrapper"></image>
+        <text>{{item.text}}</text>
+      </navigator>
+      <navigator a:else 
+        class="tabbar_nav" 
+        hover-class="none" 
+        url="{{item.pagePath}}" 
+        style="color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" 
+        open-type="switchTab">
+        <image class="tabbar_icon" src="{{item.selected ? item.selectedIconPath : item.iconPath}}"></image>
+        <text>{{item.text}}</text>
+      </navigator>
+    </block>
+  </view>
+</view>

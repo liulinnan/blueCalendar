@@ -168,7 +168,8 @@ button{
   line-height: 48rpx;
   margin-right: 9rpx;
 }
-.picture-list .ss-upload, .ss-select .ss-upload{
+.picture-list .ss-upload, 
+.ss-select .ss-upload{
   width: 158rpx;
   height: 158rpx;
   border: 2rpx dashed #cccccc;
