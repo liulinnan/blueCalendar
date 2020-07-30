@@ -1,9 +1,17 @@
 <view calss="refuse-classify-container">
-  <image class="banner" src="../../images/banner-refuseClassify.png"></image>
-  <view class="refuse-classify-content">
+  <image class="banner" mode="scaleToFill" src="../../images/banner-refuseClassify.jpg"></image>
+  <!-- <view class="refuse-classify-content">
     <image class="content" src="../../images/refuseClassify-content.png"></image>
     <view class="content-text">
       <text>拍摄小区的垃圾桶，上传提交后就可以点亮您所在的小区！</text>
+    </view>
+  </view> -->
+  <view class="refuse-classify-step">
+    <text class="title">参与步骤：</text>
+    <view class="step">
+      <text>1、找到垃圾桶</text>
+      <text>2、拍照上传</text>
+      <text>3、到<text class="blue-map">蔚蓝地图APP</text>查看被点亮小区</text>
     </view>
   </view>
   <view class="refuse-classify-form">
@@ -46,10 +54,10 @@
       <text class="form-title">回答几个问题</text>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        1 本小区的厨余垃圾与其他种类的垃圾分开了吗？
-        <text class="red">【必填】</text>
-      </text>
+      <view class="FAQ-title">
+        1
+        <text class="FAQ">本小区的厨余垃圾与其他种类的垃圾分开了吗？<text>【必填】</text></text>
+      </view>
       <radio-group class="radio-group" onChange="isflChange">
         <label class="radio">
           <radio value="1"></radio>
@@ -62,10 +70,10 @@
       </radio-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        2 您投放垃圾或拍摄时，本小区的厨余垃圾桶里有没有塑料袋？
-        <text>【可选】</text>
-      </text>
+      <view class="FAQ-title">
+        2 
+        <text class="FAQ">您投放垃圾或拍摄时，本小区的厨余垃圾桶里有没有塑料袋？<text>【可选】</text></text>
+      </view>
       <radio-group class="radio-group" onChange="issuliaodaiChange">
         <label class="radio">
           <radio value="1"></radio>
@@ -78,10 +86,10 @@
       </radio-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        3 你投放垃圾或拍摄时，小区垃圾桶和周边的卫生情况如何？
-        <text>【可选】</text>
-      </text>
+      <view class="FAQ-title">
+        3
+        <text class="FAQ">你投放垃圾或拍摄时，小区垃圾桶和周边的卫生情况如何？<text>【可选】</text></text>
+      </view>
       <radio-group class="radio-group" onChange="weishengtypeChange">
         <label class="radio">
           <radio value="1"></radio>
@@ -98,10 +106,10 @@
       </radio-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        4 你投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员吗？
-        <text>【可选】</text>
-      </text>
+      <view class="FAQ-title">
+        4
+        <text class="FAQ">你投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员吗？<text>【可选】</text></text>
+      </view>
       <radio-group class="radio-group" onChange="ddtypeChange">
         <label class="radio">
           <radio value="1"></radio>
@@ -114,10 +122,10 @@
       </radio-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        5 本小区垃圾投放点有以下几种辅助设施？
-        <text>【可选、多选】</text>
-      </text>
+      <view class="FAQ-title">
+        5
+        <text class="FAQ">本小区垃圾投放点有以下几种辅助设施？<text>【可选、多选】</text></text>
+      </view>
       <checkbox-group class="checkbox-group" onChange="fuzhusheshiChange">
         <label class="checkbox">
           <checkbox value="1" />
@@ -134,10 +142,10 @@
       </checkbox-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        6 本小区有没有各类垃圾的投放点分布示意图？
-        <text>【可选】</text>
-      </text>
+      <view class="FAQ-title">
+        6
+        <text class="FAQ">本小区有没有各类垃圾的投放点分布示意图？<text>【可选】</text></text>
+      </view>
       <radio-group class="radio-group" onChange="shiyituChange">
         <label class="radio">
           <radio value="1"></radio>
@@ -154,10 +162,10 @@
       </radio-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        7 本小区的有害垃圾有没有定点收集点？
-        <text>【可选】</text>
-      </text>
+      <view class="FAQ-title">
+        7
+        <text class="FAQ">本小区的有害垃圾有没有定点收集点？<text>【可选】</text></text>
+      </view>
       <radio-group class="radio-group" onChange="youhaidingdianChange">
         <label class="radio">
           <radio value="1"></radio>
@@ -174,10 +182,10 @@
       </radio-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        8 本小区的可回收物有几种回收方式？
-        <text>【可选、多选】</text>
-      </text>
+      <view class="FAQ-title">
+        8
+        <text class="FAQ">本小区的可回收物有几种回收方式？<text>【可选、多选】</text></text>
+      </view>
       <checkbox-group class="checkbox-group" onChange="huishoutypeChange">
         <label class="checkbox">
           <checkbox value="1" />
@@ -202,10 +210,10 @@
       </checkbox-group>
     </view>
     <view class="refuse-classify-FAQ">
-      <text class="FAQ-title">
-        9 本小区的公共垃圾桶是怎么布置的？
-        <text>【可选】</text>
-      </text>
+      <view class="FAQ-title">
+        9
+        <text class="FAQ">本小区的公共垃圾桶是怎么布置的？<text>【可选】</text></text>
+      </view>
       <radio-group class="radio-group" onChange="lajitongbuzhitypeChange">
         <label class="radio">
           <radio value="1"></radio>
