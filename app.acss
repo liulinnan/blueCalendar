@@ -229,11 +229,13 @@ button{
   font-size: 30rpx;
   color: #000;
   line-height: 46rpx;
+  display: block;
 }
 .ss-comment-like{
   display: flex;
   justify-content: flex-end;
   margin-right: 30rpx;
+  margin-top: 10rpx;
 }
 .ss-comment-like image{
   width: 100%;
@@ -310,7 +312,7 @@ button{
   margin-left: 23rpx;
 }
 .ss-details .ss-content-news .ss-reply-flex{
-  margin-left: 23rpx
+  margin-left: 23rpx;
 }
 /* 轮播 */
 /* .scroll-view_H {
@@ -493,8 +495,8 @@ button{
 .ss-details .comment-reply view{
   line-height: 44rpx;
   margin: 0;
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
 }
 .ss-details .user-data .com-btn{
   margin-left: 20rpx;
@@ -508,6 +510,7 @@ button{
 }
 .ss-details .comment-reply text,.ss-details .user-data .com-btn{
   margin-top: 0;
+  line-height: 40rpx;
 }
  
  /* 登录(空白插画) */

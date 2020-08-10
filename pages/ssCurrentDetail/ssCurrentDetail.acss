@@ -1,0 +1,38 @@
+.details-containner{
+  border: 0;
+  overflow: initial;
+}
+.FQA-des{
+  margin: 23rpx 0 0;
+}
+.FQA-des .title{
+  font-size: 26rpx;
+  color: #333333;
+  margin-bottom: 11rpx;
+  font-weight: bold;
+  line-height: 50rpx;
+}
+.FQA-des .list{
+  font-size: 26rpx;
+  color: #333;
+  line-height: 45rpx;
+}
+.green{
+  color: #00c06f;
+}
+.red{
+  color: #d03835;
+}
+.ss-details .ss-content{
+  margin: 20rpx 30rpx 95rpx;
+}
+.ss-details .user-comment .user-data,
+.ss-details .user-comment:last-of-type{
+  border: none;
+}
+.ss-details .user-comment{
+  border-bottom: 0.5px solid rgb(232, 232, 232);
+}
+.ss-details .comment-container{
+  padding-bottom: 0;
+}

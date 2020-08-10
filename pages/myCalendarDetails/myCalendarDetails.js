@@ -48,7 +48,7 @@ Page({
       duserid: 0,
       type: 1,
       dt_start: start,
-      dt_end: end,
+      dt_end: '',
     }
     publicFun.requestPostApi(publicFun.api.danRiLiDetails, params, this, this.successCalendarList);
   },

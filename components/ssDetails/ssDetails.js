@@ -248,6 +248,7 @@ Component({
             commentDetails: {},
             userName: '喜欢就评论一下吧',
           });
+          console.log(params);
           my.showLoading();
           publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successCommentDetaile);
         }else{
@@ -407,6 +408,12 @@ Component({
         enablesavephoto: true,
         urls: arr
       });
-    }
+    },
+    jumpSSDetail(e) {
+      let data = e.target.dataset;
+      my.navigateTo({
+        url: '/pages/ssCurrentDetail/ssCurrentDetail?ssId='+data.ssId+'&ssUserId='+data.ssUserId+'&ssKey='+this.data.ssKey+'&type='+this.data.options.type
+      });
+    },
   }
 });

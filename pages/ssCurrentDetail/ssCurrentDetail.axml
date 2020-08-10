@@ -1,0 +1,102 @@
+<view class="ss-details details-containner">
+  <scroll-view class="scroll-container" scroll-y="{{alertState ? false : true}}" 
+    lower-threshold="500" onScrollToLower="scrollMytrip">
+    <view class="ss-user-data clearfix">
+      <image class="fl" mode="scaleToFill" src="{{ssList[3]?ssList[3]:'/images/ss-default-head.png'}}"/>
+      <view class="user-name fl">
+        <text class="name">{{ssList[2]}}</text>
+        <view>{{ssList[4].split(" ")[0]}} <text class="text-overflow">{{ssList[10]}}</text></view>
+      </view>
+      <!-- <button class="fr" style="color: {{item[27] == 1 ? '#999' : '#0e61d9'}}"  data-otheruserid="{{item[1]}}" data-state="{{item[27]}}" 
+      data-index="{{index}}" onTap="followState">{{item[27] == 1 ? '已'  : '+ '}}关注</button> -->
+    </view>
+    <view class="swiper-container">
+      <swiper
+        autoplay="{{autoplay}}"
+        interval="{{interval}}"
+        circular="{{circular}}">
+        <block a:for="{{imgList}}" a:for-item="imgListUrl" a:for-index="idx">
+          <swiper-item key="swiper-item-{{imgListUrl.index}}">
+            <image src="{{imgListUrl[2]}}" 
+              data-index="{{idx}}" 
+              data-list="{{imgList}}" 
+              onTap="previewImage" 
+              mode="aspectFit" 
+              style="display: block"/>
+              <view class="indicator-dots"><text>{{idx+1}}</text>/{{imgList.length}}</view>
+          </swiper-item>
+        </block>  
+      </swiper>
+    </view>
+    <view class="ss-content">
+      <text class="ss-content-intor">{{xiaoquName ? xiaoquName : ssList[11]}}</text>
+      <view class="FQA-des" a:if="{{answerList.length > 0}}">
+        <text class="title">问题描述</text>
+        <view class="list" a:for="{{answerList}}">{{index+1}}.{{item.content.split(" ")[0]}}<text class="{{item.color}}">{{item.content.split(" ")[1]}}</text></view>
+        <text class="list">{{ssList[11]}}</text>
+        <!-- <view class="list">2.本小区厨余垃圾与其他垃圾<text class="red">没有分类丢弃</text></view> -->
+      </view>
+      <!-- ss评论/点赞数量 -->
+      <view class="ss-comment-like">
+        <view>
+          <image mode="scaleToFill" src="/images/icon-ss-comment.png"/>
+          <text>{{ssList[9]}}</text>
+        </view>
+        <view onTap="getLikeState" data-ssId="{{ssList[0]}}" data-index="{{ssList[7]}}" data-state="{{ssList[13]}}">
+          <image mode="scaleToFill" src="{{ssList[13] == 1 ? '/images/icon-ss-like.png' : '/images/icon-ss-unlike.png'}}"/>
+          <text>{{ssList[7]}}</text>
+        </view>
+      </view>
+      <!-- ss详情 -->
+      <view class="ss-content-data">
+        <view class="ss-label clearfix">
+          <text class="fl">标签：</text>
+          <button a:for="{{ssType}}" a:for-item="tagList">{{tagList[1]}}</button>
+        </view>
+        <view>位置：<text>{{ssList[10]}}</text></view>
+        <view>时间：<text>{{ssList[4]}}</text></view>
+      </view>
+
+      <!-- 评论/点赞 0:pl内容 1pl用户id 2pl名字 3被pl用户id 4被pl名字 5pl用户头像-->
+      <view class="comment-container">
+        <view class="user-comment" a:for="{{commentList}}" data-parentid="{{item[0]}}"
+          data-parentuserid="{{item[2]}}" data-rootid="{{item[0]}}" data-name="{{item[3]}}" onTap="commentUserData">
+          <image class="user-head" mode="scaleToFill" src="{{item[4]?item[4]:'/images/ss-default-head.png'}}"/>
+          <view class="user-data">
+            <text>{{item[3]}}</text>
+            <view class="like">
+              <image a:if="{{(item[1].indexOf('♥️') >= 0)}}" 
+                class="icon-thumbs-up" mode="scaleToFill" src="/images/icon-thumbs-up.png"/>
+                {{(item[1].indexOf('♥️') >= 0) ? (item[1].split("♥️")[1]) : item[1]}}
+            </view>
+            <view class="reply">{{item[5]}}<text class="com-btn">回复</text></view>
+            <view class="comment-reply" a:if="{{item[7].length > 0}}">
+              <view class="clearfix" a:for="{{item[7]}}" a:for-item="comList">
+                <text class="fl">{{comList[3]}}</text>
+                <view class="fl" a:if="{{comList[6] != '0'}}"  style="display: flex;">
+                  <text class="com-btn">回复</text>
+                  <text>{{comList[10]}}：</text>
+                </view>
+                <text class="fl">{{comList[1]}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="comment-all">
+    <input
+      type="text"
+      enableNative="{{false}}"
+      value="{{detailsComment}}"
+      class="comment-cls"
+      placeholder-class="pd-cls"
+      placeholder="{{userName}}"
+      confirm-type="none"
+      onInput="getCommentVal"
+      onConfirm="closeKeyboard"
+    />
+    <button size="default" onTap="commentListSub">发送</button>
+  </view>
+</view>

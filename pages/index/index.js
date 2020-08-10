@@ -52,7 +52,7 @@ Page({
     tabbar: {},
   },
   onLoad() {
-    //my.navigateTo({url:'/pages/login/login'});
+    //my.navigateTo({url:'/pages/ssCurrentDetail/ssCurrentDetail'});
     //my.navigateTo({url:'/pages/refuseClassify/refuseClassify'});
     // my.navigateTo({
     //   url: '../loginAuthorization/loginAuthorization'

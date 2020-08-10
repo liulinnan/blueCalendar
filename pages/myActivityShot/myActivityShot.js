@@ -17,7 +17,7 @@ Page({
       count: 1,
       sourceType: ['album'],
       success: (res) => {
-        console.log(res);
+        //console.log(res);
         const path = res.apFilePaths[0];
         //that.uploadFile(path);
         if(res.apFilePaths.length == 1){
@@ -44,15 +44,15 @@ Page({
     if(res.S == 1){
       selfObj.setData({
         auditType: res.L[0][3],
-        month: res.L[0][2].split("/")[1]
+        //month: res.L[0][2].split("/")[1]
       })
     }
   },
   uploadFile() {
     var that = this;
-    let myDate = new Date();
-    let tMonth = myDate.getMonth()+1;
-    if(that.data.month != tMonth || that.data.month == tMonth && that.data.auditType == 2){
+    //let myDate = new Date();
+    //let tMonth = myDate.getMonth()+1;
+    if(that.data.auditType != 0 ){
       my.uploadFile({
         url: publicFun.api.activityImg,
         header: {'content-type': 'application/x-www-form-urlencoded'},
@@ -72,7 +72,7 @@ Page({
               uploadStatus: 0,
               uploadUrl: '',
             });
-            that.getSSAudit();
+            //that.getSSAudit();
           }else{
             publicFun.showToast(data.M);
           }

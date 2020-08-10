@@ -52,6 +52,12 @@ const api = {
   getriskContent: apiUrl + '/GetZhiFubaoRiskContent', //文本风险识别
 
   submitGarbage: apiUrl + '/Garbage_Submit_V1', //提交垃圾分类信息
+  garbageDetail: apiUrl + '/Garbage_Detail_V1', //垃圾分类问题详情
+
+  ssCurrentDetail: apiUrl + '/ShareContent_V1', //ss详情页（只有当前的一条）
+  ssCurrentDetailType: apiUrl + '/GetShareWallTypeByWallId_V3_1', //ss详情页（只有当前的一条） type
+  ssSharePictureList: apiUrl + '/SharePictureList', //ss详情页多图
+  ssCommentList: apiUrl + '/ShareCommentList' //ss详情全部评论
 }
 /**
  * @desc    API请求接口类封装

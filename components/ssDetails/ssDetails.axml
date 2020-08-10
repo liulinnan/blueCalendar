@@ -1,5 +1,5 @@
 <view class="ss-details details-containner">
-  <scroll-view class="scroll-container" scroll-y="{{alertState ? false : true}}" 
+  <scroll-view class="scroll-container" scroll-y="true" 
     lower-threshold="500" onScrollToLower="scrollMytrip">
     <view a:for="{{ssList}}" style="border-bottom: 20rpx solid #f7f7f7">
       <view class="ss-user-data clearfix">
@@ -45,7 +45,7 @@
           </view>
         </view>
         <!-- ss详情 -->
-        <view class="ss-content-data">
+        <view class="ss-content-data" data-ssId="{{item[0]}}" data-ssUserId="{{item[1]}}" onTap="jumpSSDetail">
           <view class="ss-label clearfix">
             <text class="fl">标签：</text>
             <button a:for="{{item[28]}}" a:for-item="tagList">{{tagList}}</button>
@@ -117,14 +117,14 @@
             </view>
             <view class="reply">{{item[5]}}<text class="com-btn">回复</text></view>
             <view class="comment-reply" a:if="{{item[7].length > 0}}">
-              <view a:for="{{item[7]}}" a:for-item="comList">
-                <text>{{comList[3]}}</text>
-                <view a:if="{{comList[6] != '0'}}"  style="display: flex;">
+              <view class="clearfix" a:for="{{item[7]}}" a:for-item="comList">
+                <text class="fl">{{comList[3]}}</text>
+                <view class="fl" a:if="{{comList[6] != '0'}}"  style="display: flex;">
                   <text class="com-btn">回复</text>
-                  <text>{{comList[10]}}</text>
+                  <text>{{comList[10]}}：</text>
                 </view>
-                ：{{comList[1]}}
-                </view>
+                <text class="fl">{{comList[1]}}</text>
+              </view>
             </view>
           </view>
         </view>
