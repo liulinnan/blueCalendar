@@ -1,6 +1,6 @@
 <view class="ss-details details-containner">
   <scroll-view class="scroll-container" scroll-y="{{alertState ? false : true}}" 
-    lower-threshold="500" onScrollToLower="scrollMytrip">
+    lower-threshold="500">
     <view class="ss-user-data clearfix">
       <image class="fl" mode="scaleToFill" src="{{ssList[3]?ssList[3]:'/images/ss-default-head.png'}}"/>
       <view class="user-name fl">
@@ -33,8 +33,7 @@
       <view class="FQA-des" a:if="{{answerList.length > 0}}">
         <text class="title">问题描述</text>
         <view class="list" a:for="{{answerList}}">{{index+1}}.{{item.content.split(" ")[0]}}<text class="{{item.color}}">{{item.content.split(" ")[1]}}</text></view>
-        <text class="list">{{ssList[11]}}</text>
-        <!-- <view class="list">2.本小区厨余垃圾与其他垃圾<text class="red">没有分类丢弃</text></view> -->
+        <text class="list">{{ssList[15] == 4 ? '我还观察到：'+ ssList[11] : ssList[11]}}</text>
       </view>
       <!-- ss评论/点赞数量 -->
       <view class="ss-comment-like">
@@ -95,7 +94,6 @@
       placeholder="{{userName}}"
       confirm-type="none"
       onInput="getCommentVal"
-      onConfirm="closeKeyboard"
     />
     <button size="default" onTap="commentListSub">发送</button>
   </view>

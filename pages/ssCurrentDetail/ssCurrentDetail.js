@@ -110,92 +110,141 @@ Page({
     //console.log(res);
     var isflKey={};
     var issuliaodaiKey={};
-    var weishengtypeKey={};
     var ddtypeKey={};
+    var weishengtypeKey={};
     var fuzhusheshiKey={};
-    var shiyituKey={};
+    var xuanchuancuoshiKey={};
     var youhaidingdianKey={};
     var huishoutypeKey={};
-    var lajitongbuzhitypeKey={};
+    var lajitongbuzhitypesKey={};
+    var howtypeKey={};
     if(res.S == 1) {
       //console.log(res);
       switch(res.isfl) {
         case "1":
-            isflKey.content = '本小区厨余垃圾与其他垃圾 已分类丢弃';
+            isflKey.content = '本小区厨余垃圾与其他垃圾 已分类';
             isflKey.color = "green";
             break;
         case "2":
-            isflKey.content = '本小区厨余垃圾与其他垃圾 没有分类丢弃';
+            isflKey.content = '本小区厨余垃圾与其他垃圾 未分类';
             isflKey.color = "red"
             break;
       }
       switch(res.issuliaodai) {
         case "1":
-            issuliaodaiKey.content = '本小区投放垃圾或拍摄时，厨余垃圾桶里没有塑料袋';
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里基本都是厨余垃圾';
             break;
         case "2":
-            issuliaodaiKey.content = '本小区投放垃圾或拍摄时，厨余垃圾桶里有塑料袋';
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里是厨余垃圾带袋投放';
+            break;
+        case "3":
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里有很多未分类的垃圾';
+            break;
+        case "4":
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区没有厨余垃圾桶';
+            break;
+        case "5":
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，厨余垃圾桶锁住了，不能投放或查看';
+            break;
+      }
+      switch(res.ddtype) {
+        case "3":
+            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员，让我自己分类投放';
+            break;
+        case "1":
+            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员，而且帮我分类';
+            break;
+        case "4":
+            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边以前有垃圾分类督导员，现在没有了';
+            break;
+        case "2":
+            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边从来没见过垃圾分类督导员';
             break;
       }
       switch(res.weishengtype) {
         case "1":
-          weishengtypeKey.content = '本小区投放垃圾或拍摄时，垃圾桶和周围的卫生很干净';
+          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边常清理，很干净';
           break;
         case "2":
-          weishengtypeKey.content = '本小区投放垃圾或拍摄时，垃圾桶和周围的卫生一般';
+          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周围的卫生一般';
           break;
         case "3":
-          weishengtypeKey.content = '本小区投放垃圾或拍摄时，垃圾桶和周围的卫生很脏';
+          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边的卫生很脏';
           break;
       }
-      switch(res.ddtype) {
-        case "1":
-            ddtypeKey.content = '本小区投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员';
-            break;
-        case "2":
-            ddtypeKey.content = '本小区投放垃圾或拍摄时，垃圾桶旁边没有垃圾分类督导员';
-            break;
-      }
+      
       //console.log(isflKey,issuliaodaiKey,weishengtypeKey,ddtypeKey);
       var fuzhusheshiArr = [];
       for(let i=1;i<Number(res.fuzhusheshi)*2;i*=2){
         switch(Number(res.fuzhusheshi)&i) {
           case 1:
-              fuzhusheshiArr.push("洗手池");
+              fuzhusheshiArr.push("净手设施（洗手处、消毒液等）");
               break;
           case 2:
-              fuzhusheshiArr.push("遮雨棚");
+              fuzhusheshiArr.push("垃圾桶遮雨棚");
               break;
           case 4:
               fuzhusheshiArr.push("破袋工具");
               break;
+          case 8:
+              fuzhusheshiArr.push("垃圾桶盖拉手或脚踏");
+              break;
+          case 16:
+              fuzhusheshiArr.push("夜间照明");
+              break;
+          case 32:
+              fuzhusheshiArr.push("什么都没有");
+              break;
         }
       }
       res.fuzhusheshi != "0" ? fuzhusheshiKey.content = '本小区垃圾投放点有以下辅助设施'+fuzhusheshiArr.join("、") : "";
-      //console.log(fuzhusheshiKey)
-      switch(res.shiyitu) {
-        case "1":
-            shiyituKey.content = '本小区的投放点分布示意图很显眼';
-            break;
-        case "2":
-            shiyituKey.content = '本小区的投放点分布示意图不显眼';
-            break;
-        case "3":
-            shiyituKey.content = '没见过本小区的投放点分布示意图';
-            break;
+
+      var xuanchuancuoshiArr = [];
+      for(let i=1;i<Number(res.xuanchuancuoshi)*2;i*=2){
+        switch(Number(res.xuanchuancuoshi)&i) {
+          case 1:
+              xuanchuancuoshiArr.push("有分类细则宣传板");
+              break;
+          case 2:
+              xuanchuancuoshiArr.push("有分类宣传横幅、标语、海报等");
+              break;
+          case 4:
+              xuanchuancuoshiArr.push("最近一年内有入户讲解");
+              break;
+          case 8:
+              xuanchuancuoshiArr.push("在业主微信群宣传介绍");
+              break;
+          case 16:
+              xuanchuancuoshiArr.push("最近一年内发放了分类垃圾桶或垃圾袋");
+              break;
+          case 32:
+              xuanchuancuoshiArr.push("最近一年内发放了垃圾分类细则宣传册");
+              break;
+          case 64:
+              xuanchuancuoshiArr.push("有投放点位置示意图或指示牌");
+              break;
+          case 128:
+              xuanchuancuoshiArr.push("什么都没有");
+              break;
+        }
       }
+      res.xuanchuancuoshi != "0" ? xuanchuancuoshiKey.content = '本小区有以下垃圾分类宣传措施：'+xuanchuancuoshiArr.join("、") : "";
+      
       switch(res.youhaidingdian) {
-        case "1":
-            youhaidingdianKey.content = '本小区的有害垃圾分品类回收';
+        case "4":
+            youhaidingdianKey.content = '本小区的有害垃圾只回收特定品类（例如过期药品、灯管、电池）';
             break;
-        case "2":
-            youhaidingdianKey.content = '本小区的有害垃圾有定点收集点';
+        case "5":
+            youhaidingdianKey.content = '本小区的有有害垃圾桶，但投放不准确';
+            break;
+        case "6":
+            youhaidingdianKey.content = '本小区的有有害垃圾桶，只投放有害垃圾';
             break;
         case "3":
-            youhaidingdianKey.content = '本小区的有害垃圾没有定点收集点';
+            youhaidingdianKey.content = '本小区没见过有害垃圾桶';
             break;
       }
-      //console.log(shiyituKey,youhaidingdianKey)
+
       var huishoutypeArr = [];
       for(let i=1;i<Number(res.huishoutype)*2;i*=2){
         switch(Number(res.huishoutype)&i) {
@@ -203,7 +252,7 @@ Page({
               huishoutypeArr.push("有可回收物桶");
               break;
           case 2:
-              huishoutypeArr.push("上门收");
+              huishoutypeArr.push("电商预约上门回收");
               break;
           case 4:
               huishoutypeArr.push("周边有废品回收站");
@@ -211,34 +260,67 @@ Page({
           case 8:
               huishoutypeArr.push("智能回收箱");
               break;
+          case 32:
+              huishoutypeArr.push("随便放，有人拉走");
+              break;
           case 16:
               huishoutypeArr.push("什么都没有");
               break;
         }
       }
       res.huishoutype != "0" ? huishoutypeKey.content = '本小区的可回收方式有：'+huishoutypeArr.join("、") : "";
-      console.log(huishoutypeKey)
-      switch(res.lajitongbuzhitype) {
-        case "1":
-            lajitongbuzhitypeKey.content = '本小区的公共垃圾桶布置在高楼每层楼内';
-            break;
-        case "2":
-            lajitongbuzhitypeKey.content = '本小区的公共垃圾桶布置在各楼门下一组垃圾桶（有厨余桶）';
-            break;
-        case "3":
-            lajitongbuzhitypeKey.content = '本小区的公共垃圾桶布置在各楼门下一组垃圾桶（无厨余桶）';
-            break;
-        case "4":
-            lajitongbuzhitypeKey.content = '本小区的公共垃圾桶布置在专门的厨余收集点';
-            break;
-        case "5":
-            lajitongbuzhitypeKey.content = '本小区的公共垃圾桶布置在撤桶后的分类驿站（有人定时值守）';
-            break;
-        case "6":
-            lajitongbuzhitypeKey.content = '本小区的公共垃圾桶布置在流动车上门或到楼门外收集';
-            break;
+      
+      var lajitongbuzhitypesArr = [];
+      for(let i=1;i<Number(res.lajitongbuzhitypes)*2;i*=2){
+        switch(Number(res.lajitongbuzhitypes)&i) {
+          case 1:
+              lajitongbuzhitypesArr.push("撤桶并点后的分类驿站");
+              break;
+          case 2:
+              lajitongbuzhitypesArr.push("高楼每层楼内垃圾桶");
+              break;
+          case 4:
+              lajitongbuzhitypesArr.push("各楼门下一组垃圾桶（有厨余桶）");
+              break;
+          case 8:
+              lajitongbuzhitypesArr.push("各楼门下一组垃圾桶（无厨余桶）");
+              break;
+          case 16:
+              lajitongbuzhitypesArr.push("地下车库有一组垃圾桶（有厨余桶）");
+              break;
+          case 32:
+              lajitongbuzhitypesArr.push("地下车库有一组垃圾桶（无厨余桶）");
+              break;
+          case 64:
+              lajitongbuzhitypesArr.push("小区内有只收厨余垃圾的收集点");
+              break;
+          case 128:
+              lajitongbuzhitypesArr.push("流动车定时分类收集每户垃圾");
+              break;
+          case 256:
+              lajitongbuzhitypesArr.push("流动车定时分类收集每户垃圾");
+              break;
+        }
       }
-      console.log(lajitongbuzhitypeKey)
+      res.lajitongbuzhitypes != "0" ? lajitongbuzhitypesKey.content = '本小区的公共垃圾桶布置在：'+lajitongbuzhitypesArr.join("、") : "";
+
+      switch(res.howtype) {
+        case "1":
+          howtypeKey.content = '我家的垃圾分类能做到严格四分类';
+          break;
+        case "2":
+          howtypeKey.content = '我家的垃圾分类只能做到把厨余垃圾分出来';
+          break;
+        case "3":
+          howtypeKey.content = '我家的垃圾分类只能做到把可回收物分出来';
+          break;
+        case "4":
+          howtypeKey.content = '我家的垃圾分类只能做到把有害垃圾分出来';
+          break;
+        case "5":
+          howtypeKey.content = '我家的垃圾随便扔，不分类';
+          break;
+      }
 
       if(res.isfl != "0"){
         selfObj.data.answerList.push(isflKey)
@@ -246,17 +328,17 @@ Page({
       if(res.issuliaodai != "0"){
         selfObj.data.answerList.push(issuliaodaiKey)
       }
-      if(res.weishengtype != "0") {
-        selfObj.data.answerList.push(weishengtypeKey)
-      }
       if(res.ddtype != "0") {
         selfObj.data.answerList.push(ddtypeKey)
+      }
+      if(res.weishengtype != "0") {
+        selfObj.data.answerList.push(weishengtypeKey)
       }
       if(res.fuzhusheshi != "0") {
         selfObj.data.answerList.push(fuzhusheshiKey)
       }
-      if(res.shiyitu != "0") {
-        selfObj.data.answerList.push(shiyituKey)
+      if(res.xuanchuancuoshi != "0") {
+        selfObj.data.answerList.push(xuanchuancuoshiKey)
       }
       if(res.youhaidingdian != "0") {
         selfObj.data.answerList.push(youhaidingdianKey)
@@ -264,16 +346,17 @@ Page({
       if(res.huishoutype != "0") {
         selfObj.data.answerList.push(huishoutypeKey)
       }
-      if(res.lajitongbuzhitype != "0"){
-        selfObj.data.answerList.push(lajitongbuzhitypeKey)
+      if(res.lajitongbuzhitypes != "0"){
+        selfObj.data.answerList.push(lajitongbuzhitypesKey)
+      }
+      if(res.howtype != "0"){
+        selfObj.data.answerList.push(howtypeKey)
       }
       //selfObj.data.answerList.push(isflKey,issuliaodaiKey,weishengtypeKey,ddtypeKey,fuzhusheshiKey,shiyituKey,youhaidingdianKey,huishoutypeKey);
       selfObj.setData({
         answerList: selfObj.data.answerList,
         xiaoquName: res.xiaoqu
       });
-      //console.log(16&9)
-      //console.log(selfObj.data.answerList);
     }
   },
   previewImage(e) { //查看大图

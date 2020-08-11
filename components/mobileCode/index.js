@@ -157,19 +157,19 @@ Component({
      * @method settimer
      */
     settimer() {
-      //let timer;
+      let timer = null;
       let codeTime = this.props.codeTime;
       const {
         disabled
       } = this.props;
-      clearInterval(this.data.timer);
-      this.data.timer = setInterval(() => {
+      clearInterval(timer);
+      timer = setInterval(() => {
         codeTime--;
         this.setData({
           btnName: `倒计时${codeTime}秒`
         });
         if (codeTime === 0) {
-          clearInterval(this.data.timer);
+          clearInterval(timer);
           const box = this.data.othervalue;
           this.setData({
             btnName: '重新发送',

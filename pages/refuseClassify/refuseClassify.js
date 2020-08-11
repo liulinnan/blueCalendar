@@ -6,13 +6,14 @@ Page({
     address: '',
     isfl: '',
     issuliaodai: '',
-    weishengtype: '',
     ddtype: '',
+    weishengtype: '',
     fuzhusheshi: '',
-    shiyitu: '',
+    xuanchuancuoshi: '',
     youhaidingdian: '',
     huishoutype: '',
-    lajitongbuzhitype: '',
+    lajitongbuzhitypes: '',
+    howtype: '',
     describe: '',
     pictureList: [],
     uploadImgList: [],
@@ -193,14 +194,14 @@ Page({
       issuliaodai: e.detail.value
     })
   },
-  weishengtypeChange(e) {
-    this.setData({
-      weishengtype: e.detail.value
-    })
-  },
   ddtypeChange(e) {
     this.setData({
       ddtype: e.detail.value
+    })
+  },
+  weishengtypeChange(e) {
+    this.setData({
+      weishengtype: e.detail.value
     })
   },
   fuzhusheshiChange(e) {
@@ -212,10 +213,14 @@ Page({
       fuzhusheshi: number+''
     });
   },
-  shiyituChange(e) {
+  xuanchuancuoshiChange(e) {
+    let number = 0;
+    for(let i=0;i<e.detail.value.length;i++){
+      number += Number(e.detail.value[i]);
+    }
     this.setData({
-      shiyitu: e.detail.value
-    })
+      xuanchuancuoshi: number+''
+    });
   },
   youhaidingdianChange(e) {
     this.setData({
@@ -231,9 +236,18 @@ Page({
       huishoutype: number+''
     });
   },
-  lajitongbuzhitypeChange(e) {
+  lajitongbuzhitypesChange(e) {
+    let number = 0;
+    for(let i=0;i<e.detail.value.length;i++){
+      number += Number(e.detail.value[i]);
+    }
     this.setData({
-      lajitongbuzhitype: e.detail.value
+      lajitongbuzhitypes: number+''
+    });
+  },
+  howtypeChange(e) {
+    this.setData({
+      howtype: e.detail.value
     })
   },
   bindTextAreaInput(e) {
@@ -315,13 +329,15 @@ Page({
       address: app.globalData.location.address, //地址
       isfl: this.data.isfl, //是否分类 1是 2否
       issuliaodai: this.data.issuliaodai ? this.data.issuliaodai : 0, //厨垃是否有袋子 1没有 2有
-      weishengtype: this.data.weishengtype ? this.data.weishengtype : 0,
       ddtype: this.data.ddtype ? this.data.ddtype : 0,
+      weishengtype: this.data.weishengtype ? this.data.weishengtype : 0,
       fuzhusheshi: this.data.fuzhusheshi ? this.data.fuzhusheshi : 0,
-      shiyitu: this.data.shiyitu ? this.data.shiyitu : 0,
+      xuanchuancuoshi: this.data.xuanchuancuoshi ? this.data.xuanchuancuoshi : 0,
+      //shiyitu: this.data.shiyitu ? this.data.shiyitu : 0,
       youhaidingdian: this.data.youhaidingdian ? this.data.youhaidingdian : 0,
       huishoutype: this.data.huishoutype ? this.data.huishoutype : 0,
-      lajitongbuzhitype: this.data.lajitongbuzhitype ? this.data.lajitongbuzhitype : 0,
+      lajitongbuzhitypes: this.data.lajitongbuzhitypes ? this.data.lajitongbuzhitypes : 0,
+      howtype: this.data.howtype ? this.data.howtype : 0,
       info: this.data.describe, //备注
       pics: picsStr, //图片 |分割多张图片
       hcs: '',

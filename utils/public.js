@@ -101,7 +101,7 @@ function arrayUnique(arr) {
 //跳转登录
 function jumpLogin() {
   return my.navigateTo({
-    url: '../login/login'
+    url: '/pages/login/login'
   });
 }
 //弹窗

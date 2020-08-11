@@ -51,8 +51,8 @@ const api = {
   getThreeHours: apiUrl + '/GetZhiFubaoCharitytime', //获取公益时
   getriskContent: apiUrl + '/GetZhiFubaoRiskContent', //文本风险识别
 
-  submitGarbage: apiUrl + '/Garbage_Submit_V1', //提交垃圾分类信息
-  garbageDetail: apiUrl + '/Garbage_Detail_V1', //垃圾分类问题详情
+  submitGarbage: apiUrl + '/Garbage_Submit_V2', //提交垃圾分类信息
+  garbageDetail: apiUrl + '/Garbage_Detail_V2', //垃圾分类问题详情
 
   ssCurrentDetail: apiUrl + '/ShareContent_V1', //ss详情页（只有当前的一条）
   ssCurrentDetailType: apiUrl + '/GetShareWallTypeByWallId_V3_1', //ss详情页（只有当前的一条） type

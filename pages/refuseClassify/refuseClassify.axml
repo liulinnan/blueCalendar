@@ -56,7 +56,7 @@
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         1
-        <text class="FAQ">本小区的厨余垃圾与其他种类的垃圾分开了吗？<text>【必填】</text></text>
+        <text class="FAQ">本小区的厨余垃圾都能扔到厨余垃圾桶吗？<text class="red">【必填】</text></text>
       </view>
       <radio-group class="radio-group" onChange="isflChange">
         <label class="radio">
@@ -72,28 +72,64 @@
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         2 
-        <text class="FAQ">您投放垃圾或拍摄时，本小区的厨余垃圾桶里有没有塑料袋？<text>【可选】</text></text>
+        <text class="FAQ">你扔垃圾或拍摄时，小区厨余垃圾桶里有什么？<text>【可选】</text></text>
       </view>
       <radio-group class="radio-group" onChange="issuliaodaiChange">
         <label class="radio">
           <radio value="1"></radio>
-          <text class="radio-text">没有</text>
+          <text class="radio-text">基本都是厨余垃圾</text>
         </label>
         <label class="radio">
           <radio value="2"></radio>
-          <text class="radio-text">有</text>
+          <text class="radio-text">厨余垃圾带袋投放</text>
+        </label>
+        <label class="radio">
+          <radio value="3"></radio>
+          <text class="radio-text">有很多未分类的垃圾</text>
+        </label>
+        <label class="radio">
+          <radio value="4"></radio>
+          <text class="radio-text">没有厨余垃圾桶</text>
+        </label>
+        <label class="radio">
+          <radio value="5"></radio>
+          <text class="radio-text">厨余垃圾桶锁住了，不能投放或查看</text>
         </label>
       </radio-group>
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         3
+        <text class="FAQ">你扔垃圾或拍摄时，垃圾桶旁边有没有人协助？<text>【可选】</text></text>
+      </view>
+      <radio-group class="radio-group" onChange="ddtypeChange">
+        <label class="radio">
+          <radio value="3"></radio>
+          <text class="radio-text">有，让我自己分类投放</text>
+        </label>
+        <label class="radio">
+          <radio value="1"></radio>
+          <text class="radio-text">有，而且帮我分</text>
+        </label>
+        <label class="radio">
+          <radio value="4"></radio>
+          <text class="radio-text">以前有，现在没有了</text>
+        </label>
+        <label class="radio">
+          <radio value="2"></radio>
+          <text class="radio-text">从来没见过</text>
+        </label>
+      </radio-group>
+    </view>
+    <view class="refuse-classify-FAQ">
+      <view class="FAQ-title">
+        4
         <text class="FAQ">你投放垃圾或拍摄时，小区垃圾桶和周边的卫生情况如何？<text>【可选】</text></text>
       </view>
       <radio-group class="radio-group" onChange="weishengtypeChange">
         <label class="radio">
           <radio value="1"></radio>
-          <text class="radio-text">很干净</text>
+          <text class="radio-text">经常清理，很干净</text>
         </label>
         <label class="radio">
           <radio value="2"></radio>
@@ -101,23 +137,7 @@
         </label>
         <label class="radio">
           <radio value="3"></radio>
-          <text class="radio-text">很脏</text>
-        </label>
-      </radio-group>
-    </view>
-    <view class="refuse-classify-FAQ">
-      <view class="FAQ-title">
-        4
-        <text class="FAQ">你投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员吗？<text>【可选】</text></text>
-      </view>
-      <radio-group class="radio-group" onChange="ddtypeChange">
-        <label class="radio">
-          <radio value="1"></radio>
-          <text class="radio-text">有</text>
-        </label>
-        <label class="radio">
-          <radio value="2"></radio>
-          <text class="radio-text">没有</text>
+          <text class="radio-text">很脏，有很多污物、蚊蝇，很臭</text>
         </label>
       </radio-group>
     </view>
@@ -129,55 +149,91 @@
       <checkbox-group class="checkbox-group" onChange="fuzhusheshiChange">
         <label class="checkbox">
           <checkbox value="1" />
-          <text class="text">洗手池</text>
+          <text class="text">净手设施（洗手处、消毒液等）</text>
         </label>
         <label class="checkbox">
           <checkbox value="2" />
-          <text class="text">遮雨棚</text>
+          <text class="text">垃圾桶遮雨棚</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="8" />
+          <text class="text">垃圾桶盖拉手或脚踏</text>
         </label>
         <label class="checkbox">
           <checkbox value="4" />
           <text class="text">破袋工具</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="16" />
+          <text class="text">夜间照明</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="32" />
+          <text class="text">什么都没有</text>
         </label>
       </checkbox-group>
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         6
-        <text class="FAQ">本小区有没有各类垃圾的投放点分布示意图？<text>【可选】</text></text>
+        <text class="FAQ">你见过小区有哪些垃圾分类的宣传措施？<text>【可选、多选】</text></text>
       </view>
-      <radio-group class="radio-group" onChange="shiyituChange">
-        <label class="radio">
-          <radio value="1"></radio>
-          <text class="radio-text">见过，很显眼</text>
+      <checkbox-group class="checkbox-group" onChange="xuanchuancuoshiChange">
+        <label class="checkbox">
+          <checkbox value="1" />
+          <text class="text">有分类细则宣传板</text>
         </label>
-        <label class="radio">
-          <radio value="2"></radio>
-          <text class="radio-text">见过，不显眼</text>
+        <label class="checkbox">
+          <checkbox value="2" />
+          <text class="text">有分类宣传横幅、标语、海报等</text>
         </label>
-        <label class="radio">
-          <radio value="3"></radio>
-          <text class="radio-text">没见过</text>
+        <label class="checkbox">
+          <checkbox value="4" />
+          <text class="text">最近一年内有入户讲解</text>
         </label>
-      </radio-group>
+        <label class="checkbox">
+          <checkbox value="8" />
+          <text class="text">在业主微信群宣传介绍</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="16" />
+          <text class="text">最近一年内发放了分类垃圾桶或垃圾袋</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="32" />
+          <text class="text">最近一年内发放了垃圾分类细则宣传册</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="64" />
+          <text class="text">有投放点位置示意图或指示牌</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="128" />
+          <text class="text">什么都没有</text>
+        </label>
+      </checkbox-group>
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         7
-        <text class="FAQ">本小区的有害垃圾有没有定点收集点？<text>【可选】</text></text>
+        <text class="FAQ">本小区的有害垃圾是怎么收集的？<text>【可选】</text></text>
       </view>
       <radio-group class="radio-group" onChange="youhaidingdianChange">
         <label class="radio">
-          <radio value="1"></radio>
-          <text class="radio-text">分品类回收</text>
+          <radio value="4"></radio>
+          <text class="radio-text">只回收特定品类（例如过期药品、灯管、电池）	</text>
         </label>
         <label class="radio">
-          <radio value="2"></radio>
-          <text class="radio-text">有有害垃圾收集点</text>
+          <radio value="5"></radio>
+          <text class="radio-text">有有害垃圾桶，但投放不准确</text>
+        </label>
+        <label class="radio">
+          <radio value="6"></radio>
+          <text class="radio-text">有有害垃圾桶，只投放有害垃圾</text>
         </label>
         <label class="radio">
           <radio value="3"></radio>
-          <text class="radio-text">什么都没有</text>
+          <text class="radio-text">没见过有害垃圾桶</text>
         </label>
       </radio-group>
     </view>
@@ -193,7 +249,7 @@
         </label>
         <label class="checkbox">
           <checkbox value="2" />
-          <text class="text">上门收</text>
+          <text class="text">电商预约上门回收</text>
         </label>
         <label class="checkbox">
           <checkbox value="4" />
@@ -204,6 +260,10 @@
           <text class="text">智能回收箱</text>
         </label>
         <label class="checkbox">
+          <checkbox value="32" />
+          <text class="text">随便放，有人拉走</text>
+        </label>
+        <label class="checkbox">
           <checkbox value="16" />
           <text class="text">什么都没有</text>
         </label>
@@ -212,32 +272,72 @@
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         9
-        <text class="FAQ">本小区的公共垃圾桶是怎么布置的？<text>【可选】</text></text>
+        <text class="FAQ">本小区的公共垃圾桶是怎么布置的？<text>【可选、多选】</text></text>
       </view>
-      <radio-group class="radio-group" onChange="lajitongbuzhitypeChange">
+      <checkbox-group class="checkbox-group" onChange="lajitongbuzhitypesChange">
+        <label class="checkbox">
+          <checkbox value="1" />
+          <text class="text">撤桶并点后的分类驿站</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="2" />
+          <text class="text">高楼每层楼内垃圾桶</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="4" />
+          <text class="text">各楼门下一组垃圾桶（有厨余桶）</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="8" />
+          <text class="text">各楼门下一组垃圾桶（无厨余桶）</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="16" />
+          <text class="text">地下车库有一组垃圾桶（有厨余桶）</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="32" />
+          <text class="text">地下车库有一组垃圾桶（无厨余桶）</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="64" />
+          <text class="text">小区内有只收厨余垃圾的收集点</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="128" />
+          <text class="text">流动车定时分类收集每户垃圾</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="256" />
+          <text class="text">流动车定时混合收集每户垃圾</text>
+        </label>
+      </checkbox-group>
+    </view>
+    <view class="refuse-classify-FAQ">
+      <view class="FAQ-title">
+        10
+        <text class="FAQ">你认为你家的垃圾分类做得怎么样？<text>【可选】</text></text>
+      </view>
+      <radio-group class="radio-group" onChange="howtypeChange">
         <label class="radio">
           <radio value="1"></radio>
-          <text class="radio-text">高楼每层楼内垃圾桶</text>
+          <text class="radio-text">能做到严格四分类	</text>
         </label>
         <label class="radio">
           <radio value="2"></radio>
-          <text class="radio-text">各楼门下一组垃圾桶（有厨余桶）</text>
+          <text class="radio-text">只把厨余垃圾分出来</text>
         </label>
         <label class="radio">
           <radio value="3"></radio>
-          <text class="radio-text">各楼门下一组垃圾桶（无厨余桶）</text>
+          <text class="radio-text">只把可回收物分出来</text>
         </label>
         <label class="radio">
           <radio value="4"></radio>
-          <text class="radio-text">专门的厨余收集点</text>
+          <text class="radio-text">只把有害垃圾分出来</text>
         </label>
         <label class="radio">
           <radio value="5"></radio>
-          <text class="radio-text">撤桶后的分类驿站（有人定时值守）</text>
-        </label>
-        <label class="radio">
-          <radio value="6"></radio>
-          <text class="radio-text">流动车上门或到楼门外收集</text>
+          <text class="radio-text">随便扔，不分类</text>
         </label>
       </radio-group>
     </view>
@@ -249,6 +349,6 @@
     <button class="long-btn submit-btn" 
       form-type="submit" 
       type="primary" 
-      onTap="submitTap">提交</button>
+      onTap="submitTap">提 交</button>
   </view>
 </view>

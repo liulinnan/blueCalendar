@@ -5,7 +5,9 @@ Page({
     followList: [],
   },
   onLoad() {
-    this.data.followList = [];
+    this.setData({
+      followList: []
+    })
     this.getFollowList();
   },
   getFollowList() { //获取关注列表
