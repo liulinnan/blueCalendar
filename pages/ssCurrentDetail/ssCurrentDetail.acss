@@ -18,10 +18,13 @@
   line-height: 45rpx;
 }
 .green{
-  color: #00c06f;
+  color: #39be74;
 }
 .red{
-  color: #d03835;
+  color: #e95a53;
+}
+.yellow{
+  color: #f59829;
 }
 .ss-details .ss-content{
   margin: 20rpx 30rpx 95rpx;

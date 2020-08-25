@@ -122,29 +122,41 @@ Page({
       //console.log(res);
       switch(res.isfl) {
         case "1":
-            isflKey.content = '本小区厨余垃圾与其他垃圾 已分类';
+            isflKey.content = '本小区厨余垃圾与其他垃圾 已分类丢弃';
             isflKey.color = "green";
             break;
         case "2":
-            isflKey.content = '本小区厨余垃圾与其他垃圾 未分类';
+            isflKey.content = '本小区厨余垃圾与其他垃圾 没有分类丢弃';
             isflKey.color = "red"
             break;
       }
       switch(res.issuliaodai) {
         case "1":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里基本都是厨余垃圾';
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里 基本都是厨余垃圾';
+            if(res.isfl == 1){ //已分类
+              issuliaodaiKey.color = "green"; 
+            }else{
+              issuliaodaiKey.color = "red"; 
+            };
             break;
         case "2":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里是厨余垃圾带袋投放';
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里是 厨余垃圾带袋投放';
+            //if(res.isfl == 1){ issuliaodaiKey.color = "yellow"; }
+            issuliaodaiKey.color = "yellow"; 
             break;
         case "3":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里有很多未分类的垃圾';
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里 有很多未分类的垃圾';
+            //if(res.isfl == 1){ issuliaodaiKey.color = "red"; };
+            issuliaodaiKey.color = "red";
             break;
         case "4":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区没有厨余垃圾桶';
+            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区 没有厨余垃圾桶';
+            //if(res.isfl == 1){ issuliaodaiKey.color = "red"; };
+            issuliaodaiKey.color = "red";
             break;
         case "5":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，厨余垃圾桶锁住了，不能投放或查看';
+            issuliaodaiKey.content = '我投放垃圾或拍摄时， 厨余垃圾桶锁住了，不能投放或查看';
+            if(res.isfl == 0){ issuliaodaiKey.color = "red"; }
             break;
       }
       switch(res.ddtype) {
@@ -163,13 +175,13 @@ Page({
       }
       switch(res.weishengtype) {
         case "1":
-          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边常清理，很干净';
+          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边经常清理，很干净';
           break;
         case "2":
-          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周围的卫生一般';
+          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边的卫生条件一般';
           break;
         case "3":
-          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边的卫生很脏';
+          weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边的卫生条件很脏';
           break;
       }
       
@@ -197,7 +209,7 @@ Page({
               break;
         }
       }
-      res.fuzhusheshi != "0" ? fuzhusheshiKey.content = '本小区垃圾投放点有以下辅助设施'+fuzhusheshiArr.join("、") : "";
+      res.fuzhusheshi != "0" ? fuzhusheshiKey.content = '本小区垃圾投放点有以下辅助设施：'+fuzhusheshiArr.join("、") : "";
 
       var xuanchuancuoshiArr = [];
       for(let i=1;i<Number(res.xuanchuancuoshi)*2;i*=2){
@@ -228,17 +240,17 @@ Page({
               break;
         }
       }
-      res.xuanchuancuoshi != "0" ? xuanchuancuoshiKey.content = '本小区有以下垃圾分类宣传措施：'+xuanchuancuoshiArr.join("、") : "";
+      res.xuanchuancuoshi != "0" ? xuanchuancuoshiKey.content = '本小区的垃圾分类宣传措施：'+xuanchuancuoshiArr.join("、") : "";
       
       switch(res.youhaidingdian) {
         case "4":
             youhaidingdianKey.content = '本小区的有害垃圾只回收特定品类（例如过期药品、灯管、电池）';
             break;
         case "5":
-            youhaidingdianKey.content = '本小区的有有害垃圾桶，但投放不准确';
+            youhaidingdianKey.content = '本小区有有害垃圾桶，但投放不准确';
             break;
         case "6":
-            youhaidingdianKey.content = '本小区的有有害垃圾桶，只投放有害垃圾';
+            youhaidingdianKey.content = '本小区有有害垃圾桶，只投放有害垃圾';
             break;
         case "3":
             youhaidingdianKey.content = '本小区没见过有害垃圾桶';
@@ -258,7 +270,7 @@ Page({
               huishoutypeArr.push("周边有废品回收站");
               break;
           case 8:
-              huishoutypeArr.push("智能回收箱");
+              huishoutypeArr.push("有智能回收箱");
               break;
           case 32:
               huishoutypeArr.push("随便放，有人拉走");
@@ -268,7 +280,7 @@ Page({
               break;
         }
       }
-      res.huishoutype != "0" ? huishoutypeKey.content = '本小区的可回收方式有：'+huishoutypeArr.join("、") : "";
+      res.huishoutype != "0" ? huishoutypeKey.content = '本小区的可回收物的回收方式有：'+huishoutypeArr.join("、") : "";
       
       var lajitongbuzhitypesArr = [];
       for(let i=1;i<Number(res.lajitongbuzhitypes)*2;i*=2){

@@ -32,7 +32,10 @@
       <text class="ss-content-intor">{{xiaoquName ? xiaoquName : ssList[11]}}</text>
       <view class="FQA-des" a:if="{{answerList.length > 0}}">
         <text class="title">问题描述</text>
-        <view class="list" a:for="{{answerList}}">{{index+1}}.{{item.content.split(" ")[0]}}<text class="{{item.color}}">{{item.content.split(" ")[1]}}</text></view>
+        <view class="list" a:for="{{answerList}}">
+          {{index+1}}.{{item.content.split(" ")[0]}}
+          <text class="{{item.color}}">{{item.content.split(" ")[1]}}</text>
+        </view>
         <text class="list">{{ssList[15] == 4 ? '我还观察到：'+ ssList[11] : ssList[11]}}</text>
       </view>
       <!-- ss评论/点赞数量 -->

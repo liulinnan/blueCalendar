@@ -56,7 +56,7 @@
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         1
-        <text class="FAQ">本小区的厨余垃圾都能扔到厨余垃圾桶吗？<text class="red">【必填】</text></text>
+        <text class="FAQ">本小区的厨余垃圾，基本都能扔到厨余垃圾桶吗？<text class="red">【必填】</text></text>
       </view>
       <radio-group class="radio-group" onChange="isflChange">
         <label class="radio">
@@ -124,7 +124,7 @@
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         4
-        <text class="FAQ">你投放垃圾或拍摄时，小区垃圾桶和周边的卫生情况如何？<text>【可选】</text></text>
+        <text class="FAQ">你扔垃圾或拍摄时，小区垃圾桶和周边的卫生情况如何？<text>【可选】</text></text>
       </view>
       <radio-group class="radio-group" onChange="weishengtypeChange">
         <label class="radio">
@@ -257,7 +257,7 @@
         </label>
         <label class="checkbox">
           <checkbox value="8" />
-          <text class="text">智能回收箱</text>
+          <text class="text">有智能回收箱</text>
         </label>
         <label class="checkbox">
           <checkbox value="32" />
@@ -281,7 +281,7 @@
         </label>
         <label class="checkbox">
           <checkbox value="2" />
-          <text class="text">高楼每层楼内垃圾桶</text>
+          <text class="text">高楼每层楼内设垃圾桶</text>
         </label>
         <label class="checkbox">
           <checkbox value="4" />
@@ -343,7 +343,7 @@
     </view>
 
     <view class="observe-feedback-container">
-      <text>你还观察到了什么？</text>
+      <text>你还观察到了什么？（自由填写）</text>
       <textarea  enableNative="{{false}}" onInput="bindTextAreaInput" value="{{describe}}" maxlength="-1"></textarea>
     </view>
     <button class="long-btn submit-btn" 
