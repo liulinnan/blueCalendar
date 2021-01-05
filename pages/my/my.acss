@@ -4,6 +4,7 @@ page{
 .my-container{
   height: 100%;
   /* margin-bottom: 100rpx; */
+  margin-bottom: 100rpx;
 }
 .common-mb{
   margin-bottom: 20rpx;

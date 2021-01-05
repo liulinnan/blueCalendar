@@ -1,6 +1,6 @@
 <view class="activity-shot">
-  <text>领取公益时：当月晒图满21天，生成月历，分享到微博或朋友圈时，加上自己的环保宣言，保存截图并上传，审核需2-5个工作日，审核通过后自动发放公益时。</text>
-  <text>参与环保，感恩有你！</text>
+  <view class="text">领取公益时：<text class="red">当月晒图至少满21天，</text>生成月历，<text class="red size">分享到微博或朋友圈时，加上自己的环保宣言，</text>保存截图并上传，审核需2-5个工作日，审核通过后自动发放公益时。</view>
+  <view class="text">参与环保，感恩有你！</view>
 
   <view class="upload-img" onTap="uploadYl">
     <view a:if="{{uploadStatus === 0}}">

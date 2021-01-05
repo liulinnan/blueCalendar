@@ -277,6 +277,7 @@ Page({
 	},
 	successSubSS(res, selfObj) {
 		if(res.S == 1){
+			my.uma.trackEvent('Month_Num');
 			my.showToast({
 				content: '发布成功',
 				duration: 2000,

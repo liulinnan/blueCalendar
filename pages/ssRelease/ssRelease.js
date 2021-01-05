@@ -198,6 +198,7 @@ Page({
       },
       success: res => {
         successUp++;
+        my.uma.trackEvent('Commit_pictureNum');
       },
       fail: res => {
         failUp++;
