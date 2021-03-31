@@ -108,7 +108,9 @@ function requestApi(url, params, method, sourceObj, successFun, dataParams, fail
         data:   params,
         dataType: 'json',
         success: function (res) {
-          my.hideLoading();
+          if(res.data.S == 1){
+            my.hideLoading();
+          }
           typeof successFun  == 'function' && successFun(res.data, sourceObj, this, dataParams)
         },
         fail: function (res) {

@@ -20,7 +20,7 @@ Page({
           Phone: object.mobile,
           Type: app.globalData.mobileInfo
       }
-      my.showLoading();
+      // my.showLoading();
       publicFun.requestPostApi(publicFun.api.quickLoginCode, params, this, this.successCode);
       this.setData({ mobile: object.mobile }); 
     }

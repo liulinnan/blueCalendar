@@ -186,8 +186,11 @@ Component({
      * @param {*} number // 手机号
      */
     verifyTel(number) { // 手机号正则校验
-      const reg = /^1[3|4|5|6|7|8|9]\d{9}$/;
-      return reg.test(number);
+      // const reg = /^1[3|4|5|6|7|8|9]\d{9}$/;
+      // return reg.test(number);
+      if(number != "") {
+        return number
+      }
     }
   }
 });

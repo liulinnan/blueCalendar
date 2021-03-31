@@ -24,7 +24,7 @@ Page({
           Phone: object.mobile,
           UserId: this.data.userid
       }
-      my.showLoading();
+      // my.showLoading();
       publicFun.requestPostApi(publicFun.api.sendCode, params, this, this.successCode);
       this.setData({ mobile: object.mobile }); 
     }

@@ -7,8 +7,7 @@
     <label for="mobile" class="atd-input-con">
       <view class="atd-title-field">        
       </view>
-      <el-input style="color: rgb(153, 153, 153)" name="mobile" placeholder="请输入手机号码" type="number" 
-      maxlength="{{11}}" disabled="{{mobileDisabled}}" onInput="onMobileInput"  clear="{{true}}" 
+      <el-input style="color: rgb(153, 153, 153)" name="mobile" placeholder="请输入手机号码" type="number" disabled="{{mobileDisabled}}" onInput="onMobileInput"  clear="{{true}}" 
       value="{{hasSend ? mobileSafe : mobileValue}}" onClear="onMobileClear"	/>
     </label>
     <view class="send-code-wrapper">

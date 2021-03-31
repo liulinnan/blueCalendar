@@ -107,7 +107,7 @@ Page({
         userid: app.globalData.userid,
         dt: publicFun.getTimestamp(),
         describe: this.data.describe, //描述
-        describe1: '',
+        describe1: '支付宝小程序请搜索：蔚蓝日历',
         address: app.globalData.location.address, //地址
         lat: app.globalData.location.lat ? app.globalData.location.lat : 0, //纬度
         lng: app.globalData.location.lng ? app.globalData.location.lng : 0, //经度
