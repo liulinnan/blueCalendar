@@ -19,7 +19,7 @@
         >
           <block a:for="{{item[20]}}" a:for-item="imgList" a:for-index="idx">
             <swiper-item key="swiper-item-{{imgList.index}}">
-              <image src="{{item[26]+imgList}}" 
+              <image src="{{item[26]+imgList.replace('/ico','')}}" 
                 data-index="{{idx}}" 
                 data-imgUrl="{{item[26]}}" 
                 data-list="{{item[20]}}" 
@@ -32,7 +32,9 @@
         </swiper>
       </view>
       <view class="ss-content">
-        <text class="ss-content-intor">{{item[19]}}</text>
+        <text class="ss-content-intor">
+          <text>{{item[19].replace(/\\n/,'\n')}}</text> 
+        </text>
         <!-- ss评论/点赞数量 -->
         <view class="ss-comment-like">
           <view onTap="openComment" data-parentuserid="{{item[1]}}" data-ssId="{{item[0]}}">

@@ -1,4 +1,5 @@
 import { requestGetApi, requestPostApi, api} from '/utils/request'
+import { Base64 } from '/utils/base64';
 
 //获取当前时间戳转换为时间 
 function getTimestamp() {  
@@ -197,6 +198,7 @@ function getLessLimitSizeImage(canvasId, imagePath, limitSize = 200, drawWidth, 
 };
 
 module.exports = {
+  Base64,
   requestGetApi,
   requestPostApi,
   api,
@@ -212,5 +214,6 @@ module.exports = {
   jumpLogin,
   showToast,
   
-  getLessLimitSizeImage
+  getLessLimitSizeImage,
 }
+

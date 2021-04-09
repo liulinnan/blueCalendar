@@ -1,5 +1,6 @@
 const app = getApp();
 const publicFun = require('/utils/public.js');
+
 Page({
   data: {
     loginState: '', //0 未登录 1已登录
@@ -7,19 +8,7 @@ Page({
     winHeight:"",//窗口高度
     currentTab: 1, //预设当前项的值
     scrollLeft:0, //tab标题的滚动条位置
-    tabs: [ //sstab //关注300 推荐400 实景1 人物3 水质8 花草7 美食6 污染2 萌宠4
-      // ["300", "关注", "0"],
-      // ["400", "推荐", "0"],
-      // ["1", "实景", "0"],
-      // ["7", "自然", "0"],
-      // //["3", "人物", "0"],
-      // ["8", "水", "0"],
-      // // ["6", "美食", "0"],
-      // ["2", "污染", "0"],
-      // ["4", "萌宠", "0"],
-      // ["9", "观鸟", "0"],
-      // ["100", "日历", "0"]
-    ], 
+    tabs: [], //sstab //关注300 推荐400 实景1 人物3 水质8 花草7 美食6 污染2 萌宠4
     activeTab: 1, //选中tab
     ssKey: '', //数据缓存
     ssType: 400,
@@ -52,8 +41,8 @@ Page({
     tabbar: {},
   },
   onLoad() {
-    //my.navigateTo({url:'/pages/ssCurrentDetail/ssCurrentDetail'});
-    //my.navigateTo({url:'/pages/refuseClassify/refuseClassify'});
+    // my.navigateTo({url:'/pages/ssUpload/ssUpload'});
+    // my.navigateTo({url:'/pages/ssRelease/ssRelease'});
     // my.navigateTo({
     //   url: '../loginAuthorization/loginAuthorization'
     //   //url: '../myCalendarList/myCalendarList'
@@ -579,7 +568,6 @@ Page({
   },
 
   jumpInfor() {
-    //http://www.ipe.org.cn/apphelp/newsdetail/index.html?newid=2575087
     this.setData({
       webView: 'https://www.ipe.org.cn/apphelp/newsdetail/index.html?newid=2575087&page=1'
     });
@@ -625,7 +613,7 @@ Page({
       my.chooseImage({
         chooseImage: 1,
         sourceType: ['camera','album'],
-        count: 6,
+        count: 1,
         success: (res) => {
           //console.log(JSON.stringify(res));
           //const path = res.apFilePaths;
@@ -635,8 +623,8 @@ Page({
             success: data => {
               console.log(data.apFilePaths);
               my.navigateTo({
-                //url: '/pages/ssUpload/ssUpload?path='+path //水印页面
-                url: '/pages/ssRelease/ssRelease?pathArr='+data.apFilePaths+'&key='+that.data.ssKey//发布页面
+                url: '/pages/ssUpload/ssUpload?pathArr='+data.apFilePaths+'&key='+that.data.ssKey //水印页面
+                //url: '/pages/ssRelease/ssRelease?pathArr='+data.apFilePaths+'&key='+that.data.ssKey//发布页面
               });
             }
         })

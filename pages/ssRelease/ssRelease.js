@@ -12,16 +12,23 @@ Page({
     PR: 'PM2.5',
     PM: 0,
     disabled: false,
+    AIList: [],
+    focus: false,
+    noneState: false
   },
   onLoad(options) {
     //console.log(app.globalData.location)
     let pathArr = options.pathArr.split(",");
+    let tag = []
+    tag.push(["1/0","蓝天"])
     this.setData({
-      pictureLength: pathArr,
-      //labelList: [],
-      labelSelect: [],
+      pictureList: pathArr,
+      AIList: [],
+      labelSelect: tag,
       key: options.key
     });
+    // this.uploadImg(pathArr[0]);
+    this.aiResults(options.path); //ai识别
     this.getSSUploadTag();
     this.getAddress();
     //this.getWatermarkurl();
@@ -59,6 +66,67 @@ Page({
       urls: that.data.pictureList,
     });
   },
+  // ai识别
+  aiResults(url) {
+    var params  = {
+      url: url
+    }
+    my.showLoading();
+    publicFun.requestPostApi(publicFun.api.aiImg, params, this, this.successAiResults);
+  },
+  successAiResults(res, selfObj) {
+    for(let i=0;i<3;i++){
+      if(res.L[i][4]){
+        var text = publicFun.Base64.decode(res.L[i][4]);
+      }
+      res.L[i].splice(res.L[i].length-1, 1, text);
+      if(i == 0){
+        let checked = true;
+        res.L[0].push(checked);
+      }
+      selfObj.data.AIList.push(res.L[i]);
+    }
+    let none = ["以上都没有",'none']
+    selfObj.data.AIList.push(none);
+    selfObj.setData({
+      AIList: selfObj.data.AIList,
+      AIText: selfObj.data.AIList[0][0]+'。',
+      baikeImg: selfObj.data.AIList[0][3],
+      baikeText: selfObj.data.AIList[0][4]
+    })
+  },
+  bindKeyInput(e) {
+    this.setData({
+      baikeText: e.detail.value,
+    });
+  },
+  AIFocus() {
+    this.setData({
+      focus: true,
+    });
+  },
+  AIBlur() {
+    this.setData({
+      focus: false,
+    });
+  },
+  AIChange(e) {
+    if(e.detail.value == this.data.AIList.length-1){
+      this.setData({
+        noneState: true,
+        AIText: '',
+        baikeText: ''
+      })
+    }else{
+      this.setData({
+        noneState: false, 
+        AIText: this.data.AIList[e.detail.value][0]+'。',
+        baikeImg: this.data.AIList[e.detail.value][3],
+        baikeText: this.data.AIList[e.detail.value][4]
+      })
+    }
+  },
+
   selectTag(e) { //标签选中 index label name
     let data = e.target.dataset;
     for (let i = 0; i < this.data.labelSelect.length; i += 1) {
@@ -102,11 +170,13 @@ Page({
   },
   subSS() { //发布晒晒
     let aqi = app.globalData.aqi;
+    console.log(aqi)
     // if(this.data.location.lng > 0) {
+      let AIContent = this.data.AIText+this.data.describe+'\\n'+this.data.baikeText
       var params  = {
         userid: app.globalData.userid,
         dt: publicFun.getTimestamp(),
-        describe: this.data.describe, //描述
+        describe: AIContent, //描述
         describe1: '支付宝小程序请搜索：蔚蓝日历',
         address: app.globalData.location.address, //地址
         lat: app.globalData.location.lat ? app.globalData.location.lat : 0, //纬度
@@ -115,7 +185,7 @@ Page({
         city: app.globalData.location.city, //市
         area: app.globalData.location.district, //区县
         type: 0, //0晒晒，1日历
-        airlevel: aqi.A.L ? aqi.A.L : 0, //空气质量级别
+        airlevel: aqi["A"] != undefined ? aqi.A.L : 0, //空气质量级别
         riliid: 0, //主日历id
         start: publicFun.getTimestamp(), //开始时间
         end: publicFun.getTimestamp(), //结束时间
@@ -127,10 +197,11 @@ Page({
         rivername: '', //河流名称
         riverdescribe: '', //河流描述
         isbobao: app.globalData.location.city ? 1 : 0, //1显示到播报地图0不显示到播报地图
-        aqi: aqi.A.A ? aqi.A.A : 0, //Aqi值
-        temperature: aqi.W.T ? aqi.W.T : 0, //实况温度
-        weatherdes: aqi.W.M ? aqi.W.M : 0, //实况天气（例如：晴，多云 等）
+        aqi: aqi["A"] != undefined ? aqi.A.A : 0, //Aqi值
+        temperature: aqi["W"] != undefined ? aqi.W.T : 0, //实况温度
+        weatherdes: aqi["W"] != undefined ? aqi.W.M : 0, //实况天气（例如：晴，多云 等）
       }
+      // console.log(params)
       if(this.data.labelSelect.length > 0){
         if(this.data.describe){
           if(app.globalData.location.address){
@@ -223,7 +294,7 @@ Page({
       parentid: 0,
       ishot: 0
     }
-    my.showLoading();
+    // my.showLoading();
     publicFun.requestPostApi(publicFun.api.ssTagList, params, this, this.successGetTagList);
   },
   successGetTagList(res, selfObj) {
@@ -248,7 +319,7 @@ Page({
       this.setData({
         describe: content
       });
-      this.addWatermark(this.data.pictureLength);
+      // this.addWatermark(this.data.pictureLength);
     }
   },
   getDefaultContent(city, lat, lng) {
@@ -258,7 +329,7 @@ Page({
       this.setData({ 
         describe: content,
       });
-      this.getWaterMarkPm(res.A.Id);
+      // this.getWaterMarkPm(res.A.Id);
     });
   },
   getWaterMarkPm(MCid) { //获取PM值
@@ -282,7 +353,7 @@ Page({
   addWatermark(item, PR, PM) {
     var urlArr = [];
     var that = this;
-    my.showLoading();
+    //my.showLoading();
     for (let i=0;i<item.length;i++) {
       my.getImageInfo({
         src: item[i],
@@ -359,14 +430,5 @@ Page({
         }
       })
     }
-  },
-  getWaterMark() { //获取水印
-    var params  = {
-      
-    }
-    publicFun.requestPostApi(publicFun.api.getWaterMark, params, this, this.successWaterMark);
-  },
-  successWaterMark(res, selfObj) {
-    console.log(res);
   },
 });

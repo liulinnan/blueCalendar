@@ -132,7 +132,7 @@ page{
   line-height: 26rpx;
   display: block;
   margin: 0 19rpx;
-  text-align: justify;
+  /* text-align: justify; */
 }
 .ss-list .ss-user-data{
   display: flex;

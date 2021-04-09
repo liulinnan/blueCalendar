@@ -1,5 +1,7 @@
 {
   "usingComponents": {
     "am-icon": "mini-antui/es/am-icon/index"
-  }
+  },
+  "disableScroll":true,
+  "disableSwipeBack":true
 }

@@ -5,6 +5,7 @@ const api = {
   imgUrlUpload: imgUrl + '/App/APP_V3_Solve.ashx', //上传图片 //动态密钥
   commonImg: imgUrl + '/App/CommonUpload.ashx', //月历上传封面 //固定密钥
   activityImg: imgUrl + '/SiteManage/BlueMapCalendar/UploadImg.aspx', //上传活动截图
+  aiImg: imgUrl + '/app/GetAIResult.ashx', //AI识别
   miyao: apiUrl + '/GetSecondCount',
   imgMiyao: '24646572424578787574454', //上传图片密钥
 
@@ -51,7 +52,7 @@ const api = {
   getThreeHours: apiUrl + '/GetZhiFubaoCharitytime', //获取公益时
   getriskContent: apiUrl + '/GetZhiFubaoRiskContent', //文本风险识别
 
-  submitGarbage: apiUrl + '/Garbage_Submit_V2', //提交垃圾分类信息
+  submitGarbage: apiUrl + '/Garbage_Submit_V4', //提交垃圾分类信息
   garbageDetail: apiUrl + '/Garbage_Detail_V2', //垃圾分类问题详情
 
   ssCurrentDetail: apiUrl + '/ShareContent_V1', //ss详情页（只有当前的一条）

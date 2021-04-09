@@ -1,8 +1,27 @@
-<view class="ss-upload">
-  <image class="ss-img" mode="widthFix" src="{{bigImg}}"/>
+<view class="ss-upload-container">
+  <button class="next-step"  onTap="openMask">下一步</button>
+  <view class="img-container">
+    <view class='contentWarp' style='width:{{imgWidth}}rpx; height:{{imgHeight}}rpx;'>
+      <image class="ss-img" mode="widthFix" src="{{bigImg}}"/>
+      <!-- *************操作区域*************  -->
+      <block a:for="{{itemList}}" a:key="{{item.id}}">
+        <!-- 圆心坐标 <text style='position:absolute;top:{{item.y}}px;left:{{item.x}}px;width:2px;height:2px;background-color:yellow;z-index:500'></text> -->
+        <view class='touchWrap' style='transform: scale({{item.scale}});top:{{item.top}}px;left:{{item.left}}px; z-index:{{item.active?100:1}}'>
+          <view class='imgWrap {{item.active? "touchActive":""}}' style="transform: rotate({{item.angle}}deg); border: {{item.active?2*item.oScale:0}}rpx #fff solid;">
+
+            <image src='{{item.image}}' data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' onTouchStart='WraptouchStart' onTouchMove='WraptouchMove' onTouchEnd='WraptouchEnd' />
+            <!-- <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></image> -->
+            <image class='o' src='/images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' onTouchStart='oTouchStart' onTouchMove='oTouchMove' onTouchEnd='WraptouchEnd' />
+
+          </view>
+        </view>
+      </block>
+      <!-- **************操作区域************  -->
+    </view>
+  </view>
 
   <!-- 用户选择的图片 -->
-  <view class="ss-select">
+  <view class="ss-select" style="display: none;">
     <view class="select-pos">
       <view class="picture-select" a:for="{{selectList}}">
         <image mode="aspectFill" src="{{item}}" 
@@ -12,12 +31,13 @@
         </view>
         <view class="border" a:if="{{currentData === index}}"></view>
       </view>
-      <view class="ss-upload" a:if="{{selectList.length < 6}}">
+      <view class="ss-upload" a:if="{{selectList.length < 6}}" onTap="addImg">
         <am-icon size="22" color="#ccc" type="plus" />
       </view>
     </view>
   </view>
-  <!-- 水印 -->
+
+  <!-- 水印列表 -->
   <view class="ss-watermark" style="bottom: {{watermarkState === 1 ? '182rpx' : '0rpx'}}">
     <view class="icon-watermark clearfix"><image mode="scaleToFill" src="/images/icon-watermark.png" onTap="openWatermark" /></view>
     <!-- 水印列表 -->
@@ -28,4 +48,8 @@
       </view>
     </view>
   </view>
+
+  <!-- bug点：一定不要用if hidden 隐藏canvas会导致很多api调用bug -->
+  <canvas class='maskCanvas' id="maskCanvas" style='width:{{imgWidth}}px; height:{{imgHeight}}px;'></canvas>
+  <canvas class='watermarkCanvas'  width="304" height="136" style="width:152px;height:68px;" id="watermarkCanvas"></canvas>
 </view>

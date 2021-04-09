@@ -23,6 +23,81 @@ page{
 .picture-list .fl:nth-child(4n){
   margin-right: 0;
 }
+/* AI识图 */
+.ss-AI{
+  padding: 40rpx 30rpx 55rpx;
+}
+.ss-AI .ai-result-title{
+  display: block;
+  font-size: 28rpx;
+  color: #333333;
+  padding-bottom: 40rpx;
+  border-bottom: 1rpx solid rgb(222, 222, 222);
+}
+.ss-AI .AI-list label{
+  display: block;
+  line-height: 30rpx;
+  margin-top: 30rpx;
+}
+.ss-AI .AI-list .radio{
+  width: 300rpx;
+}
+.ss-AI .AI-list .radio-value{
+  display: block;
+  font-size: 30rpx;
+  line-height: 44rpx;
+  font-weight: 500;
+  color: #333333;
+}
+.ss-AI .AI-list .radio-xsd{
+  font-size: 28rpx;
+  line-height: 44rpx;
+  color: #333333;
+  margin-right: 80rpx;
+}
+.ss-AI .AI-list .radio-xsd text{
+  font-weight: bold;
+  width:120rpx;
+  display:inline-block;
+}
+.ss-AI .AI-content{
+  margin-top: 38rpx;
+}
+.ss-AI .AI-content .blame,.blame-bg text{
+  width: calc(100% - 48px);
+  font-size: 28rpx;
+  color: #999999;
+  line-height: 62rpx;
+  background: #F5F5F5;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 8rpx;
+  margin-left: 56rpx;
+}
+.blame-bg{
+  padding: 30rpx 0;
+}
+.blame-bg text{
+  background: #fff;
+  padding: 10rpx;
+  margin-left: 0;
+  display: block;
+  margin: 0 30rpx;
+}
+.ss-AI .AI-content .encyclopedias{
+  font-size: 30rpx;
+  color: #333333;
+  line-height: 42rpx;
+  padding: 32rpx;
+  border: 2rpx solid #E6E6E6;
+  border-radius: 12rpx;
+  text-align: justify;
+}
+.ss-AI .AI-content .encyclopedias image{
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 27rpx;
+}
+
 /* 标签 */
 .ss-label{
   padding: 43rpx 25rpx 0 30rpx;

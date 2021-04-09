@@ -225,7 +225,7 @@ button{
 .ss-details .ss-content{
   margin: 20rpx 30rpx;
 }
-.ss-details .ss-content .ss-content-intor{
+.ss-details .ss-content .ss-content-intor text{
   font-size: 30rpx;
   color: #000;
   line-height: 46rpx;

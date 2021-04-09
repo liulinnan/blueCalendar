@@ -3,14 +3,33 @@
 <view class="ss-release">
   <view class="picture-list clearfix mt">
     <view class="picture-select fl" a:for="{{pictureList}}">
-      <image mode="aspectFill" src="{{item}}" data-index="{{index}}" onTap="previewImage" />
-      <view class="close" onTap="deleteImg" data-index="{{index}}">
+      <!-- onTap="previewImage" -->
+      <image mode="aspectFill" src="{{item}}" data-index="{{index}}" /> 
+      <view class="close" a:if="{{index != 0 }}" onTap="deleteImg" data-index="{{index}}">
         <am-icon class="fr" size="7" color="#fff" type="cross" />
       </view>
     </view>
-    <!-- <view class="ss-upload fl" a:if="{{pictureList.length < 6}}" onTap="addImg">
+    <view class="ss-upload fl" a:if="{{pictureList.length < 6}}" onTap="addImg">
       <am-icon size="22" color="#ccc" type="plus" />
-    </view> -->
+    </view>
+  </view>
+
+  <view class="ss-AI mt">
+    <text class="ai-result-title">图片AI识别结果</text>
+    <radio-group class="AI-list" onChange="AIChange" name="lib">
+      <label class="clearfix" a:for="{{AIList}}" key="{{index}}">
+        <radio class="fl" value="{{index}}" checked="{{item[5]}}" />
+        <text class="radio-value fl">{{item[0]}}</text>
+        <view class="radio-xsd fr" a:if="{{item[1] != 'none'}}">相似度：<text>{{item[1]}}%</text></view>
+      </label>
+      <view class="AI-content">
+        <input a:if="{{noneState}}" class="blame" focus="{{focus}}" onFocus="AIFocus" onBlur="AIBlur" onInput="bindKeyInput" placeholder="请输入你认为的识别内容" />
+        <view a:elif="{{baikeText && noneState == false}}" class="encyclopedias clearfix">
+            <image a:if="{{baikeImg}}" mode="aspectFit" class="fl" src="{{baikeImg}}"/>
+            {{baikeText}}
+        </view>
+      </view>
+    </radio-group>
   </view>
 
   <view class="ss-label mt">
@@ -27,6 +46,10 @@
   <view class="ss-text mt">
     <text>写下标题收获更多赞哦</text>
     <textarea enableNative="{{false}}" onBlur="bindTextAreaBlur" value="{{describe}}" auto-height maxlength="-1" placeholder="写下此时此刻的想法..." />
+  </view>
+
+  <view class="blame-bg mt" a:if="{{baikeText.length>0}}">
+    <text>{{baikeText}}</text>
   </view>
 
   <view class="ss-pos-share mt">

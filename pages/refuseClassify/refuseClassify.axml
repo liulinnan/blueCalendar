@@ -56,77 +56,83 @@
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         1
-        <text class="FAQ">本小区的厨余垃圾，基本都能扔到厨余垃圾桶吗？<text class="red">【必填】</text></text>
+        <text class="FAQ">你扔垃圾或拍摄时，垃圾投放点符合下列哪些情况？<text class="red">【必填、多选】</text></text>
       </view>
-      <radio-group class="radio-group" onChange="isflChange">
-        <label class="radio">
-          <radio value="1"></radio>
-          <text class="radio-text">是</text>
+      <checkbox-group class="checkbox-group" onChange="istoufangdianqingkuangChange">
+        <label class="checkbox">
+          <checkbox value="1" />
+          <text class="radio-text">厨余垃圾基本都能正确投放</text>
+          <radio-group a:if="{{suliaodaiState}}" class="radio-group" onChange="issuliaodaiChange">
+            <label class="radio">
+              <radio value="1" />
+              <text class="radio-text">基本都是厨余垃圾</text>
+            </label>
+            <label class="radio">
+              <radio value="2" />
+              <text class="radio-text">厨余垃圾带袋投放</text>
+            </label>
+          </radio-group>
         </label>
-        <label class="radio">
-          <radio value="2"></radio>
-          <text class="radio-text">否</text>
+        <label class="checkbox">
+          <checkbox value="2" />
+          <text class="radio-text">可回收物基本都能正确投放</text>
         </label>
-      </radio-group>
+        <label class="checkbox">
+          <checkbox value="4" />
+          <text class="radio-text">有害垃圾基本都能正确投放</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="8" />
+          <text class="radio-text">其他垃圾基本都能正确投放</text>
+        </label>
+        <label class="checkbox">
+          <checkbox value="16" />
+          <text class="radio-text">存在垃圾混合投放现象</text>
+        </label>
+      </checkbox-group>
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         2 
-        <text class="FAQ">你扔垃圾或拍摄时，小区厨余垃圾桶里有什么？<text>【可选】</text></text>
+        <text class="FAQ">本小区垃圾分类是否做出以下尝试？<text class="red">【必填、多选】</text></text>
       </view>
-      <radio-group class="radio-group" onChange="issuliaodaiChange">
-        <label class="radio">
-          <radio value="1"></radio>
-          <text class="radio-text">基本都是厨余垃圾</text>
+      <checkbox-group class="checkbox-group" onChange="ischangshiChange">
+        <label class="checkbox">
+          <checkbox value="2" />
+          <text class="radio-text">楼宇已撤桶，垃圾只能定点集中投放</text>
         </label>
-        <label class="radio">
-          <radio value="2"></radio>
-          <text class="radio-text">厨余垃圾带袋投放</text>
+        <label class="checkbox">
+          <checkbox value="1" />
+          <text class="radio-text">实行定时投放</text>
         </label>
-        <label class="radio">
-          <radio value="3"></radio>
-          <text class="radio-text">有很多未分类的垃圾</text>
+        <label class="checkbox">
+          <checkbox value="4" />
+          <text class="radio-text">投放时总有人监督</text>
         </label>
-        <label class="radio">
-          <radio value="4"></radio>
-          <text class="radio-text">没有厨余垃圾桶</text>
+        <label class="checkbox">
+          <checkbox value="8" />
+          <text class="radio-text">投放时有24小时电子监控</text>
         </label>
-        <label class="radio">
-          <radio value="5"></radio>
-          <text class="radio-text">厨余垃圾桶锁住了，不能投放或查看</text>
+        <label class="checkbox">
+          <checkbox value="16" />
+          <text class="radio-text">不正确投放的个人确实会被问责</text>
         </label>
-      </radio-group>
+        <label class="checkbox">
+          <checkbox value="32" />
+          <text class="radio-text">以上都没有</text>
+        </label>
+      </checkbox-group>
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
         3
-        <text class="FAQ">你扔垃圾或拍摄时，垃圾桶旁边有没有人协助？<text>【可选】</text></text>
-      </view>
-      <radio-group class="radio-group" onChange="ddtypeChange">
-        <label class="radio">
-          <radio value="3"></radio>
-          <text class="radio-text">有，让我自己分类投放</text>
-        </label>
-        <label class="radio">
-          <radio value="1"></radio>
-          <text class="radio-text">有，而且帮我分</text>
-        </label>
-        <label class="radio">
-          <radio value="4"></radio>
-          <text class="radio-text">以前有，现在没有了</text>
-        </label>
-        <label class="radio">
-          <radio value="2"></radio>
-          <text class="radio-text">从来没见过</text>
-        </label>
-      </radio-group>
-    </view>
-    <view class="refuse-classify-FAQ">
-      <view class="FAQ-title">
-        4
         <text class="FAQ">你扔垃圾或拍摄时，小区垃圾桶和周边的卫生情况如何？<text>【可选】</text></text>
       </view>
       <radio-group class="radio-group" onChange="weishengtypeChange">
+        <!-- <label class="radio" a:for="{{weishengtypeArr}}">
+          <radio value="{{item.value}}"></radio>
+          <text class="radio-text">{{item.text}}</text>
+        </label> -->
         <label class="radio">
           <radio value="1"></radio>
           <text class="radio-text">经常清理，很干净</text>
@@ -143,7 +149,7 @@
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
-        5
+        4
         <text class="FAQ">本小区垃圾投放点有以下几种辅助设施？<text>【可选、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="fuzhusheshiChange">
@@ -175,7 +181,7 @@
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
-        6
+        5
         <text class="FAQ">你见过小区有哪些垃圾分类的宣传措施？<text>【可选、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="xuanchuancuoshiChange">
@@ -215,7 +221,7 @@
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
-        7
+        6
         <text class="FAQ">本小区的有害垃圾是怎么收集的？<text>【可选】</text></text>
       </view>
       <radio-group class="radio-group" onChange="youhaidingdianChange">
@@ -239,7 +245,7 @@
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
-        8
+        7
         <text class="FAQ">本小区的可回收物有几种回收方式？<text>【可选、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="huishoutypeChange">
@@ -271,7 +277,7 @@
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
-        9
+        8
         <text class="FAQ">本小区的公共垃圾桶是怎么布置的？<text>【可选、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="lajitongbuzhitypesChange">
@@ -315,7 +321,7 @@
     </view>
     <view class="refuse-classify-FAQ">
       <view class="FAQ-title">
-        10
+        9
         <text class="FAQ">你认为你家的垃圾分类做得怎么样？<text>【可选】</text></text>
       </view>
       <radio-group class="radio-group" onChange="howtypeChange">
