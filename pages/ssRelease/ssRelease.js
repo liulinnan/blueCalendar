@@ -6,8 +6,6 @@ Page({
     labelSelect: [],
     pictureList: [],
     describe: '',
-    canvasW: 0,
-    canvasH: 0,
     location: {},
     PR: 'PM2.5',
     PM: 0,
@@ -202,26 +200,24 @@ Page({
         weatherdes: aqi["W"] != undefined ? aqi.W.M : 0, //实况天气（例如：晴，多云 等）
       }
       // console.log(params)
-      if(this.data.labelSelect.length > 0){
-        if(this.data.describe){
-          if(app.globalData.location.address){
-            this.setData({disabled:true})
-            publicFun.requestPostApi(publicFun.api.ssUpload, params, this, this.successSubSS);
+      if(this.data.baikeText){
+        //if(this.data.labelSelect.length > 0){
+          if(this.data.describe){
+            if(app.globalData.location.address){
+              this.setData({disabled:true})
+              publicFun.requestPostApi(publicFun.api.ssUpload, params, this, this.successSubSS);
+            }else{
+              publicFun.showToast('请选择地址');
+            }
           }else{
-            publicFun.showToast('请选择地址');
+            publicFun.showToast('请填写描述');
           }
-        }else{
-          publicFun.showToast('请填写描述');
-        }
-      }else{
-        publicFun.showToast('请填写标签');
-      }
-    // }
-    // else{
-    //   if(app.globalData.mobileInfo == 1){
-    //     publicFun.showToast('请打开手机定位');
-    //   }
-    // }
+        // }else{
+        //   publicFun.showToast('请填写标签');
+        // }
+    }else{
+      publicFun.showToast('请选择AI识别结果');
+    }
   },
   successSubSS(res, selfObj) {
     if(res.S == 1){
@@ -329,106 +325,6 @@ Page({
       this.setData({ 
         describe: content,
       });
-      // this.getWaterMarkPm(res.A.Id);
     });
-  },
-  getWaterMarkPm(MCid) { //获取PM值
-    var params  = {
-      MCid: MCid, //监测点id
-      IsCity: 0, //0 监测点 1城市
-    }
-    publicFun.requestPostApi(publicFun.api.waterMarkPM, params, this, this.successWaterMarkPm);
-  },
-  successWaterMarkPm(res, selfObj) {
-    if(res.S == 1){
-      // if(res.PR){
-      //   var PR = res.PR;
-      // }else{
-      //   var PR = "PM2.5";
-      // }
-      var PR = "PM2.5";
-      selfObj.addWatermark(selfObj.data.pictureLength, PR, res.X[0]);
-    }
-  },
-  addWatermark(item, PR, PM) {
-    var urlArr = [];
-    var that = this;
-    //my.showLoading();
-    for (let i=0;i<item.length;i++) {
-      my.getImageInfo({
-        src: item[i],
-        success: (res) => {
-          that.setData({
-            canvasW: res.width,
-            canvasH: res.height
-          });
-          console.log(res);
-          let ctx = my.createCanvasContext('firstCanvas'+i);
-          //将图片src放到cancas内，宽高为图片大小(原图片);
-          ctx.drawImage(item[i], 0, 0, res.width, res.height);
-
-          if(app.globalData.location.city){
-            //var cityLength = '北京市市北京'
-            var city = app.globalData.location.city.substr(0,app.globalData.location.city.length-1);
-            if(city.length > 5){
-              var taxtWidth = res.width/2-((city.length)*40);
-            }else{
-              var taxtWidth = res.width/2-((city.length+1)*40);
-            }
-            
-            var imgWidth = taxtWidth+ ((city.length)*80);//(res.width/2)+(city.length*((city.length+1)*10-5));
-            var watermarkUrl = 'watermark3.png';
-
-            ctx.setFontSize(80);
-            ctx.setFillStyle('#ffffff'); // 文字颜色：黑色  
-            ctx.fillText(city, taxtWidth, res.height/2); //在画布上绘制被填充的文本
-
-
-            ctx.setFontSize(40);
-            ctx.fillText(PR+'：'+PM+'μg/m³', res.width/2-120, res.height/2+60); //在画布上绘制被填充的文本
-            ctx.setTextAlign('center'); // 文字居中
-
-          }else{
-            var watermarkUrl = 'watermark-zjhb.png';
-          }
-          
-            my.downloadFile({
-            url: 'https://www.ipe.org.cn/public/static/images/'+ watermarkUrl,
-            success(wkUrl) {
-              //ctx.drawImage(wkUrl.apFilePath, res.width/2-res.width/4/2, res.height/2-res.width/4/2, res.width/4, res.width/4);
-              if(app.globalData.location.city){
-                // if(city.length >= 4) {
-                //   var imgWidth = res.width/2+city.length*50;
-                // }else if(city.length == 3) {
-                //   var imgWidth = res.width/2+city.length*40;
-                // }else{
-                //   var imgWidth = res.width/2+city.length*30;
-                // }
-                
-                ctx.drawImage(wkUrl.apFilePath, imgWidth, res.height/2-100, 120, 120);
-              }else{
-                //ctx.drawImage(wkUrl.apFilePath, res.width/2-res.width/4/2, res.height/2-res.width/4/2, res.width/4, res.width/4);
-                ctx.drawImage(wkUrl.apFilePath, res.width/2-res.width/4/2, res.height/2-res.width/4/2, res.width/4, res.width/4);
-              }
-              
-              ctx.draw(false, function() {
-                setTimeout(function() {
-                  ctx.toTempFilePath({
-                    success(resUrl) {
-                      urlArr.push(resUrl.apFilePath);
-                      that.setData({
-                        pictureList: urlArr,
-                      });
-                      my.hideLoading();
-                    },
-                  });
-                }, 600)
-              });
-              ctx.clearRect(0, 0, res.width, res.height);
-            }
-          })
-        }
-      })
-    }
   },
 });

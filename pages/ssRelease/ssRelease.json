@@ -2,5 +2,7 @@
   "pullRefresh": false,
   "usingComponents": {
     "am-icon": "mini-antui/es/am-icon/index"
-  }
+  },
+  "disableScroll":false,
+  "disableSwipeBack":false
 }

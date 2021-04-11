@@ -1,11 +1,9 @@
-<canvas class='canvas' style="width: {{canvasW}}; height:{{canvasH}}" 
-  a:for="{{pictureLength}}" id="firstCanvas{{index}}"></canvas>
 <view class="ss-release">
   <view class="picture-list clearfix mt">
     <view class="picture-select fl" a:for="{{pictureList}}">
       <!-- onTap="previewImage" -->
       <image mode="aspectFill" src="{{item}}" data-index="{{index}}" /> 
-      <view class="close" a:if="{{index != 0 }}" onTap="deleteImg" data-index="{{index}}">
+      <view class="close clearfix" a:if="{{index != 0 }}" onTap="deleteImg" data-index="{{index}}">
         <am-icon class="fr" size="7" color="#fff" type="cross" />
       </view>
     </view>
