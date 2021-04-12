@@ -8,6 +8,7 @@ page{
   height: 100%;
   width: 100%;
   position: absolute;
+  overflow: hidden;
 }
 .next-step{
   position: fixed;
@@ -157,8 +158,8 @@ page{
 }
 .o {
     position: absolute;
-    bottom: -25rpx;
-    right: -25rpx;
+    bottom: -20rpx;
+    right: -20rpx;
     width: 50rpx;
     height: 50rpx;
     text-align: center;

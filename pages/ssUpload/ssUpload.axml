@@ -11,7 +11,7 @@
 
             <image src='{{item.image}}' data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' onTouchStart='WraptouchStart' onTouchMove='WraptouchMove' onTouchEnd='WraptouchEnd' />
             <!-- <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></image> -->
-            <image class='o' src='/images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' onTouchStart='oTouchStart' onTouchMove='oTouchMove' onTouchEnd='WraptouchEnd' />
+            <image class='o' src='/images/o.png' style='transform: rotate(45deg) scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' onTouchStart='oTouchStart' onTouchMove='oTouchMove' onTouchEnd='WraptouchEnd' />
 
           </view>
         </view>

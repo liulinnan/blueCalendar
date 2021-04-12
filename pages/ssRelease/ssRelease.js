@@ -84,7 +84,7 @@ Page({
       }
       selfObj.data.AIList.push(res.L[i]);
     }
-    let none = ["以上都没有",'none']
+    let none = ["以上都不是",'none']
     selfObj.data.AIList.push(none);
     selfObj.setData({
       AIList: selfObj.data.AIList,
@@ -200,24 +200,20 @@ Page({
         weatherdes: aqi["W"] != undefined ? aqi.W.M : 0, //实况天气（例如：晴，多云 等）
       }
       // console.log(params)
-      if(this.data.baikeText){
-        //if(this.data.labelSelect.length > 0){
-          if(this.data.describe){
-            if(app.globalData.location.address){
-              this.setData({disabled:true})
-              publicFun.requestPostApi(publicFun.api.ssUpload, params, this, this.successSubSS);
-            }else{
-              publicFun.showToast('请选择地址');
-            }
-          }else{
-            publicFun.showToast('请填写描述');
-          }
-        // }else{
-        //   publicFun.showToast('请填写标签');
-        // }
-    }else{
-      publicFun.showToast('请选择AI识别结果');
-    }
+      //if(this.data.labelSelect.length > 0){
+      if(this.data.describe){
+        if(app.globalData.location.address){
+          this.setData({disabled:true})
+          publicFun.requestPostApi(publicFun.api.ssUpload, params, this, this.successSubSS);
+        }else{
+          publicFun.showToast('请选择地址');
+        }
+      }else{
+        publicFun.showToast('请填写描述');
+      }
+      // }else{
+      //   publicFun.showToast('请填写标签');
+      // }
   },
   successSubSS(res, selfObj) {
     if(res.S == 1){
@@ -321,7 +317,9 @@ Page({
   getDefaultContent(city, lat, lng) {
     app.getSScontent(city, lat, lng).then((res) => {
       let date = publicFun.getNowFormatDate();
-      let content = '#蔚蓝地图#实景。'+ date +'，'+ app.globalData.location.city +'，当前'+res.W.M+'，'+res.W.T+'℃'+'，湿度'+res.W.H+'%，'+res.W.W+res.W.Ws+'，空气质量'+res.A.LN+'。';
+      let M = res.W.M.split("，")[0];
+      let content = '#蔚蓝地图#实景。'+ date +'，'+ app.globalData.location.city +'，当前'+M+'，'+res.W.T+'℃'+'，湿度'+res.W.H+'%，'+res.W.W+res.W.Ws+'，空气质量'+res.A.LN+'。';
+      console.log(content);
       this.setData({ 
         describe: content,
       });

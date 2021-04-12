@@ -133,6 +133,13 @@ page{
   display: block;
   margin: 0 19rpx;
   /* text-align: justify; */
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  align-content: center;
 }
 .ss-list .ss-user-data{
   display: flex;
