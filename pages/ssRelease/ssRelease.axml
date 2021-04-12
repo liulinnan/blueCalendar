@@ -23,7 +23,7 @@
       <view class="AI-content">
         <input a:if="{{noneState}}" class="blame" focus="{{focus}}" onFocus="AIFocus" onBlur="AIBlur" onInput="bindKeyInput" placeholder="请输入你认为的识别内容" />
         <view a:elif="{{baikeText && noneState == false}}" class="encyclopedias clearfix">
-            <image a:if="{{baikeImg}}" mode="aspectFit" class="fl" src="{{baikeImg}}"/>
+            <!-- <image a:if="{{baikeImg}}" mode="aspectFit" class="fl" src="{{baikeImg}}"/> -->
             {{baikeText}}
         </view>
       </view>

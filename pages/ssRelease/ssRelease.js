@@ -89,7 +89,7 @@ Page({
     selfObj.setData({
       AIList: selfObj.data.AIList,
       AIText: selfObj.data.AIList[0][0]+'。',
-      baikeImg: selfObj.data.AIList[0][3],
+      // baikeImg: selfObj.data.AIList[0][3],
       baikeText: selfObj.data.AIList[0][4]
     })
   },
@@ -119,7 +119,7 @@ Page({
       this.setData({
         noneState: false, 
         AIText: this.data.AIList[e.detail.value][0]+'。',
-        baikeImg: this.data.AIList[e.detail.value][3],
+        // baikeImg: this.data.AIList[e.detail.value][3],
         baikeText: this.data.AIList[e.detail.value][4]
       })
     }

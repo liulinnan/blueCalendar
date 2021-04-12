@@ -143,7 +143,7 @@
           <view class="ss-list" a:for="{{ssList}}" a:if="{{index%2 == 0}}" 
             onTap="jumpSSDetails" data-ssId="{{item[0]}}" data-ssUserId="{{item[1]}}">
             <image class="ss-img" mode="widthFix" src="{{item[5]}}"/>
-            <text>{{item[19]}}</text>
+            <text>{{item[19].replace(/🌏/g,'\n')}}</text>
             <view class="ss-user-data">
               <view>
                 <image mode="scaleToFill" src="{{item[3] ? item[3]: '/images/ss-list-default.png'}}"/>
@@ -160,7 +160,7 @@
           <view class="ss-list" a:for="{{ssList}}" a:if="{{index%2 == 1}}" 
             onTap="jumpSSDetails" data-ssId="{{item[0]}}" data-ssUserId="{{item[1]}}">
             <image class="ss-img" mode="widthFix" src="{{item[5]}}"/>
-            <text>{{item[19]}}</text>
+            <text>{{item[19].replace(/🌏/g,'\n')}}</text>
             <view class="ss-user-data">
               <view>
                 <image mode="scaleToFill" src="{{item[3] ? item[3] : '/images/ss-list-default.png'}}"/>

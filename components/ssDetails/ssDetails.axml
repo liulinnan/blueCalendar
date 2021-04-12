@@ -33,7 +33,8 @@
       </view>
       <view class="ss-content">
         <text class="ss-content-intor">
-          <text>{{item[19].replace(/\\n/,'\n')}}</text> 
+          <!-- <text>{{item[19].replace(/🌏/g,'\n')}}</text>  -->
+          <text>{{item[19].replace(/🌏/g,'\n')}}</text>
         </text>
         <!-- ss评论/点赞数量 -->
         <view class="ss-comment-like">
