@@ -89,7 +89,7 @@ Page({
     publicFun.requestPostApi(publicFun.api.ssCurrentDetail, params, this, this.successSSCurrentDetail);
   },
   successSSCurrentDetail(res, selfObj) { //晒晒成功后返回参数
-    //console.log(res);
+    console.log(res);
     if(res.L.length > 0){
       res.L.forEach((ssItem) => {
         selfObj.data.ssList.push(ssItem);

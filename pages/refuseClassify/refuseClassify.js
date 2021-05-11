@@ -22,13 +22,10 @@ Page({
     uploadImgList: [],
     suliaodaiState: false,
     sharewalldes: '', //晒晒文案
+
     toufangdianqingkuangArr: [],
     lajifenleichangshiArr: [],
-    weishengtypeArr: [
-      // {value: '1', text: '经常清理，很干净'},
-      // {value: '2', text: '一般'},
-      // {value: '3', text: '很脏，有很多污物、蚊蝇，很臭'}
-    ],
+    weishengtypeArr: [],
     fuzhusheshiArr: [],
     xuanchuancuoshiArr: [],
     huishoutypeArr: [],
@@ -38,6 +35,40 @@ Page({
     this.setData({
       pictureList: [],
       uploadImgList: [],
+      changshiList: [
+        {value : '2', text: '楼宇已撤桶，垃圾只能定点集中投放'},
+        {value : '1', text: '实行定时投放'},
+        {value : '4', text: '投放时总有人监督'},
+        {value : '8', text: '投放时有24小时电子监控'},
+        {value : '16', text: '不正确投放的个人确实会被问责'},
+        {value : '32', text: '以上都没有'}
+      ],
+      fuzhusheshiList: [
+        {value : '1', text: '净手设施（洗手处、消毒液等）'},
+        {value : '2', text: '垃圾桶遮雨棚'},
+        {value : '8', text: '垃圾桶盖拉手或脚踏'},
+        {value : '4', text: '破袋工具'},
+        {value : '16', text: '夜间照明'},
+        {value : '32', text: '什么都没有'},
+      ],
+      xuanchuancuoshiList: [
+        {value : '1', text: '有分类细则宣传板'},
+        {value : '2', text: '有分类宣传横幅、标语、海报等'},
+        {value : '4', text: '最近一年内有入户讲解'},
+        {value : '8', text: '在业主微信群宣传介绍'},
+        {value : '16', text: '最近一年内发放了分类垃圾桶或垃圾袋'},
+        {value : '32', text: '最近一年内发放了垃圾分类细则宣传册'},
+        {value : '64', text: '有投放点位置示意图或指示牌'},
+        {value : '128', text: '什么都没有'},
+      ],
+      huishoutypeList: [
+        {value : '1', text: '有可回收物桶'},
+        {value : '2', text: '电商预约上门回收'},
+        {value : '4', text: '周边有废品回收站'},
+        {value : '8', text: '有智能回收箱'},
+        {value : '32', text: '随便放，有人拉走'},
+        {value : '16', text: '什么都没有'},
+      ],
     })
     if(app.globalData.userid){
       if(app.globalData.location.address){
@@ -233,12 +264,12 @@ Page({
   },
   ischangshiChange(e) {
     let number = 0;
-    for(let i=0;i<e.detail.value.length;i++){
-      number += Number(e.detail.value[i]);
-    }
+    var arr = [];
+    let common = this.checkboxFun(e.detail.value,this.data.changshiList,number,arr,32)
     this.setData({
-      lajifenleichangshi: number+'',
-      lajifenleichangshiArr: e.detail.value
+      changshiList: this.data.changshiList,
+      lajifenleichangshi: common.number+'',
+      lajifenleichangshiArr: common.arr
     });
   },
   weishengtypeChange(e) {
@@ -248,22 +279,22 @@ Page({
   },
   fuzhusheshiChange(e) {
     let number = 0;
-    for(let i=0;i<e.detail.value.length;i++){
-      number += Number(e.detail.value[i]);
-    }
+    let arr = [];
+    let common = this.checkboxFun(e.detail.value,this.data.fuzhusheshiList,number,arr,32)
     this.setData({
-      fuzhusheshi: number+'',
-      fuzhusheshiArr: e.detail.value
+      fuzhusheshiList: this.data.fuzhusheshiList,
+      fuzhusheshi: common.number+'',
+      fuzhusheshiArr: common.arr
     });
   },
   xuanchuancuoshiChange(e) {
     let number = 0;
-    for(let i=0;i<e.detail.value.length;i++){
-      number += Number(e.detail.value[i]);
-    }
+    var arr = [];
+    let common = this.checkboxFun(e.detail.value,this.data.xuanchuancuoshiList,number,arr,128)
     this.setData({
-      xuanchuancuoshi: number+'',
-      xuanchuancuoshiArr: e.detail.value
+      xuanchuancuoshiList: this.data.xuanchuancuoshiList,
+      xuanchuancuoshi: common.number+'',
+      xuanchuancuoshiArr: arr
     });
   },
   youhaidingdianChange(e) {
@@ -273,12 +304,12 @@ Page({
   },
   huishoutypeChange(e) {
     let number = 0;
-    for(let i=0;i<e.detail.value.length;i++){
-      number += Number(e.detail.value[i]);
-    }
+    let arr = [];
+    let common = this.checkboxFun(e.detail.value,this.data.huishoutypeList,number,arr,16)
     this.setData({
-      huishoutype: number+'',
-      huishoutypeArr: e.detail.value
+      huishoutypeList: this.data.huishoutypeList,
+      huishoutype: common.number+'',
+      huishoutypeArr: arr
     });
   },
   lajitongbuzhitypesChange(e) {
@@ -295,6 +326,26 @@ Page({
     this.setData({
       howtype: e.detail.value
     })
+  },
+  checkboxFun(value,list,number,arr, no) { //多选方法封装
+    for(let j=0;j<list.length;j++) {
+      for(let i=0;i<value.length;i++){
+        if(value[i] == no){
+          list[j].checked = false;
+          list[list.length-1].checked = true;
+        }else{
+          list[list.length-1].checked = false;
+          if(value[i] == list[j].value){
+            list[j].checked = true;
+          }
+        }
+      }
+      if(list[j].checked == true){
+        number += Number(list[j].value);
+        arr.push(list[j].value);
+      }
+    }
+    return {number, arr}
   },
   bindTextAreaInput(e) {
     this.setData({

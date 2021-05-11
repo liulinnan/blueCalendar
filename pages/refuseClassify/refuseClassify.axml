@@ -97,29 +97,9 @@
         <text class="FAQ">本小区垃圾分类是否做出以下尝试？<text class="red">【必填、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="ischangshiChange">
-        <label class="checkbox">
-          <checkbox value="2" />
-          <text class="radio-text">楼宇已撤桶，垃圾只能定点集中投放</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="1" />
-          <text class="radio-text">实行定时投放</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="4" />
-          <text class="radio-text">投放时总有人监督</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="8" />
-          <text class="radio-text">投放时有24小时电子监控</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="16" />
-          <text class="radio-text">不正确投放的个人确实会被问责</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="32" />
-          <text class="radio-text">以上都没有</text>
+        <label class="checkbox" a:for="{{changshiList}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}" />
+          <text class="radio-text">{{item.text}}</text>
         </label>
       </checkbox-group>
     </view>
@@ -153,29 +133,9 @@
         <text class="FAQ">本小区垃圾投放点有以下几种辅助设施？<text>【可选、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="fuzhusheshiChange">
-        <label class="checkbox">
-          <checkbox value="1" />
-          <text class="text">净手设施（洗手处、消毒液等）</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="2" />
-          <text class="text">垃圾桶遮雨棚</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="8" />
-          <text class="text">垃圾桶盖拉手或脚踏</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="4" />
-          <text class="text">破袋工具</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="16" />
-          <text class="text">夜间照明</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="32" />
-          <text class="text">什么都没有</text>
+        <label class="checkbox" a:for="{{fuzhusheshiList}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}" />
+          <text class="radio-text">{{item.text}}</text>
         </label>
       </checkbox-group>
     </view>
@@ -185,37 +145,9 @@
         <text class="FAQ">你见过小区有哪些垃圾分类的宣传措施？<text>【可选、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="xuanchuancuoshiChange">
-        <label class="checkbox">
-          <checkbox value="1" />
-          <text class="text">有分类细则宣传板</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="2" />
-          <text class="text">有分类宣传横幅、标语、海报等</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="4" />
-          <text class="text">最近一年内有入户讲解</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="8" />
-          <text class="text">在业主微信群宣传介绍</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="16" />
-          <text class="text">最近一年内发放了分类垃圾桶或垃圾袋</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="32" />
-          <text class="text">最近一年内发放了垃圾分类细则宣传册</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="64" />
-          <text class="text">有投放点位置示意图或指示牌</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="128" />
-          <text class="text">什么都没有</text>
+        <label class="checkbox" a:for="{{xuanchuancuoshiList}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}" />
+          <text class="radio-text">{{item.text}}</text>
         </label>
       </checkbox-group>
     </view>
@@ -249,29 +181,9 @@
         <text class="FAQ">本小区的可回收物有几种回收方式？<text>【可选、多选】</text></text>
       </view>
       <checkbox-group class="checkbox-group" onChange="huishoutypeChange">
-        <label class="checkbox">
-          <checkbox value="1" />
-          <text class="text">有可回收物桶</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="2" />
-          <text class="text">电商预约上门回收</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="4" />
-          <text class="text">周边有废品回收站</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="8" />
-          <text class="text">有智能回收箱</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="32" />
-          <text class="text">随便放，有人拉走</text>
-        </label>
-        <label class="checkbox">
-          <checkbox value="16" />
-          <text class="text">什么都没有</text>
+        <label class="checkbox" a:for="{{huishoutypeList}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}" />
+          <text class="radio-text">{{item.text}}</text>
         </label>
       </checkbox-group>
     </view>

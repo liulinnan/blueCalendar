@@ -29,6 +29,10 @@
 .ss-details .ss-content{
   margin: 20rpx 30rpx 95rpx;
 }
+.ss-details .ss-content-intor{
+  display: block;
+  line-height: 46rpx;
+}
 .ss-details .user-comment .user-data,
 .ss-details .user-comment:last-of-type{
   border: none;

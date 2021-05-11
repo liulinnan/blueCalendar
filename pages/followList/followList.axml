@@ -1,6 +1,6 @@
 <view class="follow-list-container clearfix">
   <view class="follow-list fl" a:for="{{followList}}" data-ssUserId="{{item[0]}}" onTap="jumpDetails">
-    <image mode="scaleToFill" src="{{item[2]}}"/>
+    <image mode="scaleToFill" src="{{item[2] ? item[2] : '/images/my-default-head.png'}}"/>
     <text class="text-overflow">{{item[1]}}</text>
     <button class="{{item[6] === 1 ? 'concerned' : 'unconcerned'}}" 
       catchTap="followState" data-otheruserid="{{item[0]}}" data-state="{{item[6]}}" data-index="{{index}}">
