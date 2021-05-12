@@ -16,7 +16,7 @@ Page({
     youhaidingdian: '',
     huishoutype: '',
     lajitongbuzhitypes: '',
-    howtype: '',
+    //howtype: '',
     describe: '',
     pictureList: [],
     uploadImgList: [],
@@ -35,10 +35,14 @@ Page({
     this.setData({
       pictureList: [],
       uploadImgList: [],
+      radioList: [
+        {value : '1', text: '基本都是厨余垃圾', checked: false},
+        {value : '2', text: '厨余垃圾带袋投放', checked: false},
+      ],
       changshiList: [
-        {value : '2', text: '楼宇已撤桶，垃圾只能定点集中投放'},
-        {value : '1', text: '实行定时投放'},
-        {value : '4', text: '投放时总有人监督'},
+        {value : '2', text: '撤销每栋楼下的垃圾投放点，全小区设少量集中投放站'},
+        {value : '1', text: '实行定时投放，非投放时间上锁或将桶移走'},
+        {value : '4', text: '投放时总有监督员驻守检查（监督员会制止和约束混合投放行为）'},
         {value : '8', text: '投放时有24小时电子监控'},
         {value : '16', text: '不正确投放的个人确实会被问责'},
         {value : '32', text: '以上都没有'}
@@ -231,31 +235,32 @@ Page({
       },
     });
   },
-  // isflChange(e) {
-  //   this.setData({
-  //     isfl: e.detail.value
-  //   })
-  // },
   issuliaodaiChange(e) {
-    this.setData({
-      issuliaodai: e.detail.value
-    })
+    if(this.data.toufangdianqingkuangArr.indexOf('1') == -1){
+    }else{
+      this.setData({
+        issuliaodai: e.detail.value,
+      })
+    }
   },
-  // ddtypeChange(e) {
-  //   this.setData({
-  //     ddtype: e.detail.value
-  //   })
-  // },
   istoufangdianqingkuangChange(e){
-    console.log(e);
     let number = 0;
     for(let i=0;i<e.detail.value.length;i++){
       number += Number(e.detail.value[i]);
-      if(e.detail.value[i] == 1){
-        this.setData({
-          suliaodaiState: true,
-        })
-      }
+    }
+    if(e.detail.value.indexOf("1") == -1){
+      this.setData({
+        radioList: [
+          {value : '1', text: '基本都是厨余垃圾', checked: false},
+          {value : '2', text: '厨余垃圾带袋投放', checked: false},
+        ],
+        suliaodaiState: false,
+        issuliaodai: 0,
+      })
+    }else{
+      this.setData({
+        suliaodaiState: true,
+      })
     }
     this.setData({
       toufangdianqingkuang: number+'',
@@ -263,9 +268,32 @@ Page({
     })
   },
   ischangshiChange(e) {
+    let data = e.detail.value;
+    if(data.indexOf('4') > -1){
+      if(data[data.length-1] == 4){
+        my.confirm({
+          title: '提示',
+          content: '请确认的确有监督员在场监督',
+          confirmButtonText: '是',
+          cancelButtonText: '否',
+          success: (result) => {
+            if(result.confirm == true){
+              this.data.changshiList[2].checked = true;
+            }else{
+              this.data.changshiList[2].checked = false;
+              data = data.pop()//splice(i, 1);
+            }
+            this.setData({
+              changshiList: this.data.changshiList
+            })
+          },
+        });
+      }
+    }
+    // console.log(data)
     let number = 0;
     var arr = [];
-    let common = this.checkboxFun(e.detail.value,this.data.changshiList,number,arr,32)
+    let common = this.checkboxFun(data,this.data.changshiList,number,arr,32)
     this.setData({
       changshiList: this.data.changshiList,
       lajifenleichangshi: common.number+'',
@@ -322,11 +350,6 @@ Page({
       lajitongbuzhitypesArr: e.detail.value
     });
   },
-  howtypeChange(e) {
-    this.setData({
-      howtype: e.detail.value
-    })
-  },
   checkboxFun(value,list,number,arr, no) { //多选方法封装
     for(let j=0;j<list.length;j++) {
       for(let i=0;i<value.length;i++){
@@ -354,16 +377,24 @@ Page({
   },
   submitTap() {
     // this.getSSCopywrite();
+    let arr = this.data.toufangdianqingkuangArr;
     if(this.data.pictureList.length > 0){
       if(app.globalData.location.name){
         if(this.data.toufangdianqingkuang && this.data.lajifenleichangshi){
-          if(this.data.issuliaodai){
+          if(arr.indexOf('1') == -1) {
             let successUp = 0;
             let failUp = 0;
             let i = 0;
             this.subImg(this.data.pictureList, successUp, failUp, i, this.data.pictureList.length);
           }else{
-            publicFun.showToast("第一题请选择：厨余垃圾是否带袋投放？", 2000);
+            if(this.data.issuliaodai){
+              let successUp = 0;
+              let failUp = 0;
+              let i = 0;
+              this.subImg(this.data.pictureList, successUp, failUp, i, this.data.pictureList.length);
+            }else{
+              publicFun.showToast("第一题请选择：厨余垃圾是否带袋投放？", 2000);
+            }
           }
         }else{
           publicFun.showToast("请回答第一和第二两道必答题", 2000);
@@ -432,7 +463,7 @@ Page({
       address: app.globalData.location.address, //地址
       //isfl: this.data.isfl, //是否分类 1是 2否
       toufangdianqingkuang: this.data.toufangdianqingkuang,
-      issuliaodai: this.data.issuliaodai, //厨垃是否有袋子 1没有 2有
+      issuliaodai: this.data.issuliaodai ? this.data.issuliaodai : 0, //厨垃是否有袋子 1没有 2有
       lajifenleichangshi: this.data.lajifenleichangshi,
       //ddtype: this.data.ddtype ? this.data.ddtype : 0,
       weishengtype: this.data.weishengtype ? this.data.weishengtype : 0,
@@ -467,7 +498,7 @@ Page({
   getSSCopywrite() {
     var text1 = [];var text2= [];var text4 = [];
     var text5 = [];var text7 = [];var text8 = [];
-    var text3 = '',text6 = '',text9 = '';
+    var text3 = '',text6 = ''; //text9 = '';
     if(this.data.toufangdianqingkuangArr.length > 0){
       index++;
       let content = index+'.扔垃圾或拍摄时，垃圾投放点符合以下情况：'
@@ -475,20 +506,20 @@ Page({
         switch (this.data.toufangdianqingkuangArr[i]) {
           case '1':
             if(this.data.issuliaodai == 1){
-              text1 = '厨余垃圾基本都能正确投放、基本都是厨余垃圾、'
+              text1 = '厨余垃圾基本都能正确投放，基本都是厨余垃圾、'
             }else{
-              text1 = '厨余垃圾基本都能正确投放、厨余垃圾带袋投放、'
+              text1 = '厨余垃圾基本都能正确投放，厨余垃圾带袋投放、'
             }
             break;
-          case '2':
-            text1 += "可回收物基本都能正确投放、";
-            break;
-          case '4':
-            text1 += "有害垃圾基本都能正确投放、";
-            break;
-          case '8':
-            text1 += "其他垃圾基本都能正确投放、";
-            break;
+          // case '2':
+          //   text1 += "可回收物基本都能正确投放、";
+          //   break;
+          // case '4':
+          //   text1 += "有害垃圾基本都能正确投放、";
+          //   break;
+          // case '8':
+          //   text1 += "其他垃圾基本都能正确投放、";
+          //   break;
           case '16':
             text1 += "存在垃圾混合投放现象、";
             break;
@@ -496,7 +527,7 @@ Page({
       }
       let lastIndex = text1.lastIndexOf('、');
       if(lastIndex > -1) {
-        text1 = content+text1.substring(0, lastIndex) + text1.substring(lastIndex + 1, text1.length)+'；\\n';
+        text1 = content+text1.substring(0, lastIndex) + text1.substring(lastIndex + 1, text1.length)+'；\\n \\n';
       }
     }
     if(this.data.lajifenleichangshiArr.length > 0){
@@ -505,13 +536,13 @@ Page({
       for(let i=0;i<this.data.lajifenleichangshiArr.length;i++){
         switch (this.data.lajifenleichangshiArr[i]) {
           case '1':
-            text2 += "垃圾只能定时投放、";
+            text2 += "实行定时投放，非投放时间上锁或将桶移走、";
             break;
           case '2':
-            text2 += "楼宇已撤桶，垃圾只能定点集中投放、";
+            text2 += "撤销每栋楼下的垃圾投放点，全小区设少量集中投放站、";
             break;
           case '4':
-            text2 += "投放垃圾时总有人监督、";
+            text2 += "投放时总有监督员驻守检查（监督员会制止和约束混合投放行为）、";
             break;
           case '8':
             text2 += "投放垃圾时有24小时电子监控、";
@@ -520,13 +551,13 @@ Page({
             text2 += "不正确投放垃圾个人确实会被问责、";
             break;
           case '32':
-            text2 += "以上都没有、";
+            text2 += "小区垃圾分类机制有待完善、";
             break;
         } 
       }
       let lastIndex = text2.lastIndexOf('、');
       if(lastIndex > -1) {
-        text2 = content+text2.substring(0, lastIndex) + text2.substring(lastIndex + 1, text2.length)+'；\\n';
+        text2 = content+text2.substring(0, lastIndex) + text2.substring(lastIndex + 1, text2.length)+'；\\n \\n';
       }
     }
     if(this.data.weishengtype){
@@ -534,13 +565,13 @@ Page({
       let content = index+'.我投放垃圾或拍摄时，垃圾桶和周边卫生'
       switch (this.data.weishengtype) {
         case '1':
-          text3 = content+"经常清理，很干净；\\n";
+          text3 = content+"经常清理，很干净；\\n \\n";
           break;
         case '2':
-          text3 = content+"条件一般；\\n";
+          text3 = content+"条件一般；\\n \\n";
           break;
         case '3':
-          text3 = content+"很脏，有很多污物、蚊蝇，很臭；\\n";
+          text3 = content+"很脏，有很多污物、蚊蝇，很臭；\\n \\n";
           break;
       } 
     }
@@ -571,7 +602,7 @@ Page({
       }
       let lastIndex = text4.lastIndexOf('、');
       if(lastIndex > -1) {
-        text4 = content+text4.substring(0, lastIndex) + text4.substring(lastIndex + 1, text4.length)+'；\\n';
+        text4 = content+text4.substring(0, lastIndex) + text4.substring(lastIndex + 1, text4.length)+'；\\n \\n';
       }
     }
     if(this.data.xuanchuancuoshiArr.length > 0){
@@ -607,7 +638,7 @@ Page({
       }
       let lastIndex = text5.lastIndexOf('、');
       if(lastIndex > -1) {
-        text5 = content+text5.substring(0, lastIndex) + text5.substring(lastIndex + 1, text5.length)+'；\\n';
+        text5 = content+text5.substring(0, lastIndex) + text5.substring(lastIndex + 1, text5.length)+'；\\n \\n';
       }
     }
     if(this.data.youhaidingdian){
@@ -615,16 +646,16 @@ Page({
       let content = index+'.本小区';
       switch (this.data.youhaidingdian) {
         case '3':
-          text6 = content+"没见过有害垃圾桶；\\n";
+          text6 = content+"没见过有害垃圾桶；\\n \\n";
           break;
         case '4':
-          text6 = content+"的有害垃圾只回收特定品类（例如过期药品、灯管、电池）；\\n";
+          text6 = content+"的有害垃圾只回收特定品类（例如过期药品、灯管、电池）；\\n \\n";
           break;
         case '5':
-          text6 = content+"有有害垃圾桶，但投放不准确；\\n";
+          text6 = content+"有有害垃圾桶，但投放不准确；\\n \\n";
           break;
         case '6':
-          text6 = content+"有有害垃圾桶，只投放有害垃圾；\\n";
+          text6 = content+"有有害垃圾桶，只投放有害垃圾；\\n \\n";
           break;
       } 
     }
@@ -655,7 +686,7 @@ Page({
       }
       let lastIndex = text7.lastIndexOf('、');
       if(lastIndex > -1) {
-        text7 = content+text7.substring(0, lastIndex) + text7.substring(lastIndex + 1, text7.length)+'；\\n';
+        text7 = content+text7.substring(0, lastIndex) + text7.substring(lastIndex + 1, text7.length)+'；\\n \\n';
       }
     }
     if(this.data.lajitongbuzhitypesArr.length > 0){
@@ -694,51 +725,23 @@ Page({
       }
       let lastIndex = text8.lastIndexOf('、');
       if(lastIndex > -1) {
-        text8 = content+text8.substring(0, lastIndex) + text8.substring(lastIndex + 1, text8.length)+'；\\n';
+        text8 = content+text8.substring(0, lastIndex) + text8.substring(lastIndex + 1, text8.length)+'；\\n \\n';
       }
     }
-    if(this.data.howtype){
-      index++;
-      let content = index+'.我家的垃圾分类';
-      switch (this.data.howtype) {
-        case '1':
-          text9 = content+"能做到严格四分类；";
-          break;
-        case '2':
-          text9 = content+"只把厨余垃圾分出来；";
-          break;
-        case '3':
-          text9 = content+"只把可回收物分出来；";
-          break;
-        case '4':
-          text9 = content+"只把有害垃圾分出来；";
-          break;
-        case '5':
-          text9 = content+"随便扔，不分类；";
-          break;
-      } 
-    }
-    let data = text1+text2+text3+text4+text5+text6+text7+text8+text9;
+    
+    let data = text1+text2+text3+text4+text5+text6+text7+text8; //+text9;
     let lastIndex = data.lastIndexOf('；');
     if(lastIndex > -1) {
       console.log(data.substring(0, lastIndex))
-      console.log(data.substring(lastIndex + 1, data.length));
+      // console.log(data.substring(lastIndex + 1, data.length));
       data = data.substring(0, lastIndex)+'。' + data.substring(lastIndex + 1, data.length);
     }
-    let address = '我在【'+app.globalData.location.city+'】【'+ app.globalData.location.district +'】【'+app.globalData.location.name+'】进行垃圾分类随手拍，该小区垃圾分类情况如下所示：\\n \\n';
-    let mapBlue = '\\n#垃圾分类##随手拍点亮小区垃圾分类#@蔚蓝地图';
+    let address = '我在【'+app.globalData.location.city+'】【'+ app.globalData.location.district +'】【一小区】进行垃圾分类随手拍，该小区垃圾分类情况如下所示：\\n \\n';
+    let describe = this.data.describe ? this.data.describe+'\\n \\n' : '';
+    let mapBlue = '#垃圾分类##随手拍点亮小区垃圾分类#@蔚蓝地图';
     this.setData({
-      sharewalldes: address+data+mapBlue
+      sharewalldes: address+describe+data+mapBlue
     })
     // console.log(this.data.sharewalldes)
-    // console.log(text1)
-    // console.log(text2)
-    // console.log(text3)
-    // console.log(text4)
-    // console.log(text5)
-    // console.log(text6)
-    // console.log(text7)
-    // console.log(text8)
-    // console.log(text9)
   }
 });

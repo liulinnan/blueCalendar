@@ -171,10 +171,14 @@
 }
 .radio-group .radio,
 .checkbox-group .checkbox{
-    display: block;
+    display: flex;
+    align-items: center;
     line-height: 32rpx;
     margin-right: 24rpx;
     margin-bottom: 36rpx;
+}
+.checkbox-group .check-box{
+    display: block;
 }
 .radio-group .radio:last-of-type,
 .checkbox-group .checkbox:last-of-type{
@@ -182,6 +186,12 @@
 }
 .checkbox-group .checkbox checkbox{
     border-radius: 50%;
+}
+.radio-group .radio-text,
+.checkbox-group .radio-text{
+    display: inline-block;
+    width: calc(100% - 26px);
+    line-height: 40rpx;
 }
 
 .observe-feedback-container{

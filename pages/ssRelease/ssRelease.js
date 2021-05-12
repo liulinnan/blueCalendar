@@ -11,6 +11,8 @@ Page({
     PM: 0,
     disabled: false,
     AIList: [],
+    AIText: '',
+    baikeText: '',
     focus: false,
     noneState: false
   },

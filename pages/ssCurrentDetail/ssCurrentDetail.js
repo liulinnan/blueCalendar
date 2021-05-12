@@ -89,7 +89,7 @@ Page({
     publicFun.requestPostApi(publicFun.api.ssCurrentDetail, params, this, this.successSSCurrentDetail);
   },
   successSSCurrentDetail(res, selfObj) { //晒晒成功后返回参数
-    console.log(res);
+    //console.log(res);
     if(res.L.length > 0){
       res.L.forEach((ssItem) => {
         selfObj.data.ssList.push(ssItem);
@@ -108,71 +108,60 @@ Page({
   },
   successGarbageDetail(res, selfObj) {
     //console.log(res);
-    var isflKey={};
     var issuliaodaiKey={};
-    var ddtypeKey={};
+    var changshiKey={};
     var weishengtypeKey={};
     var fuzhusheshiKey={};
     var xuanchuancuoshiKey={};
     var youhaidingdianKey={};
     var huishoutypeKey={};
     var lajitongbuzhitypesKey={};
-    var howtypeKey={};
     if(res.S == 1) {
-      //console.log(res);
-      switch(res.isfl) {
-        case "1":
-            isflKey.content = '本小区厨余垃圾与其他垃圾 已分类丢弃';
-            isflKey.color = "green";
-            break;
-        case "2":
-            isflKey.content = '本小区厨余垃圾与其他垃圾 没有分类丢弃';
-            isflKey.color = "red"
-            break;
+      let toufangdianqingkuangArr = [];
+      for(let i=1;i<Number(res.toufangdianqingkuang)*2;i*=2){
+        switch(Number(res.toufangdianqingkuang)&i) {
+          case 1:
+              if(res.issuliaodai == 1){ //已分类
+                toufangdianqingkuangArr.push("基本都是厨余垃圾");
+                // green
+              }else{
+                toufangdianqingkuangArr.push("厨余垃圾带袋投放");
+                // yellow
+              }
+              break;
+          case 16:
+              toufangdianqingkuangArr.push("存在垃圾混合投放现象");
+              // red
+              break;
+        }
       }
-      switch(res.issuliaodai) {
-        case "1":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里 基本都是厨余垃圾';
-            if(res.isfl == 1){ //已分类
-              issuliaodaiKey.color = "green"; 
-            }else{
-              issuliaodaiKey.color = "red"; 
-            };
-            break;
-        case "2":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里是 厨余垃圾带袋投放';
-            //if(res.isfl == 1){ issuliaodaiKey.color = "yellow"; }
-            issuliaodaiKey.color = "yellow"; 
-            break;
-        case "3":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区厨余垃圾桶里 有很多未分类的垃圾';
-            //if(res.isfl == 1){ issuliaodaiKey.color = "red"; };
-            issuliaodaiKey.color = "red";
-            break;
-        case "4":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时，小区 没有厨余垃圾桶';
-            //if(res.isfl == 1){ issuliaodaiKey.color = "red"; };
-            issuliaodaiKey.color = "red";
-            break;
-        case "5":
-            issuliaodaiKey.content = '我投放垃圾或拍摄时， 厨余垃圾桶锁住了，不能投放或查看';
-            if(res.isfl == 0){ issuliaodaiKey.color = "red"; }
-            break;
+      res.toufangdianqingkuang != "0" ? issuliaodaiKey.content = '扔垃圾或拍摄时，垃圾投放点符合以下情况：'+toufangdianqingkuangArr.join("、") : "";
+
+      let changshiArr = [];
+      for(let i=1;i<Number(res.changshi)*2;i*=2){
+        switch(Number(res.changshi)&i) {
+          case 1:
+              changshiArr.push("实行定时投放，非投放时间上锁或将桶移走");
+              break;
+          case 2:
+              changshiArr.push("撤销每栋楼下的垃圾投放点，全小区设少量集中投放站");
+              break;
+          case 4:
+              changshiArr.push("投放时总有监督员驻守检查（监督员会制止和约束混合投放行为）");
+              break;
+          case 8:
+              changshiArr.push("投放时有24小时电子监控");
+              break;
+          case 16:
+              changshiArr.push("不正确投放的个人确实会被问责");
+              break;
+          case 32:
+              changshiArr.push("小区垃圾分类机制有待完善");
+              break;
+        }
       }
-      switch(res.ddtype) {
-        case "3":
-            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员，让我自己分类投放';
-            break;
-        case "1":
-            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边有垃圾分类督导员，而且帮我分类';
-            break;
-        case "4":
-            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边以前有垃圾分类督导员，现在没有了';
-            break;
-        case "2":
-            ddtypeKey.content = '我投放垃圾或拍摄时，垃圾桶旁边从来没见过垃圾分类督导员';
-            break;
-      }
+      res.changshi != "0" ? changshiKey.content = '本小区垃圾分类做出以下尝试：'+changshiArr.join("、") : "";
+
       switch(res.weishengtype) {
         case "1":
           weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边经常清理，很干净';
@@ -184,8 +173,7 @@ Page({
           weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边的卫生条件很脏';
           break;
       }
-      
-      //console.log(isflKey,issuliaodaiKey,weishengtypeKey,ddtypeKey);
+    
       var fuzhusheshiArr = [];
       for(let i=1;i<Number(res.fuzhusheshi)*2;i*=2){
         switch(Number(res.fuzhusheshi)&i) {
@@ -205,7 +193,7 @@ Page({
               fuzhusheshiArr.push("夜间照明");
               break;
           case 32:
-              fuzhusheshiArr.push("什么都没有");
+              fuzhusheshiArr.push("以上都没有");
               break;
         }
       }
@@ -236,7 +224,7 @@ Page({
               xuanchuancuoshiArr.push("有投放点位置示意图或指示牌");
               break;
           case 128:
-              xuanchuancuoshiArr.push("什么都没有");
+              xuanchuancuoshiArr.push("以上都没有");
               break;
         }
       }
@@ -276,7 +264,7 @@ Page({
               huishoutypeArr.push("随便放，有人拉走");
               break;
           case 16:
-              huishoutypeArr.push("什么都没有");
+              huishoutypeArr.push("以上都没有");
               break;
         }
       }
@@ -316,32 +304,11 @@ Page({
       }
       res.lajitongbuzhitypes != "0" ? lajitongbuzhitypesKey.content = '本小区的公共垃圾桶布置在：'+lajitongbuzhitypesArr.join("、") : "";
 
-      switch(res.howtype) {
-        case "1":
-          howtypeKey.content = '我家的垃圾分类能做到严格四分类';
-          break;
-        case "2":
-          howtypeKey.content = '我家的垃圾分类只能做到把厨余垃圾分出来';
-          break;
-        case "3":
-          howtypeKey.content = '我家的垃圾分类只能做到把可回收物分出来';
-          break;
-        case "4":
-          howtypeKey.content = '我家的垃圾分类只能做到把有害垃圾分出来';
-          break;
-        case "5":
-          howtypeKey.content = '我家的垃圾随便扔，不分类';
-          break;
-      }
-
-      if(res.isfl != "0"){
-        selfObj.data.answerList.push(isflKey)
-      }
       if(res.issuliaodai != "0"){
         selfObj.data.answerList.push(issuliaodaiKey)
       }
-      if(res.ddtype != "0") {
-        selfObj.data.answerList.push(ddtypeKey)
+      if(res.changshi != "0") {
+        selfObj.data.answerList.push(changshiKey)
       }
       if(res.weishengtype != "0") {
         selfObj.data.answerList.push(weishengtypeKey)
@@ -361,12 +328,10 @@ Page({
       if(res.lajitongbuzhitypes != "0"){
         selfObj.data.answerList.push(lajitongbuzhitypesKey)
       }
-      if(res.howtype != "0"){
-        selfObj.data.answerList.push(howtypeKey)
-      }
-      //selfObj.data.answerList.push(isflKey,issuliaodaiKey,weishengtypeKey,ddtypeKey,fuzhusheshiKey,shiyituKey,youhaidingdianKey,huishoutypeKey);
+      console.log(selfObj.data.answerList)
       selfObj.setData({
         answerList: selfObj.data.answerList,
+        info: res.info,
         xiaoquName: res.xiaoqu
       });
     }
