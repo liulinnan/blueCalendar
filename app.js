@@ -31,8 +31,8 @@ App({
           "text": "晒晒"
         },
         {
-          "pagePath": "/pages/refuseClassify/refuseClassify",
-          "iconPath": "/components/tabbarComponent/icon/icon_release_red.png",
+          //"pagePath": "/pages/refuseClassify/refuseClassify",
+          "iconPath": "/components/tabbarComponent/icon/icon-camera.png",
           "isSpecial": true,
           "text": " "
         },
@@ -46,10 +46,10 @@ App({
     }
   },
   onLaunch() {
+    this.hidetabbar();
     this.getUserId();
     this.getLocation();
-    this.getMobileInfo();   
-    this.hidetabbar();
+    this.getMobileInfo();
   },
   onShow(options) {
     // options.query == {number:1}
@@ -227,7 +227,11 @@ App({
   //自己对wx.hideTabBar的一个封装
   hidetabbar() {
     my.hideTabBar({
-      fail: function() {
+      animation: true,
+      success(res) {
+        console.log(res,'成功')
+      },
+      fail() {
         setTimeout(function() { // 做了个延时重试一次，作为保底。
           my.hideTabBar()
         }, 500)

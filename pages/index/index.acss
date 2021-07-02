@@ -165,8 +165,10 @@ page{
   word-break:break-all;
 }
 .upload-ss{
-  width: 142rpx;
-  height: 142rpx;
+  /* width: 142rpx;
+  height: 142rpx; */
+  width: 1.08rem;
+  height: 1.08rem;
   position: fixed;
   bottom: 120rpx;
   /* bottom: 20px; */

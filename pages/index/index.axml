@@ -177,7 +177,8 @@
     </scroll-view>
   </view>
   <!-- 相机 -->
-  <image onTap="chooseSSImg" class="upload-ss" mode="scaleToFill" src="/images/icon-camera.png"/>
+  <!-- <image onTap="chooseSSImg" class="upload-ss" mode="scaleToFill" src="/components/tabbarComponent/icon/icon-camera.png"/> -->
+  <image a:if="{{ssType == 10}}" onTap="jumpGarbage" class="upload-ss" mode="scaleToFill" src="/components/tabbarComponent/icon/icon_release_red.png"/>
   <!-- 评论弹窗 -->
   <scroll-view class="ss-details alert-container" a:if="{{alertState}}"  scroll-y="{{true}}" 
         lower-threshold="200" onScrollToLower="scrollComment">

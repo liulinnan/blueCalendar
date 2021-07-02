@@ -7,7 +7,18 @@ Page({
     disabled: false,// 是否可以编辑手机号
   },
   onLoad(options) {
+    let that = this;
     console.log(options.zfbUid);
+    my.getStorage({
+      key: 'phone',
+      success: function(res) {
+        if(res.data){
+          that.setData({
+            mobile: Number(res.data)
+          })
+        }
+      },
+    });
   },
   /**
    * 点击发送验证码触发的事件
@@ -59,6 +70,10 @@ Page({
         key: 'userid',
         data: res.R
       }); 
+      my.setStorage({
+        key: 'phone',
+        data: selfObj.data.mobile
+      });
       my.switchTab({
         url: '/pages/index/index'
       });

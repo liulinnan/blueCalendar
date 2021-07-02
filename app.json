@@ -39,14 +39,14 @@
       {
         "pagePath": "pages/index/index",
         "name": "晒晒",
-        "icon": "/images/icon-bask-normal.png",
-        "activeIcon": "/images/icon-bask-select.png"
+        "icon": "/components/tabbarComponent/icon/icon-bask-normal.png",
+        "activeIcon": "/components/tabbarComponent/icon/icon-bask-select.png"
       },
       {
         "pagePath": "pages/my/my",
         "name": "我的",
-        "icon": "/images/icon-my-normal.png",
-        "activeIcon": "/images/icon-my-select.png"
+        "icon": "/components/tabbarComponent/icon/icon-my-normal.png",
+        "activeIcon": "/components/tabbarComponent/icon/icon-my-select.png"
       }
     ]
   }

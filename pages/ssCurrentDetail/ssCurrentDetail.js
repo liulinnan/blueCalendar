@@ -173,7 +173,7 @@ Page({
           weishengtypeKey.content = '我投放垃圾或拍摄时，垃圾桶和周边的卫生条件很脏';
           break;
       }
-    
+
       var fuzhusheshiArr = [];
       for(let i=1;i<Number(res.fuzhusheshi)*2;i*=2){
         switch(Number(res.fuzhusheshi)&i) {
@@ -229,7 +229,7 @@ Page({
         }
       }
       res.xuanchuancuoshi != "0" ? xuanchuancuoshiKey.content = '本小区的垃圾分类宣传措施：'+xuanchuancuoshiArr.join("、") : "";
-      
+
       switch(res.youhaidingdian) {
         case "4":
             youhaidingdianKey.content = '本小区的有害垃圾只回收特定品类（例如过期药品、灯管、电池）';
@@ -269,7 +269,7 @@ Page({
         }
       }
       res.huishoutype != "0" ? huishoutypeKey.content = '本小区的可回收物的回收方式有：'+huishoutypeArr.join("、") : "";
-      
+
       var lajitongbuzhitypesArr = [];
       for(let i=1;i<Number(res.lajitongbuzhitypes)*2;i*=2){
         switch(Number(res.lajitongbuzhitypes)&i) {
@@ -304,7 +304,7 @@ Page({
       }
       res.lajitongbuzhitypes != "0" ? lajitongbuzhitypesKey.content = '本小区的公共垃圾桶布置在：'+lajitongbuzhitypesArr.join("、") : "";
 
-      if(res.issuliaodai != "0"){
+      if(res.toufangdianqingkuang != "0"){
         selfObj.data.answerList.push(issuliaodaiKey)
       }
       if(res.changshi != "0") {
@@ -398,10 +398,10 @@ Page({
     }
     publicFun.requestPostApi(publicFun.api.ssCommentList, params, this, this.successCommentList);
   },
-  successCommentList(res, selfObj) { 
+  successCommentList(res, selfObj) {
     //console.log(res);
     if(res.L.length > 0){
-      res.L.forEach((item) => {   
+      res.L.forEach((item) => {
         selfObj.data.commentList.push(item);
       });
       selfObj.setData({
@@ -458,7 +458,7 @@ Page({
           parentid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, //评论id
           parentuserid: selfObj.data.commentDetails.parentuserid ? selfObj.data.commentDetails.parentuserid : selfObj.data.ssUserId, //被留言id
           Content: selfObj.data.detailsComment, //内容
-          rootid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, // 首次评论 0 
+          rootid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, // 首次评论 0
         }
         console.log(params);
         my.showLoading();

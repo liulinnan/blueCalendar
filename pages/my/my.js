@@ -10,6 +10,7 @@ Page({
   onLoad() {
     app.editTabbar();
     if(app.globalData.userid){
+      app.hidetabbar();
       this.getUserData();
       this.getThreeHours();
     }else{
@@ -88,7 +89,9 @@ Page({
     });
   },
   signOut() {
-    my.clearStorage();
+    //my.clearStorage();
+    my.removeStorage({key: 'userid'});
+    my.removeStorage({key: 'zfbUid'});
     app.globalData.userid = '';
     app.globalData.zfbUid = '';
     my.redirectTo({

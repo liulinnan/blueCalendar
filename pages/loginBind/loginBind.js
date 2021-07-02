@@ -120,7 +120,7 @@ Page({
       key: 'userid',
       data: this.data.userid
     }); 
-    my.reLaunch({
+    my.switchTab({
       url: '/pages/index/index'
     });
   },

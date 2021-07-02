@@ -40,7 +40,7 @@ Page({
       my.getAuthCode({
         scopes: ['auth_base'],
         success: (res) => {
-          //console.log(res);
+          console.log(res);
           if(res.authCode){
             that.setData({
               authCode: res.authCode
@@ -133,7 +133,7 @@ Page({
           key: 'zfbUid',
           data: app.globalData.zfbUid
         });
-        my.reLaunch({
+        my.switchTab({
           url: '/pages/index/index'
         });
       }else{

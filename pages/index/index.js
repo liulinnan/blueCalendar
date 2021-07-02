@@ -47,6 +47,7 @@ Page({
     //   url: '../loginAuthorization/loginAuthorization'
     //   //url: '../myCalendarList/myCalendarList'
     // });
+    app.hidetabbar();
     app.editTabbar();
     this.setData({
       webView: ''
@@ -80,6 +81,8 @@ Page({
     }
   },
   onShow:function(e){
+    console.log(1111)
+    app.hidetabbar();
     if(app.globalData.tabPage == 1){
       this.setData({
         ssType: 1,
@@ -121,6 +124,7 @@ Page({
         tabs: res.L
       });
       app.globalData.tabs = res.L;
+      app.hidetabbar();
     }
   },
 
@@ -129,6 +133,7 @@ Page({
     app.globalData.tabPage = 0;
     this.checkCor();  
     var cur = e.target.dataset;
+    console.log(cur)
     this.setData({
       currentTab: cur.current,
       ssList: [],
@@ -252,8 +257,10 @@ Page({
       ssKey: res.Key,
       ssList: selfObj.data.ssList
     });
+    app.hidetabbar();
     my.stopPullDownRefresh({
       complete(res) {
+        app.hidetabbar();
         console.log("刷新成功");
       }
     })
@@ -586,8 +593,19 @@ Page({
   jumpLogin() {
     publicFun.jumpLogin();
   },
-  jumpFollowList() {
-
+  jumpGarbage() {
+    my.navigateToMiniProgram({
+     appId: '2021002146610067',//收藏有礼小程序的appid，固定值请勿修改
+     path: 'pages/index/index',//收藏有礼跳转地址和参数
+     success: (res) => {
+       // 跳转成功
+       my.alert({ content: 'success' });
+     },
+     fail: (error) => {
+       // 跳转失败
+       my.alert({ content: 'fail' });
+     }
+   });
   },
   previewImage(e) { //查看大图
     let data = e.currentTarget.dataset;
@@ -607,47 +625,5 @@ Page({
   //     imgIndex: e.detail.current+1
   //   })
   // },
-  chooseSSImg() {//上传ss
-    let that = this;
-    if(app.globalData.userid){
-      my.chooseImage({
-        chooseImage: 1,
-        sourceType: ['camera','album'],
-        count: 1,
-        success: (res) => {
-          //console.log(JSON.stringify(res));
-          //const path = res.apFilePaths;
-          my.compressImage({
-            apFilePaths: res.apFilePaths,
-            compressLevel: 1,
-            success: data => {
-              console.log(data.apFilePaths);
-              my.navigateTo({
-                url: '/pages/ssUpload/ssUpload?pathArr='+data.apFilePaths+'&key='+that.data.ssKey //水印页面
-                //url: '/pages/ssRelease/ssRelease?pathArr='+data.apFilePaths+'&key='+that.data.ssKey//发布页面
-              });
-            }
-        })
-        },
-        fail:()=>{
-          my.getSetting({
-            success: (res) => {
-              //console.log(res.authSetting+111);
-              if(!res.authSetting.album || !res.authSetting.camera){
-                publicFun.showToast("没有相机或者相册访问权限，请授权", 2000);
-                my.openSetting({
-                  success: (res) => {
-                    console.log(res.authSetting);
-                  }
-                });
-              }
-            },
-          }) 
-        }
-      })
-    }else{
-      publicFun.jumpLogin();
-    }
-  },
   footerTap:app.footerTap
 });

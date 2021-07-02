@@ -6,14 +6,14 @@ Page({
     currentMonth: new Date().getMonth() + 1, //当前月份
 
     currentMonthDateLen: 0, // 当月天数
-	preMonthDateLen: 0, // 当月中，上月多余天数
-	allArr:[], // 当月所有数据
+    preMonthDateLen: 0, // 当月中，上月多余天数
+    allArr:[], // 当月所有数据
 
-	calendarInfor: '', //月历介绍
-	danRiLiList: [], //已发布月历列表
-	currentActive: null,
-	start: 0,
-	end: 0
+    calendarInfor: '', //月历介绍
+    danRiLiList: [], //已发布月历列表
+    currentActive: null,
+    start: 0,
+    end: 0
   },
   onLoad() {
 		var now = new Date(); //当前日期 
@@ -158,7 +158,7 @@ Page({
 			let currentArr = currentMonthDateArr;
 			let nextArr = selfObj.getNextArr();
 			//let allArr = [...preArr, ...currentArr, ...nextArr];
-			let allArr = [...preArr, ...currentArr];
+      let allArr = [...preArr, ...currentArr];
 			selfObj.setData({
 				currentYear: selfObj.data.currentYear,
 				currentMonth: selfObj.data.currentMonth,
