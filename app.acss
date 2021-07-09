@@ -539,6 +539,47 @@ button{
 .not-login button{
   border-radius: 50rpx;
 }
+
+/* 登录-手机号验证码 */
+.mobile-code-container{
+  width: calc(100% - 110rpx);
+  margin: 0 auto;
+  padding-top: 45rpx;
+}
+.mobile-code-container .mc{
+  border-bottom: 2rpx solid rgb(204, 204, 204);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mobile-code-container .mc .input{
+  height: 47px;
+  padding-left: 20rpx;
+  font-size: 28rpx;
+  color: #000;
+}
+.mobile-code-container .mc .placeholder{
+  color: #ccc;
+}
+.mobile-code-container .mc .code-btn{
+  line-height: 44rpx;
+  padding:0px 16rpx;
+  text-align:center;
+  font-size: 24rpx;
+  color:rgb(255, 255, 255);
+  background:#437DDE;
+  border-radius: 10rpx;
+}
+.mobile-code-container .mc .active{
+  /* color: rgb(67, 125, 222); */
+}
+.bind-btn{
+  width: 100%;
+  border-radius: 5rpx;
+  color: #fff;
+  margin-top: 200rpx;
+}
+
 /* 关注公共样式 */
 .tab-follow{
   padding: 30rpx 22rpx 22rpx 29rpx;

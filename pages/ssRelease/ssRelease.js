@@ -259,7 +259,7 @@ Page({
         url: filePaths[i],
         datetime: publicFun.getTimestamp(), 
         //typestr: dataParams.typestr,
-        miyao: app.getMiyao()
+        miyao: app.getMiYao()
       },
       success: res => {
         successUp++;

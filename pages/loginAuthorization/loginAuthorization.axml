@@ -1,3 +1,0 @@
-<view>
-    <button onTap="loginBtn">登录授权</button>
-</view>

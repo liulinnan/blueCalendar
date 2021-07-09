@@ -25,7 +25,6 @@
     "pages/commonJump/commonJump",
     "pages/myFeedbackList/myFeedbackList",
     "pages/refuseClassify/refuseClassify",
-    "pages/loginAuthorization/loginAuthorization",
     "pages/ssCurrentDetail/ssCurrentDetail"
   ],
   "window": {

@@ -214,7 +214,7 @@ Page({
 	},
 	screenshot() {
 		if(app.globalData.location){
-			let data = '?start='+this.data.start+'&end='+this.data.end+'&userid='+app.globalData.userid+'&miyao='+app.getMiyao();
+			let data = '?start='+this.data.start+'&end='+this.data.end+'&userid='+app.globalData.userid+'&miyao='+app.getMiYao();
 			this.setData({
 				webView: 'https://wwwoa.ipe.org.cn/apphelp/calendar/calendar.html' + data
 			});

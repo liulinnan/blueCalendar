@@ -98,7 +98,7 @@ App({
       tabbar: tabbar
     });
   },
-  getMiyao() {
+  getMiYao() {
     var data = publicFun.getTimestamp()+this.globalData.secondCount;
     let miyao = secretKey.encrypt(data);
     return miyao;

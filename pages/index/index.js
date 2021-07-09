@@ -41,10 +41,9 @@ Page({
     tabbar: {},
   },
   onLoad() {
-    // my.navigateTo({url:'/pages/ssUpload/ssUpload'});
+    //my.navigateTo({url:'/pages/loginBind/loginBind'});
     // my.navigateTo({url:'/pages/ssRelease/ssRelease'});
     // my.navigateTo({
-    //   url: '../loginAuthorization/loginAuthorization'
     //   //url: '../myCalendarList/myCalendarList'
     // });
     app.hidetabbar();
@@ -576,7 +575,7 @@ Page({
 
   jumpInfor() {
     this.setData({
-      webView: 'https://www.ipe.org.cn/apphelp/newsdetail/index.html?newid=2575087&page=1'
+      webView: 'https://www.ipe.org.cn/apphelp/newsdetail/index.html?newid=5397446&page=1'
     });
   },
   jumpSSDetails(e) {

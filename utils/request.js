@@ -100,7 +100,7 @@ function requestGetApi(url, params, sourceObj, successFun, dataParams, failFun, 
 function requestApi(url, params, method, sourceObj, successFun, dataParams, failFun, completeFun) {
     var contentType = 'application/x-www-form-urlencoded';
     const app = getApp();
-    params.miyao = app.getMiyao();   
+    params.miyao = app.getMiYao();   
     params.Token = '';
     my.request({
         url:    url,

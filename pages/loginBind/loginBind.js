@@ -1,11 +1,15 @@
-const app = getApp();
-const publicFun = require('/utils/public.js');
+const app = getApp()
+const publicFun = require('../../utils/public.js')
+import { sendCode,bindMobile,mergeAccount,quickLogin} from '/utils/requestApp'
 Page({
   data: {
-    mobile: '', // 手机号
-    code: '', // 手机验证码input内容
-    disabled: false,// 是否可以编辑手机号
+    text: '获取验证码', //按钮文字
+    currentTime: 61, //倒计时
+    disabled: false, //按钮是否禁用
+    phone: '', //获取到的手机栏中的值
+    code: '',
     userid: '',
+    interval: null
   },
   onLoad(options) {
     console.log(app.globalData.userInfo)
@@ -13,105 +17,155 @@ Page({
       userid: options.userid
     })
   },
-  /**
-   * 点击发送验证码触发的事件
-   * @method onSendCode
-   * @param {object} object 组件传递参数,包含手机号
-   */
-  onSendCode(object) {
-    if(object.mobile){
-      var params  = {
-          Phone: object.mobile,
-          UserId: this.data.userid
-      }
-      // my.showLoading();
-      publicFun.requestPostApi(publicFun.api.sendCode, params, this, this.successCode);
-      this.setData({ mobile: object.mobile }); 
-    }
+  phoneInput (e) {
+    this.setData({
+      phone: e.detail.value
+    })
   },
-  successCode(res, selfObj) {
-    console.log(res)
-    publicFun.showToast(res.M)
+  codeInput(e) {
+    this.setData({
+      code: e.detail.value
+    })
   },
-  /**
-   * 输入验证码触发的事件
-   * @method onCodeInput
-   * @param {*} e
-   */
-  onCodeInput(e) {
-    const { value } = e.detail;
-    this.setData({ code: value });
-  },
-  /**
-   * 点击提交触发的事件
-   * @method bindTap
-   */
-  bindTap() {
-    var params  = {
-      UserId: this.data.userid,
-      Phone: this.data.mobile,
-      Code: this.data.code,
-      //Type: app.globalData.mobileInfo
-    }
-    my.showLoading();
-    publicFun.requestPostApi(publicFun.api.bindMobile, params, this, this.successBind);
-  },
-  successBind(res, selfObj) {
-    if(res.S == 1){ //绑定
-      publicFun.showToast('绑定成功');
-      app.globalData.userid = selfObj.data.userid;
-      my.setStorage({
-        key: 'userid',
-        data: selfObj.data.userid
-      }); 
-      my.switchTab({
-        url: '/pages/index/index'
-      });
-    }else if(res.S == 2){ //合并
-      selfObj.mergeAccount(res.fId);
+  async bindButtonTap () {
+    var that = this;
+    that.setData({
+      disabled: true, 
+      color: '#A2BEEE',
+    })
+    var phone = that.data.phone;
+    var currentTime = that.data.currentTime //把手机号跟倒计时值变例成js值
+    
+    var warn = null; //warn为当手机号为空或格式不正确时提示用户的文字，默认为空
+    
+    if (phone == '') {
+      warn = "手机号码不能为空";
     } else {
-      publicFun.showToast(res.M);
-    }
+      try {
+        var params  = {
+          Phone: that.data.phone,
+          UserId: this.data.userid
+        }
+        //当手机号正确的时候提示用户短信验证码已经发送
+        const res = await sendCode(params)
+        if (res.S == 1) {
+          publicFun.showToast(res.M)
+          //设置一分钟的倒计时
+          clearInterval(that.interval)
+          that.interval = setInterval(function () {
+            currentTime--; //每执行一次让倒计时秒数减一
+            that.setData({
+              text: '倒计时'+currentTime + '秒', //按钮文字变成倒计时对应秒数
+            })
+            //如果当秒数小于等于0时 停止计时器 且按钮文字变成重新发送 且按钮变成可用状态 倒计时的秒数也要恢复成默认秒数 即让获取验证码的按钮恢复到初始化状态只改变按钮文字
+            if (currentTime <= 0) {
+              clearInterval(that.interval)
+              that.setData({
+                text: '重新发送',
+                currentTime: 61,
+                disabled: false,
+                color: '#437DDE'
+              })
+            }
+          }, 1000);
+        }else{
+          that.setData({
+            disabled: false,
+            color: '#437DDE'
+          })
+          publicFun.showToast(res.M);
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    };
+    //判断 当提示错误信息文字不为空 即手机号输入有问题时提示用户错误信息 并且提示完之后一定要让按钮为可用状态 因为点击按钮时设置了只要点击了按钮就让按钮禁用的情况
+    if (warn != null) {
+      publicFun.showToast(warn)
+      that.setData({
+        disabled: false,
+        color: '#437DDE'
+      })
+      return;
+    };
   },
-  mergeAccount(FUserId) {
-    publicFun.showToast('正在合并数据');
-    let params = {
-      UserId: FUserId,
-      FUserId: this.data.userid,
-      Phone: this.data.mobile,
-      Code: this.data.code,
-    }
-    console.log(params);
-    publicFun.requestPostApi(publicFun.api.mergeAccount, params, this, this.successMerge);
-
-  },
-  successMerge(res, selfObj) {
-    if(res.S == 1)  {
-      //publicFun.showToast(res.M);
+  async bindTap() {
+    let that = this;
+    try {
+      var params  = {
+        UserId: this.data.userid,
+        Phone: this.data.phone,
+        Code: this.data.code,
+      }
       my.showLoading();
+      const res = await bindMobile(params)
+      if(res.S == 1){ //绑定
+        publicFun.showToast('绑定成功');
+        app.globalData.userid = that.data.userid;
+        my.setStorage({
+          key: 'userid',
+          data: that.data.userid
+        }); 
+        my.switchTab({
+          url: '/pages/index/index'
+        });
+      }else if(res.S == 2){ //合并
+        my.showLoading();
+        that.mergeAccount(res.fId);
+      } else {
+        my.hideLoading();
+        publicFun.showToast(res.M);
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async mergeAccount(FUserId) {
+    publicFun.showToast('正在合并数据');
+    let that = this;
+    try {
+      var params  = {
+        UserId: FUserId,
+        FUserId: that.data.userid,
+        Phone: that.data.phone,
+        Code: that.data.code,
+      }
+      my.showLoading();
+      const res = await mergeAccount(params)
+      if (res.S == 1) {
+        publicFun.showToast('合并成功');
+        that.quickLogin();
+      }else{
+        my.hideLoading();
+        publicFun.showToast(res.M);
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async quickLogin() {
+    let that = this;
+    try {
       let params  = {
-        Phone: selfObj.data.mobile,
-        Code: selfObj.data.code,
+        Phone: that.data.phone,
+        Code: that.data.code,
         Type: app.globalData.mobileInfo
       }
-      publicFun.requestPostApi(publicFun.api.quickLogin, params, selfObj, selfObj.quickLogin);
-    }else{
-      publicFun.showToast(res.M);
-    }
-  },
-  quickLogin(res, selfObj) {
-    if(res.S == 1){
-      publicFun.showToast('合并成功');
-      app.globalData.userid = res.R;
-      my.setStorage({
-        key: 'userid',
-        data: res.R
-      }); 
-      my.switchTab({
-        url: '/pages/index/index'
-      });
-    } else {
-      publicFun.showToast(res.M);
+      const res = await quickLogin(params)
+      if (res.S == 1) {
+        app.globalData.userid = res.R;
+        my.setStorage({
+          key: 'userid',
+          data: res.R
+        }); 
+        my.switchTab({
+          url: '/pages/index/index'
+        });
+      }else{
+        publicFun.showToast(res.M);
+      }
+    } catch (e) {
+      console.log(e)
     }
   },
   jumpIndex() { //跳过

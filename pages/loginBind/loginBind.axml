@@ -4,16 +4,16 @@
     <text class="prompt">发现污染·找回蔚蓝</text>
     <text>欢迎加入蔚蓝地图</text>
   </view>
-  <view class="atd-mobile-code">
-    <mobile-code
-      onSendCode="onSendCode"
-      onCodeInput="onCodeInput"
-      disabled="{{disabled}}"
-      mobile="{{mobile}}"
-    />
+  <view class="mobile-code-container">
+    <view class="mc">
+      <input class="input" type="number" placeholder="请输入手机号码" placeholder-class="placeholder" onInput="phoneInput" />
+    </view>
+    <view class="mc">
+      <input class="input" type="number" placeholder="请输入手机验证 "placeholder-class="placeholder" onInput="codeInput" />
+      <button class="code-btn" plain="{{true}}" disabled="{{phoneInput}}" style="background-color: {{color}}" onTap="bindButtonTap">{{text}}</button>
+    </view>
     <button class="long-btn bind-btn"
-    style="background : {{disabled === true ? '#abc2f8': ''}};" 
-    disabled="{{(code && mobile) ? false : true}}" onTap="bindTap">绑 定</button>
-     <!-- <text class="forget-pwd" onTap="jumpIndex">跳  过</text> -->
+    style="background : {{(phone && code) ? '': '#abc2f8'}};" 
+    disabled="{{(phone && code) ? false : true}}" onTap="bindTap">绑 定</button>
   </view>
 </view>

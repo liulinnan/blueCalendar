@@ -83,7 +83,7 @@ Page({
       authorization_code: "authorization_code",
       zhifubaoCode: this.data.authCode,
       refreshtoken: "",
-      //miyao: app.getMiyao()
+      //miyao: app.getMiYao()
     }
     publicFun.requestPostApi(publicFun.api.getAuthCode, data, this, this.successAuthCode);
   },
