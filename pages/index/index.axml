@@ -35,95 +35,7 @@
               </view>
             </view>
             <!-- 列表 -->
-            <view class="ss-details ss-follow" a:for="{{ssList}}">
-              <view class="ss-user-data clearfix">
-                <image class="fl" mode="scaleToFill" src="{{item[3]?item[3]:'/images/ss-default-head.png'}}"/>
-                <view class="user-name fl">
-                  <text class="name">{{item[2]}}</text>
-                  <view>{{item[4].split(" ")[0]}} <text class="text-overflow">{{item[10]}}</text></view>
-                </view>
-                <button class="fr" style="color: {{item[27] == 1 ? '#999' : '#0e61d9'}}"  data-otheruserid="{{item[1]}}" data-state="{{item[27]}}" 
-                data-index="{{index}}" onTap="followState">{{item[27] == 1 ? '已'  : '+ '}}关注</button>
-              </view>
-              <view class="swiper-container">
-                <swiper
-                  autoplay="{{autoplay}}"
-                  interval="{{interval}}"
-                  circular="{{circular}}"
-                >
-                  <block a:for="{{item[20]}}" a:for-item="imgList">
-                    <swiper-item key="swiper-item-{{imgList.index}}">
-                      <image src="{{item[26]+imgList}}" 
-                      mode="aspectFit" style="display: block" 
-                      data-imgUrl="{{item[26]}}" 
-                      data-list="{{item[20]}}" 
-                      onTap="previewImage" />
-                      <view class="indicator-dots"><text>{{index+1}}</text>/{{item[20].length}}</view>
-                    </swiper-item>
-                  </block>  
-                </swiper>
-              </view>
-              <view class="ss-content">
-                <text class="ss-content-intor">{{item[19]}}</text>
-                <!-- ss评论/点赞数量 -->
-                <view class="ss-comment-like">
-                  <view onTap="openComment" data-parentuserid="{{item[1]}}" data-ssId="{{item[0]}}">
-                    <image mode="scaleToFill" src="/images/icon-ss-comment.png"/>
-                    <text>{{item[9]}}</text>
-                  </view>
-                  <view onTap="getLikeState" data-ssId="{{item[0]}}"  data-index="{{index}}" data-state="{{item[12]}}">
-                    <image mode="scaleToFill" src="{{item[12] == 1 ? '/images/icon-ss-like.png' : '/images/icon-ss-unlike.png'}}"/>
-                    <text>{{item[7]}}</text>
-                  </view>
-                </view>
-                <!-- ss详情 -->
-                <view class="ss-content-data">
-                  <view class="ss-label clearfix">
-                    <text class="fl">标签：</text>
-                    <button a:for="{{item[28]}}" a:for-item="tagList">{{tagList}}</button>
-                  </view>
-                  <view>位置：<text>{{item[10]}}</text></view>
-                  <view>时间：<text>{{item[4]}}</text></view>
-                  <!-- <view>阅读：<text>{{item[6]}}次</text></view> -->
-                </view>
-                <!-- 评论/点赞 0:pl内容 1pl用户id 2pl名字 3被pl用户id 4被pl名字 5pl用户头像-->
-                <view class="ss-content-news">
-                  <view class="ss-reply" a:for="{{item[21]}}" a:for-item="commentList">
-                    <image mode="scaleToFill" src="{{commentList[5]?commentList[5]:'/images/ss-default-head.png'}}"/>
-                    <text>{{commentList[2]}}</text>
-                    <!-- 评论内容 -->
-                    <view class="ss-reply-flex" a:if="{{(commentList[0].indexOf('♥️') >= 0)}}"> 
-                      <image class="icon-thumbs-up" mode="scaleToFill" src="/images/icon-thumbs-up.png"/>
-                    </view>
-                    <view a:elif="{{commentList[4]}}" >
-                      回复：{{commentList[4]}}
-                    </view>
-                    <!-- 内容 -->
-                    <text style="margin-left: {{(commentList[0].indexOf('♥️') >= 0) ? '0' : '32rpx'}}" class="reply">{{(commentList[0].indexOf('♥️') >= 0) ? (commentList[0].split("♥️")[1]) : commentList[0]}}</text> 
-                  </view>
-
-                  <view class="comment-container">
-                    <view class="comment-input">
-                      <image mode="scaleToFill" src="/images/icon-comment.png"/>
-                      <input
-                        type="text"
-                        class="comment-cls"
-                        placeholder-class="pd-cls"
-                        placeholder="喜欢就评论一下吧"
-                        data-ssId="{{item[0]}}"
-                        data-ssUserId="{{item[1]}}"
-                        data-index="{{index}}"
-                        value="{{listComment}}"
-                        confirm-type="send"
-                        onConfirm="commentSub"
-                      />
-                    </view>
-                    <!-- <text a:if="{{item[9] > 9}}" onTap="openComment">查看全部10条评论</text> -->
-                    <text onTap="openComment" a:if="{{item[9] > 0}}" data-parentuserid="{{item[1]}}" data-ssId="{{item[0]}}">查看全部{{item[9]}}条评论</text>
-                  </view>
-                </view>
-              </view>
-            </view>
+            <ss-details optionsData="{{optionsData}}"></ss-details>
           </view>
            <!-- 未关注 -->
           <view class="not-login" a:if="{{followUserState}}">
@@ -143,7 +55,8 @@
           <view class="ss-list" a:for="{{ssList}}" a:if="{{index%2 == 0}}" 
             onTap="jumpSSDetails" data-ssId="{{item[0]}}" data-ssUserId="{{item[1]}}">
             <image class="ss-img" mode="widthFix" src="{{item[5]}}"/>
-            <text>{{item[19].replace(/🌏/g,'\n')}}</text>
+            <!-- <text>{{item[19].replace(/🌏/g,'\n')}}</text> -->
+            <text>{{item[10]}}</text>
             <view class="ss-user-data">
               <view>
                 <image mode="scaleToFill" src="{{item[3] ? item[3]: '/images/ss-list-default.png'}}"/>
@@ -152,6 +65,7 @@
               <view class="ss-list-icon" data-ssId="{{item[0]}}"  data-index="{{index}}" data-state="{{item[12]}}"  catchTap="getLikeState">
                 <image mode="scaleToFill" 
                 src="{{item[12] == 1 ? '/images/icon-like.png' : '/images/icon-unlike.png'}}"/>
+                {{item[7]}}
               </view>
             </view>
           </view>
@@ -160,7 +74,7 @@
           <view class="ss-list" a:for="{{ssList}}" a:if="{{index%2 == 1}}" 
             onTap="jumpSSDetails" data-ssId="{{item[0]}}" data-ssUserId="{{item[1]}}">
             <image class="ss-img" mode="widthFix" src="{{item[5]}}"/>
-            <text>{{item[19].replace(/🌏/g,'\n')}}</text>
+            <text>{{item[10]}}</text>
             <view class="ss-user-data">
               <view>
                 <image mode="scaleToFill" src="{{item[3] ? item[3] : '/images/ss-list-default.png'}}"/>
@@ -169,6 +83,7 @@
               <view class="ss-list-icon" data-ssId="{{item[0]}}"  data-index="{{index}}" data-state="{{item[12]}}"  catchTap="getLikeState">
                 <image mode="scaleToFill" 
                 src="{{item[12] == 1 ? '/images/icon-like.png' : '/images/icon-unlike.png'}}"/>
+                {{item[7]}}
               </view>
             </view>
           </view>
@@ -179,60 +94,5 @@
   <!-- 相机 -->
   <!-- <image onTap="chooseSSImg" class="upload-ss" mode="scaleToFill" src="/components/tabbarComponent/icon/icon-camera.png"/> -->
   <image a:if="{{ssType == 10}}" onTap="jumpGarbage" class="upload-ss" mode="scaleToFill" src="/components/tabbarComponent/icon/icon_release_red.png"/>
-  <!-- 评论弹窗 -->
-  <scroll-view class="ss-details alert-container" a:if="{{alertState}}"  scroll-y="{{true}}" 
-        lower-threshold="200" onScrollToLower="scrollComment">
-    <view class="popup-box">
-      <view class="popup-title">
-        <text></text>
-        <text>{{commentNumber}}条评论</text>
-        <view class="close" onTap="closeAlert">
-          <am-icon type="cross" size="14px" color="#000" />
-        </view>
-      </view>
-      <view class="comment-container comment-list-container">
-        <view class="user-comment" a:for="{{commentList}}" data-parentid="{{item[0]}}"
-          data-parentuserid="{{item[2]}}" data-rootid="{{item[0]}}" data-name="{{item[3]}}" onTap="commentUserData">
-          <image class="user-head" mode="scaleToFill" src="{{item[4]?item[4]:'/images/ss-default-head.png'}}"/>
-          <view class="user-data">
-            <text>{{item[3]}}</text>
-            <view class="like">
-              <image a:if="{{(item[1].indexOf('♥️') >= 0)}}" 
-                class="icon-thumbs-up" mode="scaleToFill" src="/images/icon-thumbs-up.png"/>
-                {{(item[1].indexOf('♥️') >= 0) ? (item[1].split("♥️")[1]) : item[1]}}
-            </view>
-            <view class="reply">{{item[5]}}<text class="com-btn">回复</text></view>
-            <view class="comment-reply" a:if="{{item[7].length > 0}}">
-              <view a:for="{{item[7]}}" a:for-item="comList">
-                <text>{{comList[3]}}</text>
-                <view a:if="{{comList[6] != '0'}}"  style="display: flex;">
-                  <text class="com-btn">回复</text>
-                  <text>{{comList[10]}}</text>
-                </view>
-                ：{{comList[1]}}
-                </view>
-            </view>
-          </view>
-        </view>
-        <view a:if="{{showAllTap && commentNumber > 0}}" class="comment-tap">
-          <text>已显示全部评论</text>
-        </view>
-      </view>
-    </view>
-  </scroll-view>
-  <view class="comment-all comment-all-index" a:if="{{showInput}}">
-    <input
-      type="text"
-      enableNative="{{false}}"
-      value="{{detailsComment}}"
-      class="comment-cls"
-      placeholder-class="pd-cls"
-      placeholder="{{userName}}"
-      confirm-type="none"
-      onInput="getCommentVal"
-      onConfirm="closeKeyboard"
-    />
-    <button size="default" onTap="commentListSub">发送</button>
-  </view>
 </view>
 <tabbar-component optionsData="{{tabbar}}"></tabbar-component>

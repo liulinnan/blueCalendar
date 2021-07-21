@@ -9,14 +9,13 @@ Page({
   },
   onLoad() {
     app.editTabbar();
+    app.hidetabbar();
     if(app.globalData.userid){
-      app.hidetabbar();
       this.getUserData();
       this.getThreeHours();
-    }else{
-      my.redirectTo({
-        url: '/pages/login/login',
-      });
+      this.setData({
+        userid: app.globalData.userid
+      })
     }
   },
   getUserData() {
@@ -54,39 +53,67 @@ Page({
   },
   seeYL() {
     //publicFun.showToast("此功能暂未开放，待完成和阿里公益时对接后方可使用,您可以去蔚蓝地图App进行月历的制作。", 5000)
-    my.navigateTo({
-      url: '../myCalendarDetails/myCalendarDetails'
-    });
+    if(app.globalData.userid){
+      my.navigateTo({
+        url: '../myCalendarDetails/myCalendarDetails'
+      });
+    }else{
+      publicFun.jumpLogin();
+    }
   },
   activityShot() {
-    my.navigateTo({
-      url: '../myActivityShot/myActivityShot'
-    });
+    if(app.globalData.userid){
+      my.navigateTo({
+        url: '../myActivityShot/myActivityShot'
+      });
+    }else{
+      publicFun.jumpLogin();
+    }
   },
   auditResult() {
-    my.navigateTo({
-      url: '../myAuditResult/myAuditResult'
-    });
+    if(app.globalData.userid){
+      my.navigateTo({
+        url: '../myAuditResult/myAuditResult'
+      });
+    }else{
+      publicFun.jumpLogin();
+    }
   },
   myDynamic() {
-    my.navigateTo({
-      url: '../myDynamic/myDynamic'
-    });
+    if(app.globalData.userid){
+      my.navigateTo({
+        url: '../myDynamic/myDynamic'
+      });
+    }else{
+      publicFun.jumpLogin();
+    }
   },
   myCalendarList() {
-    my.navigateTo({
-      url: '../myCalendarList/myCalendarList'
-    });
+    if(app.globalData.userid){
+      my.navigateTo({
+        url: '../myCalendarList/myCalendarList'
+      });
+    }else{
+      publicFun.jumpLogin();
+    }
   },
   myFeedback() {
-    my.navigateTo({
-      url: '../myFeedback/myFeedback'
-    })
+    if(app.globalData.userid){
+      my.navigateTo({
+        url: '../myFeedback/myFeedback'
+      })
+    }else{
+      publicFun.jumpLogin();
+    }
   },
   publicWelfare() {
-    my.navigateTo({
-      url: '../myPublicWelfare/myPublicWelfare?threeHours='+this.data.threeHours
-    });
+    if(app.globalData.userid){
+      my.navigateTo({
+        url: '../myPublicWelfare/myPublicWelfare?threeHours='+this.data.threeHours
+      });
+    }else{
+      publicFun.jumpLogin();
+    }
   },
   signOut() {
     //my.clearStorage();

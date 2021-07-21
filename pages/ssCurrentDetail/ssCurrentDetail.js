@@ -91,6 +91,10 @@ Page({
   successSSCurrentDetail(res, selfObj) { //晒晒成功后返回参数
     //console.log(res);
     if(res.L.length > 0){
+      res.L[2] = publicFun.Base64.decode(res.L[2]);
+      res.L[10] = publicFun.Base64.decode(res.L[10]);
+      res.L[11] = publicFun.Base64.decode(res.L[11]);
+      res.L[14] = publicFun.Base64.decode(res.L[14]);
       res.L.forEach((ssItem) => {
         selfObj.data.ssList.push(ssItem);
       });

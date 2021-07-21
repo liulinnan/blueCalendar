@@ -119,12 +119,10 @@ page{
   width: 363rpx;
   /* display: inline-block; */
 }
-/* .ss-list:nth-child(2n){
-  margin-right: 0;
-} */
 .ss-list .ss-img{
   width: 100%;
   border-radius: 5rpx 5rpx 0 0;
+  margin-bottom: 10rpx;
 }
 .ss-list text{
   font-size: 21rpx;
@@ -161,7 +159,7 @@ page{
   font-size: 18rpx;
   color: #323232;
   text-align: left;
-  width:180rpx;
+  width:160rpx;
   word-break:break-all;
 }
 .upload-ss{

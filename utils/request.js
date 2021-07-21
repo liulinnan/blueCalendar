@@ -23,7 +23,8 @@ const api = {
   userData: apiUrl + '/User_Center', //用户信息
   
   ssTab: apiUrl + '/ShareWallTab_V1', //晒晒tab
-  ssList: apiUrl + '/ShareList_V4_1_NP', //晒晒列表/详情
+  ssList: apiUrl + '/ShareList_V4_1_Base64',
+  ssListDetails: apiUrl + '/ShareList_V4_1_NP_Base64', //晒晒列表/详情
   followList: apiUrl + '/UserCenter_Users', //关注列表
   follow: apiUrl + '/UserCenter_AddUsers', //关注
   unfollow: apiUrl + '/UserCenter_RemoveUsers', //取消关注
@@ -46,7 +47,7 @@ const api = {
   
   monthlyCalendar: apiUrl + '/UserRiLiDetail_V4_1', //获取月份月历
   DanRiLiList: apiUrl + '/RiLi_DanRiLi_V4_0', //获取月份月历下发布过的月历封面列表
-  danRiLiDetails: apiUrl + '/ShareList_V3_1_UserList', //单日历详情
+  danRiLiDetails: apiUrl + '/ShareList_V3_1_UserList_Base64', //单日历详情
   //getWaterMark: apiUrl + '/GetWaterMark_V3_1', //水印
 
   getThreeHours: apiUrl + '/GetZhiFubaoCharitytime', //获取公益时
@@ -55,7 +56,7 @@ const api = {
   submitGarbage: apiUrl + '/Garbage_Submit_V4', //提交垃圾分类信息
   garbageDetail: apiUrl + '/Garbage_Detail_V2', //垃圾分类问题详情
 
-  ssCurrentDetail: apiUrl + '/ShareContent_V1', //ss详情页（只有当前的一条）
+  ssCurrentDetail: apiUrl + '/ShareContent_V1_Base64', //ss详情页（只有当前的一条）
   ssCurrentDetailType: apiUrl + '/GetShareWallTypeByWallId_V3_1', //ss详情页（只有当前的一条） type
   ssSharePictureList: apiUrl + '/SharePictureList', //ss详情页多图
   ssCommentList: apiUrl + '/ShareCommentList' //ss详情全部评论
@@ -116,10 +117,6 @@ function requestApi(url, params, method, sourceObj, successFun, dataParams, fail
         },
         fail: function (res) {
           my.hideLoading();
-          my.showToast({
-            type: 'none',
-            content: res,
-          });
           typeof failFun  == 'function' && failFun(res.data, sourceObj, this)
         },
         complete: function (res) {

@@ -357,11 +357,15 @@ Component({
         islabel: 1,
       }
       //console.log(params);
-      publicFun.requestPostApi(publicFun.api.ssList, params, this, this.successList);
+      publicFun.requestPostApi(publicFun.api.ssListDetails, params, this, this.successList);
     },
     successList(res, selfObj) { //晒晒成功后返回参数
       if(res.L.length > 0){
         res.L.forEach((ssItem) => {   
+          ssItem[2] = publicFun.Base64.decode(ssItem[2]);
+          ssItem[10] = publicFun.Base64.decode(ssItem[10]);
+          ssItem[19] = publicFun.Base64.decode(ssItem[19]);
+          ssItem[29] = publicFun.Base64.decode(ssItem[29]);
           selfObj.data.ssList.push(ssItem);
         });
         selfObj.setData({

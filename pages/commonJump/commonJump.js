@@ -1,7 +1,7 @@
 Page({
   data: {},
   onLoad() {
-    my.switchTab({
+    my.reLaunch({
 			url: '/pages/index/index'
 		}); 
   },

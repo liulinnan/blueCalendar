@@ -58,6 +58,8 @@ Page({
         var arr = [];
         //var dayNum = res.WZ.split("，")[0].replace(/[^0-9]/ig,"");
         for(let item in res.L){
+          res.L[item][2] = publicFun.Base64.decode(res.L[item][2]);
+          res.L[item][19] = publicFun.Base64.decode(res.L[item][19]);
           arr.push(res.L[item][4].split(" ")[0])
         }
         

@@ -117,14 +117,17 @@ button{
   height: 24rpx!important;
 }
 .ss-list-icon {
-  width: 48rpx;
+  width: 100rpx;
   height: 48rpx;
   justify-content: flex-end;
+  color: #666;
+  font-size: 20rpx;
 }
 .ss-list-icon image{
   width: 34rpx!important;
   height: 28rpx!important;
   border-radius: 0!important;
+  margin-right: 5rpx;
 }
 /* ss 上拉 */
 .common-scroll-container{

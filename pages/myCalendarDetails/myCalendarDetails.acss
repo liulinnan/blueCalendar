@@ -46,6 +46,7 @@ page{
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    margin-top: 10rpx;
 }
 .calendar-number image{
     width: 30rpx;

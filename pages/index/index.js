@@ -80,8 +80,8 @@ Page({
     }
   },
   onShow:function(e){
-    console.log(1111)
     app.hidetabbar();
+    app.editTabbar();
     if(app.globalData.tabPage == 1){
       this.setData({
         ssType: 1,
@@ -99,7 +99,12 @@ Page({
     })
     if(this.data.ssType == 300){
       this.getFollowList();
-      this.getSSList(this.data.ssType, 1);
+      this.setData({
+        optionsData: {
+          type: 300,
+          follow: 1,
+        }
+      })
     }else{
       this.getSSList(this.data.ssType, 1);
     }
@@ -146,8 +151,12 @@ Page({
     if(cur.current == 0 && app.globalData.userid){
       //my.showLoading();
       this.getFollowList();
-      //this.getSSTab();
-      this.getSSList(this.data.ssType, this.data.pageindex);
+      this.setData({
+        optionsData: {
+          type: cur.id,
+          follow: 1,
+        }
+      })
     }
   },
   //判断当前滚动超过一屏时，设置tab标题滚动条。
@@ -161,28 +170,6 @@ Page({
         scrollLeft:0
       })
     }
-  },
-  handleInput(value) {
-    this.setData({
-      value,
-    });
-  },
-  handleClear(value) {
-    this.setData({
-      value: '',
-    });
-  },
-  handleFocus() {},
-  handleBlur() {},
-  handleCancel() {
-    this.setData({
-      value: '',
-    });
-  },
-  handleSubmit(value) {
-    my.alert({
-      content: value,
-    });
   },
 
   followAll(e) { ////跳转关注列表
@@ -240,16 +227,17 @@ Page({
       area: '',
       keyword: '',
       typelabelid: 0,
-      isindex: 0,
-      ismanypics: type == 300 ? 1 : 0,
-      lastid: 0,
-      islabel: type == 300 ? 1 : 0,
+      isindex: 1,
+      // ismanypics: type == 300 ? 1 : 0,
+      // lastid: 0,
+      // islabel: type == 300 ? 1 : 0,
     }
     publicFun.requestPostApi(publicFun.api.ssList, params, this, this.successList);
   },
   successList(res, selfObj) { //晒晒成功后返回参数
-    //console.log(res);
     res.L.forEach((ssItem) => {
+      ssItem[2] = publicFun.Base64.decode(ssItem[2]);
+      ssItem[10] = publicFun.Base64.decode(ssItem[10]);
       selfObj.data.ssList.push(ssItem);
     });
     selfObj.setData({
@@ -261,42 +249,11 @@ Page({
       complete(res) {
         app.hidetabbar();
         console.log("刷新成功");
+        setTimeout(function() {
+          app.hidetabbar();
+        },300)
       }
     })
-  },
-
-  /* 关注 */
-  followState(e) { //关注状态
-    let data = e.target.dataset;
-    let params  = {
-      userid: app.globalData.userid,
-      otheruserid: data.otheruserid
-    }
-    if(data.state == 1){
-      this.unfollowTap(params, data.index);
-    }else{
-      this.followTap(params, data.index);
-    }
-  },
-  followTap(params, item) { //关注
-    publicFun.requestPostApi(publicFun.api.follow, params, this, this.successFollowTap, item);
-  },
-  successFollowTap(res, selfObj, sourceObj, dataParams) {
-    if(res.M){publicFun.showToast(res.M)};
-    selfObj.data.ssList[dataParams][27] = 1;
-    selfObj.setData({
-      ssList: selfObj.data.ssList
-    });
-  },
-  unfollowTap(params, index) { //取消关注
-    publicFun.requestPostApi(publicFun.api.unfollow, params, this, this.successUnfollowTap, index);
-  },
-  successUnfollowTap(res, selfObj, sourceObj, dataParams) {
-    if(res.M){publicFun.showToast(res.M)};
-    selfObj.data.ssList[dataParams][27] = 0;
-    selfObj.setData({
-      ssList: selfObj.data.ssList
-    });
   },
 
   getLikeState(e) { //是否赞过
@@ -340,215 +297,6 @@ Page({
     });
   },
 
-     /* 评论 */
-  commentSub(e) { //是否可评论
-    let data = e.target.dataset;
-    this.setData({
-      listComment: e.detail.value
-    })
-    if(app.globalData.userid){
-      let params = {
-        content: this.data.listComment,
-      }
-      publicFun.requestPostApi(publicFun.api.getriskContent, params, this, this.successRiskContent, data);
-      // let params = {
-      //   userid: app.globalData.userid, //login id
-      //   dt: publicFun.getTimestamp(), //time
-      //   wallid: data.ssId, //ss id
-      //   parentid: 0, //评论id
-      //   parentuserid: data.ssUserId, //被留言id
-      //   Content: this.data.listComment, //内容
-      //   rootid: 0, // 首次评论 0 
-      // }
-      // my.showLoading();
-      // publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successComment, data.index);
-    }else{
-      publicFun.jumpLogin();
-    }
-  },
-  successRiskContent(res, selfObj, sourceObj, dataParams) {
-      if(res.S == 1) {
-        if(res.D.action == 'PASSED') {
-          my.showLoading();
-          let params = {
-            userid: app.globalData.userid, //login id
-            dt: publicFun.getTimestamp(), //time
-            wallid: dataParams.ssId, //ss id
-            parentid: 0, //评论id
-            parentuserid: dataParams.ssUserId, //被留言id
-            Content: selfObj.data.listComment, //内容
-            rootid: 0, // 首次评论 0 
-          }
-          publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successComment, dataParams.index);
-        }else{
-          setTimeout(function () {
-            publicFun.showToast("您输入的内容涉及敏感词汇，请重新输入。", 2000);
-            selfObj.setData({
-              listComment: ''
-            });
-          }, 300)
-        }
-      }
-    },
-  successComment(res, selfObj, sourceObj, dataParams) {
-    if(res.S == 1){
-      setTimeout(function () {
-        publicFun.showToast("提交成功", 2000);
-      },300);
-      selfObj.data.ssList[dataParams][9] = Number(selfObj.data.ssList[dataParams][9])+1;
-      selfObj.setData({
-        ssList: selfObj.data.ssList,
-        listComment: ''
-      });
-    }
-  },
-  openComment(e) { //打开全部评论列表
-    //console.log(e.target.dataset)
-    if(app.globalData.userid){
-      this.setData({
-        commentList: [],
-        commentIndex: 1,
-        commentNumber: 0,
-        showAllTap: false,
-        alertState: true, //全部评论弹窗
-        showInput: true, // input输入评论框
-        //focusKeyboard: false,
-        userName: '喜欢就评论一下吧',
-        ssId: e.target.dataset.ssId,
-        parentuserid: e.target.dataset.parentuserid
-      });
-      this.getAllComment(e.target.dataset.ssId,this.data.commentIndex);
-    }else{
-      publicFun.jumpLogin();
-    }
-  },
-  getAllComment(ssId,commentIndex) {//获取全部评论
-    let params = {
-      id: ssId,
-      pageindex: commentIndex
-    }
-    publicFun.requestPostApi(publicFun.api.commentAllList, params, this, this.successCommentList);
-  },
-  successCommentList(res, selfObj) { 
-    //console.log(res);
-    if(res.L.length > 0){
-      res.L.forEach((item) => {   
-        selfObj.data.commentList.push(item);
-      });
-      selfObj.setData({
-        commentNumber: res.CC,
-        commentList: selfObj.data.commentList
-      });
-    }else{
-      selfObj.setData({
-        showAllTap: true
-      })
-    }
-  }, 
-  getCommentVal(e) { //获取框里的内容
-    this.setData({
-      detailsComment: e.detail.value
-    })
-  },
-  commentUserData(e) { //获取点击的某个要回复用户的信息
-    let data = e.target.dataset;
-    var ids = {
-      parentid: data.parentid,
-      parentuserid: data.parentuserid,
-      rootid: data.rootid,
-      name: data.name
-    }
-    this.setData({
-      showInput: true,
-      commentDetails: ids,
-      //focusKeyboard: true,
-      userName: '回复：'+ data.name
-    });
-  },
-  commentListSub() { //评论单个提交
-    if(app.globalData.userid){
-      if(this.data.detailsComment){
-        let params = {
-          content: this.data.detailsComment,
-        }
-        publicFun.requestPostApi(publicFun.api.getriskContent, params, this, this.successRiskContentAlone);
-        // let params = {
-        //   userid: app.globalData.userid, //login id
-        //   dt: publicFun.getTimestamp(), //time
-        //   wallid: this.data.ssId, //ss id
-        //   parentid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, //评论id
-        //   parentuserid: this.data.commentDetails.parentuserid ? this.data.commentDetails.parentuserid : this.data.parentuserid, //被留言id
-        //   Content: this.data.detailsComment, //内容
-        //   rootid: this.data.commentDetails.parentid ? this.data.commentDetails.parentid : 0, // 首次评论 0 
-        // }
-        // my.showLoading();
-        // publicFun.requestPostApi(publicFun.api.commentSub, params, this, this.successCommentDetaile);
-      }else{
-        publicFun.showToast("请输入评论内容")
-      }
-    }else{
-      publicFun.jumpLogin();
-    }
-  },
-  successRiskContentAlone(res, selfObj) {
-    if(res.S == 1) {
-      if(res.D.action == 'PASSED') {
-        let params = {
-          userid: app.globalData.userid, //login id
-          dt: publicFun.getTimestamp(), //time
-          wallid: selfObj.data.ssId, //ss id
-          parentid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, //评论id
-          parentuserid: selfObj.data.commentDetails.parentuserid ? selfObj.data.commentDetails.parentuserid : selfObj.data.parentuserid, //被留言id
-          Content: selfObj.data.detailsComment, //内容
-          rootid: selfObj.data.commentDetails.parentid ? selfObj.data.commentDetails.parentid : 0, // 首次评论 0 
-        }
-        my.showLoading();
-        publicFun.requestPostApi(publicFun.api.commentSub, params, selfObj, selfObj.successCommentDetaile);
-      }else{
-        setTimeout(function () {
-          publicFun.showToast("您输入的内容涉及敏感词汇，请重新输入。", 2000);
-          selfObj.setData({
-            detailsComment: ''
-          });
-        }, 300)
-      }
-    }
-  },
-  successCommentDetaile(res, selfObj) {
-    if(res.S == 1){
-      setTimeout(function () {
-          publicFun.showToast("提交成功", 2000);
-      }, 300)
-      
-      //selfObj.data.ssList[dataParams][9] = Number(selfObj.data.ssList[dataParams][9])+1;
-      selfObj.setData({
-        commentList: [],
-        //showInput: false,
-        detailsComment: '',
-        commentDetails: {},
-        userName: '喜欢就评论一下吧',
-        //focusKeyboard: false
-      });
-      selfObj.getAllComment(selfObj.data.ssId, 1);
-    }
-  },
-  //隐藏输入框
-  onHideInput() {
-    this.setData({
-      detailsComment: '',
-      listComment: '',
-      //focusKeyboard: false,
-      userName: '喜欢就评论一下吧',
-    })
-  },
-  closeAlert() { //关闭评论
-    this.setData({
-      alertState: false,
-      showInput: false,
-
-    })
-  },
-
   async scrollMytrip(e) { //上拉加载
     //console.log(e)
     try {
@@ -557,16 +305,6 @@ Page({
       const newPage = this.data.pageindex + 1;
       this.getSSList(this.data.ssType, newPage);
       this.setData({pageindex: newPage});
-    } catch (e) {
-      my.hideLoading();
-      console.log('scrollMytrip执行异常:', e);
-    }
-  },
-  async scrollComment(e) { //评论上拉加载
-    try {
-      const newPage = this.data.commentIndex + 1;
-      this.getAllComment(this.data.ssId,newPage);
-      this.setData({commentIndex: newPage});
     } catch (e) {
       my.hideLoading();
       console.log('scrollMytrip执行异常:', e);

@@ -30,7 +30,7 @@
     <view onTap="publicWelfare">查看公益时<text></text></view>
   </view>
 
-  <view class="common-mb view-data">
+  <view class="common-mb view-data" a:if="{{userid}}">
     <view onTap="signOut">退出</view>
   </view>
 </view>

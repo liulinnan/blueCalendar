@@ -106,7 +106,7 @@ Page({
           key: 'userid',
           data: that.data.userid
         }); 
-        my.switchTab({
+        my.reLaunch({
           url: '/pages/index/index'
         });
       }else if(res.S == 2){ //合并
@@ -158,7 +158,7 @@ Page({
           key: 'userid',
           data: res.R
         }); 
-        my.switchTab({
+        my.reLaunch({
           url: '/pages/index/index'
         });
       }else{
@@ -174,7 +174,7 @@ Page({
       key: 'userid',
       data: this.data.userid
     }); 
-    my.switchTab({
+    my.reLaunch({
       url: '/pages/index/index'
     });
   },

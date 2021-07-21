@@ -35,8 +35,8 @@ Page({
   },
   getAuthorize() {
     let that = this;
-    my.showLoading();
     if(this.data.protocolStatus == 1){
+      my.showLoading();
       my.getAuthCode({
         scopes: ['auth_base'],
         success: (res) => {
@@ -133,7 +133,7 @@ Page({
           key: 'zfbUid',
           data: app.globalData.zfbUid
         });
-        my.switchTab({
+        my.reLaunch({
           url: '/pages/index/index'
         });
       }else{

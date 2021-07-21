@@ -4,6 +4,7 @@
     "search-bar": "mini-antui/es/search-bar/index",
     "popup": "mini-antui/es/popup/index",
     "am-icon": "mini-antui/es/am-icon/index",
-    "tabbar-component": "/components/tabbarComponent/tabbarComponent"
+    "tabbar-component": "/components/tabbarComponent/tabbarComponent",
+    "ss-details": "/components/ssDetails/ssDetails"
   }
 }

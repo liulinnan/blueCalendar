@@ -113,7 +113,7 @@ Page({
           key: 'phone',
           data: that.data.phone
         });
-        my.switchTab({
+        my.reLaunch({
           url: '/pages/index/index'
         });
       }else{
